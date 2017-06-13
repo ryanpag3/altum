@@ -1,0 +1,43 @@
+<!doctype html>
+<html data-ng-app="angulobby">
+  <head>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <script src="https://use.fontawesome.com/7222f42b52.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="app.js"></script>
+    <base href="/">
+  </head>
+  <body data-ng-controller="IndexController">
+
+     <!-- HEADER AND NAVBAR -->
+  <header>
+      <nav class="navbar navbar-default">
+        <div class="container">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/"> Routing Example</a>
+          </div>
+
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+            <li><a href="/about"><i class="fa fa-shield"></i> About</a></li>
+            <li><a href="/contact"><i class="fa fa-comment"></i> Contact</a></li>
+          </ul>
+
+        </div>
+      </nav>
+  </header>
+
+  <!-- MAIN CONTENT AND INJECTED VIEWS -->
+  <div id="main">
+    <!-- angular templating -->
+    <!-- this is where the content will be injected -->
+    <div data-ng-view></div>
+  </div>
+
+
+  </body>
+</html>
