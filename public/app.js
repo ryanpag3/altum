@@ -1,22 +1,30 @@
 var app = angular.module('angulobby', ['ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
-  $routeProvider.
-
-    when('/', {
-      templateUrl: 'pages/home.html',
+  $routeProvider.when('/', {
+    templateUrl: 'pages/home.html',
+    controller: 'IndexController'
+  })
+    .when('/login', {
+    templateUrl: 'pages/login.html',
+    controller: 'LoginController'
+  })
+    .when('/logout', {
+      templateUrl: 'pages/logout.html',
+      controller: 'LogoutController'
+    })
+    .when('/signup', {
+      templateUrl: 'pages/signup.html',
       controller: 'IndexController'
-    }).
-
-    when('/about', {
-      templateUrl: 'pages/about.html',
-      controller: 'IndexController'
-    }).
-
-    when('/contact', {
-      templateUrl: 'pages/contact.html',
-      controller: 'IndexController'
-    });
+    })
+    .when('/about', {
+    templateUrl: 'pages/about.html',
+    controller: 'IndexController'
+  })
+    .when('/contact', {
+    templateUrl: 'pages/contact.html',
+    controller: 'IndexController'
+  });
 
   $locationProvider.html5Mode(true);
 
