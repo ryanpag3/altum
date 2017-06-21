@@ -15,6 +15,7 @@ router.post('/register', function(req, res) {
           err: err
         });
       }
+      // passport.authenticate handles encrypting the data
      passport.authenticate('local')(req, res, function(){
        return res.status(200).json({
          status: 'Registration Successful'
@@ -22,5 +23,57 @@ router.post('/register', function(req, res) {
      })
     });
   });
+
+router.post('/login', function(req, res, next) {
+  // passport strategy & callback function
+  // if authentication fails, user will be set to false
+  // if exception occurs, error will be set
+  // info contains optional details provided by the strategies callback
+  passport.authenticate('local', function(err, user, info) {
+    // if error was thrown
+    // see: https://derickbailey.com/2014/09/06/proper-error-handling-in-expressjs-route-handlers/
+    // returns error to error handler asynchronously
+    if (err) {
+      return next(err);
+    }
+    // if user does not exist
+    if (!user) {
+      return result.status(401).json({
+        err: info
+      });
+    }
+
+    req.logIn(user, function(err) {
+      if (err) {
+        return res.status(500).json({
+          err: 'Could not log in user'
+        });
+      }
+      res.status(200).json({
+        status: 'Login successful!'
+      });
+    });
+  })(req, res, next); // I'm not sure why these go here, but they were included in the documentation
+});
+
+router.get('/logout', function(req, res) {
+  // method exposed by passport
+  req.logout();
+  res.status(200).json({
+    status: 'Bye!'
+  });
+});
+
+router.get('/status', function(req, res) {
+  // method exposed by passport
+  if(!req.isAuthenticated()) {
+    return res.status(200).json({
+      status: false
+    });
+  }
+  res.status(200).json({
+    status: true
+  });
+});
 
 module.exports = router;

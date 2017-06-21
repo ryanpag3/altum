@@ -3,22 +3,29 @@ var app = angular.module('angulobby', ['ngRoute']);
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
-    templateUrl: 'pages/home.html',
-    controller: 'IndexController'
-    })
-    .when('/about', {
-      templateUrl: 'pages/about.html',
+      templateUrl: 'pages/home.html',
       controller: 'IndexController'
+    })
+    .when('/login', {
+      templateUrl: 'pages/login.html',
+      controller: 'loginController',
+      access: { restricted: false }
+    })
+    .when('/logout', {
+      templateUrl: 'pages/logout.html'
+    })
+    .when('/register', {
+      templateUrl: 'pages/register.html',
+      controller: 'registerController'
     })
     .when('/contact', {
-      templateUrl: 'pages/contact.html',
-      controller: 'IndexController'
+      templateUrl: 'pages/contact.html'
     })
     .otherwise({
       redirectTo: '/'
     });
 
-   $locationProvider.html5Mode(true);
+  $locationProvider.html5Mode(true);
 
 }]);
 

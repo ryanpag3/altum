@@ -3,12 +3,14 @@
   <head>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://use.fontawesome.com/7222f42b52.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="main.js"></script>
+    <script src="./controllers.js"></script>
+    <script src="./main.js"></script>
+    <script src="./services.js"></script>
     <base href="/">
   </head>
   <body data-ng-controller="IndexController">
@@ -23,7 +25,7 @@
 
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="/about"><i class="fa fa-shield"></i> About</a></li>
+            <li><a href="/login"><i class="fa fa-shield"></i> Login</a></li>
             <li><a href="/contact"><i class="fa fa-comment"></i> Contact</a></li>
           </ul>
 

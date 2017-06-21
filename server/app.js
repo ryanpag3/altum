@@ -28,6 +28,9 @@ var routes = require('./routes/api.js');
 // middleware allows you to define a stack of actions that you should flow through
 // express servers themselves are a stack of middlewares
 app.use(express.static(path.join(__dirname, '../public')));
+// __dirname is the path to the current module
+// for example, __dirname of this file is /angulobby/server/
+
 // dev defined the output of the logger, in this case formats log for dev use
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -63,6 +66,10 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+// TODO: handle production vs development error handling
+// TODO: Stack trace will leak to client if error == {}
+// TODO: error should be equal to err
+// see: https://www.joyent.com/node-js/production/design/errors
 app.use(function(err, req, res) {
   res.status(err.status || 500);
   res.end(JSON.stringify({
