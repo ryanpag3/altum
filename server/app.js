@@ -6,6 +6,7 @@ var logger  = require('morgan');
 var bodyParser = require('body-parser');
 var expressSession = require('express-session');
 var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
 // not sure if needed, run w/o and see if it works
 var hash = require('bcrypt-nodejs');
 var path = require('path');
@@ -38,7 +39,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressSession({
   secret: 'TempSecretKey',
   resave: false,
-  saveUnitialized: false
+  saveUninitialized: false
 }));
 // required for express
 app.use(passport.initialize());
@@ -51,10 +52,13 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // routes
-// app.use('/user/', routes);
-app.use('/', routes);
+app.use('/user/', routes);
 
-app.get('/', function(req, res) {
+// serve angular front end files from root path
+app.use('/', express.static('public', { redirect: false }));
+
+// reswite virtual urls to angular app to enable refreshing of internal pages
+app.get('*', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 

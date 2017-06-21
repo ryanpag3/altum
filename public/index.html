@@ -1,5 +1,5 @@
 <!doctype html>
-<html data-ng-app="angulobby">
+<html ng-app="angulobby">
   <head>
 
     <!-- Latest compiled and minified CSS -->
@@ -8,9 +8,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
     <script src="/socket.io/socket.io.js"></script>
-    <script src="./controllers.js"></script>
     <script src="./main.js"></script>
     <script src="./services.js"></script>
+    <script src="./controllers.js"></script>
     <base href="/">
   </head>
   <body data-ng-controller="IndexController">
@@ -20,13 +20,16 @@
       <nav class="navbar navbar-default">
         <div class="container">
           <div class="navbar-header">
-            <a class="navbar-brand" href="/">Lobby Finder Prototype</a>
+            <a class="navbar-brand" href="/">AnguLobby Prototype</a>
           </div>
 
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
             <li><a href="/login"><i class="fa fa-shield"></i> Login</a></li>
-            <li><a href="/contact"><i class="fa fa-comment"></i> Contact</a></li>
+            <li><a href="/register"><i class="fa fa-comment"></i> Register</a></li>
+            <div ng-controller="logoutController">
+              <a ng-click='logout()' class="btn btn-default">Logout</a>
+            </div>
           </ul>
 
         </div>

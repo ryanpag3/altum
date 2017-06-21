@@ -7,18 +7,20 @@ var passport = require('passport');
 var User = require('../models/user.js');
 
 router.post('/register', function(req, res) {
+  console.log('register authentication called');
   User.register(new User({username: req.body.username}),
     req.body.password, function (err, account) {
     // if any error thrown
     if (err) {
+      console.log(err.message);
         return res.status(500).json({
-          err: err
+          msg: err
         });
       }
       // passport.authenticate handles encrypting the data
      passport.authenticate('local')(req, res, function(){
        return res.status(200).json({
-         status: 'Registration Successful'
+         msg: 'Registration Successful'
        });
      })
     });
@@ -30,6 +32,7 @@ router.post('/login', function(req, res, next) {
   // if exception occurs, error will be set
   // info contains optional details provided by the strategies callback
   passport.authenticate('local', function(err, user, info) {
+    console.log('passport.authenticate called');
     // if error was thrown
     // see: https://derickbailey.com/2014/09/06/proper-error-handling-in-expressjs-route-handlers/
     // returns error to error handler asynchronously
@@ -38,19 +41,20 @@ router.post('/login', function(req, res, next) {
     }
     // if user does not exist
     if (!user) {
-      return result.status(401).json({
-        err: info
+      return res.status(401).json({
+        msg: info
       });
     }
 
     req.logIn(user, function(err) {
       if (err) {
         return res.status(500).json({
-          err: 'Could not log in user'
+          msg: 'Could not log in user'
         });
       }
+      console.log('login successful');
       res.status(200).json({
-        status: 'Login successful!'
+        msg: 'Login successful!'
       });
     });
   })(req, res, next); // I'm not sure why these go here, but they were included in the documentation
@@ -60,7 +64,7 @@ router.get('/logout', function(req, res) {
   // method exposed by passport
   req.logout();
   res.status(200).json({
-    status: 'Bye!'
+    msg: 'Bye!'
   });
 });
 
@@ -68,11 +72,11 @@ router.get('/status', function(req, res) {
   // method exposed by passport
   if(!req.isAuthenticated()) {
     return res.status(200).json({
-      status: false
+      msg: false
     });
   }
   res.status(200).json({
-    status: true
+    msg: true
   });
 });
 

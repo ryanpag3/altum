@@ -5,7 +5,7 @@
 // injected the dependencies that will be used
 // $q, $timeout, $http
 angular.module('angulobby').factory('AuthService',
-  [$q, $timeout, $http,
+  ['$q', '$timeout', '$http',
     function ($q, $timeout, $http) {
       var user = null;
       return ({
@@ -24,8 +24,8 @@ angular.module('angulobby').factory('AuthService',
       }
 
       function getUserStatus() {
-        return $http.get('/status')
-          .success(function (data) {
+        return $http.get('/user/status')
+          .then(function (data) {
             // status returns true if user is authenticated
             if (data.status) {
               user = true;
@@ -33,7 +33,7 @@ angular.module('angulobby').factory('AuthService',
               user = false;
             }
           })
-          .error(function (data) {
+          .catch(function (data) {
             user = false;
           });
       }
@@ -44,11 +44,11 @@ angular.module('angulobby').factory('AuthService',
         var deferred = $q.defer();
 
         // send a POST request to the server
-        $http.post('/login',
+        $http.post('/user/login',
           {username: username, password: password})
-        // handle success
-          .success(function (data, status) {
-            if (status === 200 && data.status) {
+          // handle success
+          .then(function (response) {
+            if (response.status === 200 && response.data.msg) {
               user = true;
               deferred.resolve();
             } else {
@@ -56,9 +56,9 @@ angular.module('angulobby').factory('AuthService',
               deferred.reject();
             }
           })
-          .error(function (data) {
+          .catch(function (response) {
             user = false;
-            deferred.rejest();
+            deferred.reject();
           });
         // return promise object
         return deferred.promise;
@@ -69,12 +69,12 @@ angular.module('angulobby').factory('AuthService',
         var deferred = $q.defer();
 
         // send a GET request to the server
-        $http.get('/logout')
-          .success(function (data) {
+        $http.get('/user/logout')
+          .then(function (response) {
             user = false;
             deferred.resolve();
           })
-          .error(function (data) {
+          .catch(function (response) {
             user = false;
             deferred.reject();
           });
@@ -88,18 +88,18 @@ angular.module('angulobby').factory('AuthService',
         var deferred = $q.defer();
 
         // send POST request to the server
-        $http.post('/register.html',
+        $http.post('/user/register',
           {username: username, password: password})
           // handle success case
-          .success(function (data, status) {
-            if (status === 200 && data.status) {
+          .then(function (response) {
+            if (response.status === 200 && response.data.msg) {
               deferred.resolve();
             } else {
               deferred.reject();
             }
           })
           // handle error
-          .error(function (data) {
+          .catch(function (response) {
             deferred.reject();
           });
 

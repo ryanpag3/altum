@@ -12,7 +12,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
       access: { restricted: false }
     })
     .when('/logout', {
-      templateUrl: 'pages/logout.html'
+      controller:  'logoutController'
     })
     .when('/register', {
       templateUrl: 'pages/register.html',
