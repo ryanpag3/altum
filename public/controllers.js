@@ -18,9 +18,9 @@ angular.module('angulobby').controller('loginController',
           $scope.loginForm = {};
         })
         // handle error
-        .catch(function () {
+        .catch(function (err) {
           $scope.error = true;
-          $scope.errorMessage = "Invalid username and/or password";
+          $scope.errorMessage = err;
           $scope.disabled = false;
           $scope.loginForm = {};
         });
@@ -55,9 +55,9 @@ angular.module('angulobby').controller('registerController',
           $scope.registerForm = {};
         })
       // handle error
-        .catch(function(){
+        .catch(function(err){
           $scope.error = true;
-          $scope.errorMessage = 'error';
+          $scope.errorMessage = err;
           $scope.disabled = false;
           $scope.registerForm = {};
         })

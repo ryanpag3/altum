@@ -53,12 +53,12 @@ angular.module('angulobby').factory('AuthService',
               deferred.resolve();
             } else {
               user = false;
-              deferred.reject();
+              deferred.reject(response.data.msg);
             }
           })
           .catch(function (response) {
             user = false;
-            deferred.reject();
+            deferred.reject(response.data.msg);
           });
         // return promise object
         return deferred.promise;
@@ -95,12 +95,12 @@ angular.module('angulobby').factory('AuthService',
             if (response.status === 200 && response.data.msg) {
               deferred.resolve();
             } else {
-              deferred.reject();
+              deferred.reject(response.data.msg);
             }
           })
           // handle error
           .catch(function (response) {
-            deferred.reject();
+            deferred.reject(response.data.msg);
           });
 
         // return promise object
