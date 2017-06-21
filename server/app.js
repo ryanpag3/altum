@@ -27,7 +27,7 @@ var routes = require('./routes/api.js');
 // middleware definitions
 // middleware allows you to define a stack of actions that you should flow through
 // express servers themselves are a stack of middlewares
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname, '../public')));
 // dev defined the output of the logger, in this case formats log for dev use
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -52,7 +52,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use('/', routes);
 
 app.get('/', function(req, res) {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 // error handlers
