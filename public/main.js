@@ -4,7 +4,8 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
   $routeProvider
     .when('/', {
       templateUrl: 'pages/home.html',
-      controller: 'IndexController'
+      controller: 'IndexController',
+      access: { restricted: true }
     })
     .when('/login', {
       templateUrl: 'pages/login.html',
@@ -12,14 +13,17 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
       access: { restricted: false }
     })
     .when('/logout', {
-      controller:  'logoutController'
+      controller:  'logoutController',
+      access: { restricted: true }
     })
     .when('/register', {
       templateUrl: 'pages/register.html',
-      controller: 'registerController'
+      controller: 'registerController',
+      access: { restricted: false }
     })
     .when('/contact', {
-      templateUrl: 'pages/contact.html'
+      templateUrl: 'pages/contact.html',
+      access: {restricted: true }
     })
     .otherwise({
       redirectTo: '/'
@@ -53,4 +57,20 @@ app.controller('IndexController', function ($scope, socket) {
     alert('test message');
   });
 
+});
+
+app.run(function($rootScope, $location, $route, AuthService) {
+  $rootScope.$on('$routeChangeStart',
+  function (event, next, current) {
+    AuthService.getUserStatus()
+      .then(function(){
+        console.log('then function called');
+        console.log("restricted? " + next.access.restricted);
+        console.log("logged in? " + AuthService.isLoggedIn());
+        if (next.access.restricted && !AuthService.isLoggedIn()){
+          $location.path('/login');
+          $route.reload();
+        }
+      });
+  });
 });

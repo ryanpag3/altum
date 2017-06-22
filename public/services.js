@@ -25,9 +25,9 @@ angular.module('angulobby').factory('AuthService',
 
       function getUserStatus() {
         return $http.get('/user/status')
-          .then(function (data) {
+          .then(function (response) {
             // status returns true if user is authenticated
-            if (data.status) {
+            if (response.data.msg) {
               user = true;
             } else {
               user = false;
