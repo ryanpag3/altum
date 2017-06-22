@@ -7,7 +7,7 @@
 angular.module('angulobby').factory('AuthService',
   ['$q', '$timeout', '$http',
     function ($q, $timeout, $http) {
-      var user = null;
+      var userAuthenticated = null;
       return ({
         isLoggedIn: isLoggedIn,
         getUserStatus: getUserStatus,
@@ -16,7 +16,7 @@ angular.module('angulobby').factory('AuthService',
         register: register
       });
       function isLoggedIn() {
-        if (user) {
+        if (userAuthenticated) {
           return true;
         } else {
           return false;
@@ -27,14 +27,14 @@ angular.module('angulobby').factory('AuthService',
         return $http.get('/user/status')
           .then(function (response) {
             // status returns true if user is authenticated
-            if (response.data.msg) {
-              user = true;
+            if (response.data.isAuthenticated) {
+              userAuthenticated = true;
             } else {
-              user = false;
+              userAuthenticated = false;
             }
           })
           .catch(function (data) {
-            user = false;
+            userAuthenticated = false;
           });
       }
 
@@ -49,15 +49,15 @@ angular.module('angulobby').factory('AuthService',
           // handle success
           .then(function (response) {
             if (response.status === 200 && response.data.msg) {
-              user = true;
+              userAuthenticated = true;
               deferred.resolve();
             } else {
-              user = false;
+              userAuthenticated = false;
               deferred.reject(response.data.msg);
             }
           })
           .catch(function (response) {
-            user = false;
+            userAuthenticated = false;
             deferred.reject(response.data.msg);
           });
         // return promise object
@@ -71,11 +71,11 @@ angular.module('angulobby').factory('AuthService',
         // send a GET request to the server
         $http.get('/user/logout')
           .then(function (response) {
-            user = false;
+            userAuthenticated = false;
             deferred.resolve();
           })
           .catch(function (response) {
-            user = false;
+            userAuthenticated = false;
             deferred.reject();
           });
 
@@ -107,4 +107,21 @@ angular.module('angulobby').factory('AuthService',
         return deferred.promise;
       }
     }]);
+
+app.factory('socket', ['$rootScope', function ($rootScope) {
+  var socket = io();
+
+  return {
+    on: function (eventName, callback) {
+      socket.on(eventName, callback);
+    },
+    emit: function (eventName, data) {
+      socket.emit(eventName, data);
+    },
+    emitTo: function(room, eventName, data) {
+      socket.to(room).emit(eventName, data);
+    }
+
+  };
+}]);
 

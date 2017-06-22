@@ -33,18 +33,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
 }]);
 
-app.factory('socket', ['$rootScope', function ($rootScope) {
-  var socket = io();
 
-  return {
-    on: function (eventName, callback) {
-      socket.on(eventName, callback);
-    },
-    emit: function (eventName, data) {
-      socket.emit(eventName, data);
-    }
-  };
-}]);
 
 app.controller('IndexController', function ($scope, socket) {
   $scope.alert = function () {

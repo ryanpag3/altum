@@ -1,3 +1,25 @@
-<div class="jumbotron text-center">
-  <h1> HOME PAGE </h1>
-</div>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../stylesheets/style.css">
+</head>
+<body>
+    <div id="test">
+    </div>
+        <div id="chat-container" data-ng-controller="homeController">
+                <div id="chat-box">
+                    <h1 id="room-name"></h1>
+            <!--<div id="active-users-column"><ul id="user_names"></ul></div>-->
+                    <div data-ng-repeat="message in messages track by $index">
+                        <span>{{message}}</span>
+                    </div>
+                </div>
+                <form data-ng-submit="sendMessage()">
+                    <input id="m" data-ng-model="text" autocomplete="off"/>
+                    <button>Submit</button>
+                </form>
+        </div>
+        <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script></script>
+    </body>
+</html>

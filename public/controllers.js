@@ -1,6 +1,16 @@
 /**
  * Created by dev on 6/21/2017.
  */
+/**
+ * Controllers are used to add behavior to the $scope object.
+ * error: data-ng-show="error" sets <div> contents to {{errorMessage}}
+ * disabled: boolean which controls visibility of login button
+ *
+ * loginController handles the transaction between the AuthService and the front-end
+ * AuthService: service that handles the Ajax calls
+ * location: current page
+ * scope: current DOM scope, set by the data-ng-controller directive
+ */
 angular.module('angulobby').controller('loginController',
   ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
@@ -16,6 +26,7 @@ angular.module('angulobby').controller('loginController',
           $location.path('/');
           $scope.disabled = false;
           $scope.loginForm = {};
+
         })
         // handle error
         .catch(function (err) {
@@ -27,6 +38,10 @@ angular.module('angulobby').controller('loginController',
     }
   }]);
 
+/**
+ * loginController calls the AuthService.logout function
+ * and sets the page to the login on success.
+ */
 angular.module('angulobby').controller('logoutController',
 ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
@@ -38,6 +53,9 @@ angular.module('angulobby').controller('logoutController',
     };
   }]);
 
+/**
+ *
+ */
 angular.module('angulobby').controller('registerController',
 ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
@@ -63,3 +81,24 @@ angular.module('angulobby').controller('registerController',
         })
     };
   }]);
+
+/**
+ *
+ */
+angular.module('angulobby').controller('homeController',
+  function($scope, socket) {
+    $scope.messages = [];
+    $scope.text = null;
+    socket.emit('join-room', 'home');
+
+    $scope.sendMessage = function () {
+      var data = {room: 'home', message: $scope.text };
+      socket.emit('send-message', data);
+      $scope.text = null;
+    };
+
+    socket.on('update-chat', function(message) {
+        $scope.messages.push(message);
+        $scope.$apply();
+    });
+  });

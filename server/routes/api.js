@@ -47,6 +47,7 @@ router.post('/login', function(req, res, next) {
     }
 
     req.logIn(user, function(err) {
+
       if (err) {
         return res.status(500).json({
           msg: 'Could not log in user'
@@ -72,11 +73,11 @@ router.get('/status', function(req, res) {
   // method exposed by passport
   if(!req.isAuthenticated()) {
     return res.status(200).json({
-      msg: false
+      isAuthenticated: false
     });
   }
   res.status(200).json({
-    msg: true
+    isAuthenticated: true
   });
 });
 
