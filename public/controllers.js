@@ -12,8 +12,8 @@
  * scope: current DOM scope, set by the data-ng-controller directive
  */
 angular.module('angulobby').controller('loginController',
-  ['$scope', '$location', 'AuthService',
-  function ($scope, $location, AuthService) {
+  ['$scope', '$location', 'AuthService', 'socket',
+  function ($scope, $location, AuthService, socket) {
     $scope.login = function() {
       // initial values
       $scope.error = false;
@@ -25,8 +25,9 @@ angular.module('angulobby').controller('loginController',
         .then(function () {
           $location.path('/');
           $scope.disabled = false;
+          socket.emit('add-user', $scope.loginForm.username);
+          console.log('add user called from controllers.js');
           $scope.loginForm = {};
-
         })
         // handle error
         .catch(function (err) {
@@ -43,12 +44,14 @@ angular.module('angulobby').controller('loginController',
  * and sets the page to the login on success.
  */
 angular.module('angulobby').controller('logoutController',
-['$scope', '$location', 'AuthService',
-  function ($scope, $location, AuthService) {
+['$scope', '$location', 'AuthService', 'socket',
+  function ($scope, $location, AuthService, socket) {
     $scope.logout = function() {
+      var username = AuthService.getCurrentUser();
       AuthService.logout()
         .then(function() {
           $location.path('/login');
+          socket.emit('delete-user', username);
         });
     };
   }]);
@@ -101,4 +104,11 @@ angular.module('angulobby').controller('homeController',
         $scope.messages.push(message);
         $scope.$apply();
     });
+
+    // join queue
+    // sending a socket command to the server
+    // add their username to the queue
+    //
+
+    // join lobby
   });

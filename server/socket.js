@@ -3,6 +3,34 @@
  */
 var socket = function(io) {
   io.on('connection', function(socket) {
+    var users = {};
+    function User(username) {
+      this.username = username;
+      // null if not in lobby
+      // id if in lobby
+      this.lobby = null;
+      // if a user is in a queue, the name of the queue is here
+      this.activeQueues = [];
+      this.disconnected = false;
+
+    }
+
+  /**
+     * receives the username and creates a user object
+     * the user object is added to a map: users[username] = user object
+     */
+    socket.on('add-user', function(username) {
+      users[username] = new User(username);
+      console.log('username: ' + users[username].username);
+      console.log('# of users: ' + Object.keys(users).length);
+    });
+
+    socket.on('delete-user', function(username) {
+      console.log('username: ' + username);
+      delete users[username];
+      console.log('# of users ' + Object.keys(users).length);
+    });
+
     socket.on('join-room', function(room) {
       console.log(room + ' joined.');
       socket.join(room);

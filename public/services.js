@@ -8,7 +8,8 @@ angular.module('angulobby').factory('AuthService',
   ['$q', '$timeout', '$http',
     function ($q, $timeout, $http) {
       var userAuthenticated = null;
-      var currentUser;
+      // current session username
+      var currentUser = null;
       return ({
         isLoggedIn: isLoggedIn,
         getUserStatus: getUserStatus,
@@ -16,7 +17,6 @@ angular.module('angulobby').factory('AuthService',
         logout: logout,
         register: register,
         getCurrentUser: function() {
-          console.log(isLoggedIn());
           return currentUser; }
       });
       function isLoggedIn() {
