@@ -77,8 +77,14 @@ router.get('/status', function(req, res) {
     });
   }
   res.status(200).json({
-    isAuthenticated: true
+    isAuthenticated: true,
+    username: req.user.username
   });
 });
+
+router.get('/confirm-login', function(req,res) {
+  res.send(req.user)
+});
+
 
 module.exports = router;

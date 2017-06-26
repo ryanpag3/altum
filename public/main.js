@@ -53,9 +53,6 @@ app.run(function($rootScope, $location, $route, AuthService) {
   function (event, next, current) {
     AuthService.getUserStatus()
       .then(function(){
-        console.log('then function called');
-        console.log("restricted? " + next.access.restricted);
-        console.log("logged in? " + AuthService.isLoggedIn());
         if (next.access.restricted && !AuthService.isLoggedIn()){
           $location.path('/login');
           $route.reload();
@@ -63,3 +60,4 @@ app.run(function($rootScope, $location, $route, AuthService) {
       });
   });
 });
+

@@ -10,7 +10,12 @@ var socket = function(io) {
 
     socket.on('send-message', function(data) {
       console.log('attempting to send "' + data.message + '" to ' + data.room);
-      io.to(data.room).emit('update-chat', data.message);
+      var rawTime = new Date();
+      var currTime = rawTime.getHours() + ':' +
+          rawTime.getMinutes() + ':' +
+          rawTime.getSeconds() + ' ';
+      var msg = currTime + data.username + ': ' + data.message;
+      io.to(data.room).emit('update-chat', msg);
     });
   });
 

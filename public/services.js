@@ -8,12 +8,16 @@ angular.module('angulobby').factory('AuthService',
   ['$q', '$timeout', '$http',
     function ($q, $timeout, $http) {
       var userAuthenticated = null;
+      var currentUser;
       return ({
         isLoggedIn: isLoggedIn,
         getUserStatus: getUserStatus,
         login: login,
         logout: logout,
-        register: register
+        register: register,
+        getCurrentUser: function() {
+          console.log(isLoggedIn());
+          return currentUser; }
       });
       function isLoggedIn() {
         if (userAuthenticated) {
@@ -29,6 +33,7 @@ angular.module('angulobby').factory('AuthService',
             // status returns true if user is authenticated
             if (response.data.isAuthenticated) {
               userAuthenticated = true;
+              currentUser = response.data.username;
             } else {
               userAuthenticated = false;
             }
@@ -50,6 +55,7 @@ angular.module('angulobby').factory('AuthService',
           .then(function (response) {
             if (response.status === 200 && response.data.msg) {
               userAuthenticated = true;
+              currentUser = username;
               deferred.resolve();
             } else {
               userAuthenticated = false;
@@ -72,10 +78,12 @@ angular.module('angulobby').factory('AuthService',
         $http.get('/user/logout')
           .then(function (response) {
             userAuthenticated = false;
+            currentUser = null;
             deferred.resolve();
           })
           .catch(function (response) {
             userAuthenticated = false;
+            currentUser = null;
             deferred.reject();
           });
 

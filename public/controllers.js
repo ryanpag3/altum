@@ -86,13 +86,13 @@ angular.module('angulobby').controller('registerController',
  *
  */
 angular.module('angulobby').controller('homeController',
-  function($scope, socket) {
+  function($scope, socket, AuthService) {
     $scope.messages = [];
     $scope.text = null;
     socket.emit('join-room', 'home');
 
     $scope.sendMessage = function () {
-      var data = {room: 'home', message: $scope.text };
+      var data = {room: 'home', username: AuthService.getCurrentUser(), message: $scope.text };
       socket.emit('send-message', data);
       $scope.text = null;
     };
