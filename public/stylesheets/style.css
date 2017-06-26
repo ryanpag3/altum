@@ -1,28 +1,41 @@
-html, body {
+html, body, #main, #ng-view {
     width: 100%;
     height: 100%;
 }
 
-form {
+.box {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
 }
 
-input {
-}
-
-.chat-box {
-    width: 50%;
-}
-.chat-container {
-    background-color: lightblue;
-}
-
-.chat-box {
-    
-}
-
-.test {
-    position: relative;
+#main {
     background-color: aliceblue;
-    height: 500px;
-    width: 500px;
+    flex-grow: 1;
+}
+
+#ng-view {
+    height: 100%;
+}
+
+#container {
+  height: 100%;
+  width: 100%;
+}
+
+#left, #middle, #right {
+    height: 100%;
+    width: 33%;
+}
+
+#chat-container {
+    display: flex;
+    flex-direction: column;
+    background-color: lightblue;
+    height: 100%;
+    width: 100%;
+}
+
+#messages-box {
+    flex-grow: 1;
 }

@@ -1,48 +1,60 @@
-<!doctype html>
-<html ng-app="angulobby">
-  <head>
+<html>
+<head>
+  <style type="text/css">
+    html, body {
+      height: 100%;
+    }
+  #container {
+    height:100%;
+    display:flex;
+    flex-flow:column;
+  }
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="https://use.fontawesome.com/7222f42b52.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="./main.js"></script>
-    <script src="./services.js"></script>
-    <script src="./controllers.js"></script>
-    <base href="/">
-  </head>
-  <body data-ng-controller="IndexController">
+   #ng-view {
+     background-color: lightgreen;
+     overflow: hidden;
+   }
 
-     <!-- HEADER AND NAVBAR -->
-  <header>
-      <nav class="navbar navbar-default">
-        <div class="container">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="/">AnguLobby Prototype</a>
-          </div>
+    header {
+      height: 10%;
+    }
+  </style>
 
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="/login"><i class="fa fa-shield"></i> Login</a></li>
-            <li><a href="/register"><i class="fa fa-comment"></i> Register</a></li>
-            <div ng-controller="logoutController">
-              <a ng-click='logout()' class="btn btn-default">Logout</a>
-            </div>
-          </ul>
-
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="css/text" href="./stylesheets/style.css">
+  <script src="https://use.fontawesome.com/7222f42b52.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="./main.js"></script>
+  <script src="./services.js"></script>
+  <script src="./controllers.js"></script>
+  <base href="/">
+</head>
+<body ng-app="angulobby">
+<div id="container">
+    <header>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/">AnguLobby Prototype</a>
         </div>
-      </nav>
-  </header>
 
-  <!-- MAIN CONTENT AND INJECTED VIEWS -->
-  <div id="main">
-    <!-- angular templating -->
-    <!-- this is where the content will be injected -->
-    <div data-ng-view></div>
-  </div>
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
+          <li><a href="/login"><i class="fa fa-shield"></i> Login</a></li>
+          <li><a href="/register"><i class="fa fa-comment"></i> Register</a></li>
+          <div ng-controller="logoutController">
+            <a ng-click='logout()' class="btn btn-default">Logout</a>
+          </div>
+        </ul>
 
+      </div>
+    </nav>
+    </header>
 
-  </body>
+  <div id="ng-view" ng-view></div>
+</div>
+</body>
 </html>
