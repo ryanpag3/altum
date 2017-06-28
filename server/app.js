@@ -23,7 +23,8 @@ var User = require('./models/user.js');
 var app = express();
 
 // require routes
-var routes = require('./routes/api.js');
+var authRoutes = require('./routes/api.js');
+var queueRoutes = require('./routes/queue.js');
 
 // middleware definitions
 // middleware allows you to define a stack of actions that you should flow through
@@ -52,7 +53,8 @@ passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
 // routes
-app.use('/user/', routes);
+app.use('/user/', authRoutes);
+app.use('/queue/', queueRoutes);
 
 // serve angular front end files from root path
 app.use('/', express.static('public', { redirect: false }));
@@ -63,12 +65,12 @@ app.get('*', function(req, res, next) {
 });
 
 // error handlers
-app.use(function(req, res, next) {
-  var err = new Error('not found');
-  err.status = 404;
-  // report error in middleware
-  next(err);
-});
+// app.use(function(req, res, next) {
+//   var err = new Error('not found');
+//   err.status = 404;
+//   // report error in middleware
+//   next(err);
+// });
 
 // TODO: handle production vs development error handling
 // TODO: Stack trace will leak to client if error == {}

@@ -89,10 +89,33 @@ angular.module('angulobby').controller('registerController',
  *
  */
 angular.module('angulobby').controller('homeController',
-  function($scope, socket, AuthService) {
+  function($scope, socket, AuthService, QueueService) {
     $scope.messages = [];
     $scope.text = null;
-    socket.emit('join-room', 'home');
+    socket.emit('join-room', 'home'); // join global chat
+
+    $scope.joinQueue = function() {
+      // debug
+      var potentialQueues = ['CSGO', 'LOL', 'DOTA2']; // end debug
+      var queue = potentialQueues[Math.floor(Math.random() * potentialQueues.length)]; // end debug
+      QueueService.addToQueue(AuthService.getCurrentUser(), queue)
+        .then(
+          // on success
+        )
+        .catch(function(err) {
+          alert(err);
+        });
+    };
+
+    $scope.leaveQueues = function() {
+      QueueService.removeFromAllQueues(AuthService.getCurrentUser())
+        .then(
+          // handle success
+        )
+        .catch(function(err) {
+        // handle failure
+        });
+    };
 
     $scope.sendMessage = function () {
       var data = {room: 'home', username: AuthService.getCurrentUser(), message: $scope.text };
@@ -105,7 +128,7 @@ angular.module('angulobby').controller('homeController',
         $scope.$apply();
     });
 
-    $scope.joinQueue = function() {
+    $scope.joinQueueBackup = function() {
       // debug
       var potentialQueues = ['CSGO', 'LOL', 'DOTA2']; // end debug
       var queue = potentialQueues[Math.floor(Math.random() * potentialQueues.length)];
