@@ -4,7 +4,7 @@ var app = require('./app.js');
 var server = require('http').createServer(app);
 // attach socket.io to http server
 var io = require('socket.io')(server);
-var socketHandler = require('./socket')(io);
+var socketHandler = require('./utils/socket')(io);
 
 server.listen(3000, function () {
   console.log('server running on port 3000');

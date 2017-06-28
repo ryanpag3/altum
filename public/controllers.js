@@ -105,6 +105,18 @@ angular.module('angulobby').controller('homeController',
         $scope.$apply();
     });
 
+    $scope.joinQueue = function() {
+      // debug
+      var potentialQueues = ['CSGO', 'LOL', 'DOTA2']; // end debug
+      var queue = potentialQueues[Math.floor(Math.random() * potentialQueues.length)];
+      console.log(AuthService.getCurrentUser() + ' is joining the queue: ' + queue);
+      var data = {
+        username: AuthService.getCurrentUser(),
+        queue: potentialQueues[Math.floor(Math.random() * potentialQueues.length)]
+      };
+      socket.emit('join-queue', data);
+    }
+
     // join queue
     // sending a socket command to the server
     // add their username to the queue
