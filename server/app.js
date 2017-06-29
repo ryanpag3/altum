@@ -15,6 +15,11 @@ var localStrategy = require('passport-local').Strategy;
 
 // connect mongoose to db
 mongoose.connect('mongodb://localhost/angulobby');
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error: '));
+db.on('open', function() {
+  console.log('connected to database.');
+});
 
 // user schema/model
 var User = require('./models/user.js');
@@ -23,8 +28,9 @@ var User = require('./models/user.js');
 var app = express();
 
 // require routes
-var authRoutes = require('./routes/api.js');
+var authRoutes = require('./routes/auth.js');
 var queueRoutes = require('./routes/queue.js');
+var gamesRoutes = require('./routes/games.js');
 
 // middleware definitions
 // middleware allows you to define a stack of actions that you should flow through
@@ -55,6 +61,7 @@ passport.deserializeUser(User.deserializeUser());
 // routes
 app.use('/user/', authRoutes);
 app.use('/queue/', queueRoutes);
+app.use('/games/', gamesRoutes);
 
 // serve angular front end files from root path
 app.use('/', express.static('public', { redirect: false }));

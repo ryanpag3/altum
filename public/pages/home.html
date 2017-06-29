@@ -1,68 +1,18 @@
 <head>
-  <script type="text/javascript" src="../scripts/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="../scripts/bootstrap.min.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="../stylesheets/home.css" type="text/css">
 </head>
 
 <div id="home-container" class="container-fluid" data-ng-controller="homeController">
   <div id ="select-params-container" data-ng-show="paramWindowState">
-    <div id="select-games" class="row">
-      <label class="checkbox-inline"><input type="checkbox" /><strong>CSGO</strong></label>
-      <label class="checkbox-inline"><input type="checkbox" class=""/><strong>LoL</strong></label>
-      <label class="checkbox-inline"><input type="checkbox" class=""/><strong>DOTA 2</strong></label>
-    </div>
-    <div class="dropdown col-sm-4">
-      <button class="btn btn-primary dropdown-toggle col-sm-12" type="button" data-toggle="dropdown"> Select your CSGO rank
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu scrollable-menu">
-        <li><span>Silver I</span></li>
-        <li><span>Silver II</span></li>
-        <li><span>Silver III</span></li>
-        <li><span>Silver IV</span></li>
-        <li><span>Silver V</span></li>
-        <li><span>Nova I</span></li>
-        <li><span>Nova II</span></li>
-        <li><span>Nova III</span></li>
-        <li><span>Nova IV</span></li>
-        <li><span>Nova Master</span></li>
-      </ul>
-    </div>
-    <div class="dropdown col-sm-4">
-      <button class="btn btn-primary dropdown-toggle col-sm-12" type="button" data-toggle="dropdown"> Select your LoL rank
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu scrollable-menu">
-        <li><span>Silver I</span></li>
-        <li><span>Silver II</span></li>
-        <li><span>Silver III</span></li>
-        <li><span>Silver IV</span></li>
-        <li><span>Silver V</span></li>
-        <li><span>Nova I</span></li>
-        <li><span>Nova II</span></li>
-        <li><span>Nova III</span></li>
-        <li><span>Nova IV</span></li>
-        <li><span>Nova Master</span></li>
-      </ul>
-    </div>
-    <div class="dropdown col-sm-4">
-      <button class="btn btn-primary dropdown-toggle col-sm-12" type="button" data-toggle="dropdown"> Select your DOTA 2 rank
-        <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu scrollable-menu">
-        <li><span>Silver I</span></li>
-        <li><span>Silver II</span></li>
-        <li><span>Silver III</span></li>
-        <li><span>Silver IV</span></li>
-        <li><span>Silver V</span></li>
-        <li><span>Nova I</span></li>
-        <li><span>Nova II</span></li>
-        <li><span>Nova III</span></li>
-        <li><span>Nova IV</span></li>
-        <li><span>Nova Master</span></li>
-      </ul>
-    </div>
+
+   <select data-ng-model="selectedGame" ng-options="x for x in names"></select>
+
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-secondary">[1]</button>
       <button type="button" class="btn btn-secondary">[2]</button>

@@ -7,7 +7,6 @@ var passport = require('passport');
 var User = require('../models/user.js');
 
 router.post('/register', function(req, res) {
-  console.log('register authentication called');
   User.register(new User({username: req.body.username}),
     req.body.password, function (err, account) {
     // if any error thrown
@@ -53,7 +52,6 @@ router.post('/login', function(req, res, next) {
           msg: 'Could not log in user'
         });
       }
-      console.log('login successful');
       res.status(200).json({
         msg: 'Login successful!'
       });
