@@ -1,96 +1,86 @@
 <head>
-  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <style type="text/css">
-
-    form {
-      background-color: darkslategray;
-
-    }
-    textarea {
-      resize: none;
-    }
-
-    .input {
-      height: 100%;
-    }
-
-    .nav-button {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 120px;
-      font-size: 24px;
-      background-color: #223f85;
-      margin-top: 5%;
-    }
-
-    #home-container {
-      height: 90%;
-    }
-
-    #sidebar-container, #news-feed-container, #global-chat-container {
-      color: white;
-      font-size: 3vh;
-      height: 100%;
-    }
-
-    #sidebar-container {
-      background-color: darkgreen;
-    }
-
-    #news-feed-container {
-      background-color: darkblue;
-    }
-
-    #global-chat-container {
-      background-color: darkslategray;
-    }
-
-    #nav-container {
-      height: 100%;
-      background-color: darkolivegreen;
-    }
-
-    #profile-container {
-      background-color: darkred;
-      height: 40%;
-    }
-
-    #button-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 100%;
-      height: 60%;
-      background-color: #336699;
-    }
-
-    #message-box {
-      height: 80%;
-      background-color: lightblue;
-      color: black;
-      font-size: 16px;
-      margin-top: 2%;
-      margin-left: 2%;
-      margin-right: 2%;
-    }
-
-    #chat-form {
-      color: black;
-      font-size: 16px;
-      height: 10%;
-      margin-left: 2%;
-      margin-right: 2%;
-      background-color: #223f85;
-    }
-
-    #send-chat-button {
-      height: 100%;
-    }
-  </style>
+  <script type="text/javascript" src="../scripts/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="../scripts/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="../stylesheets/home.css" type="text/css">
 </head>
 
 <div id="home-container" class="container-fluid" data-ng-controller="homeController">
+  <div id ="select-params-container" data-ng-show="paramWindowState">
+    <div id="select-games" class="row">
+      <label class="checkbox-inline"><input type="checkbox" /><strong>CSGO</strong></label>
+      <label class="checkbox-inline"><input type="checkbox" class=""/><strong>LoL</strong></label>
+      <label class="checkbox-inline"><input type="checkbox" class=""/><strong>DOTA 2</strong></label>
+    </div>
+    <div class="dropdown col-sm-4">
+      <button class="btn btn-primary dropdown-toggle col-sm-12" type="button" data-toggle="dropdown"> Select your CSGO rank
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu scrollable-menu">
+        <li><span>Silver I</span></li>
+        <li><span>Silver II</span></li>
+        <li><span>Silver III</span></li>
+        <li><span>Silver IV</span></li>
+        <li><span>Silver V</span></li>
+        <li><span>Nova I</span></li>
+        <li><span>Nova II</span></li>
+        <li><span>Nova III</span></li>
+        <li><span>Nova IV</span></li>
+        <li><span>Nova Master</span></li>
+      </ul>
+    </div>
+    <div class="dropdown col-sm-4">
+      <button class="btn btn-primary dropdown-toggle col-sm-12" type="button" data-toggle="dropdown"> Select your LoL rank
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu scrollable-menu">
+        <li><span>Silver I</span></li>
+        <li><span>Silver II</span></li>
+        <li><span>Silver III</span></li>
+        <li><span>Silver IV</span></li>
+        <li><span>Silver V</span></li>
+        <li><span>Nova I</span></li>
+        <li><span>Nova II</span></li>
+        <li><span>Nova III</span></li>
+        <li><span>Nova IV</span></li>
+        <li><span>Nova Master</span></li>
+      </ul>
+    </div>
+    <div class="dropdown col-sm-4">
+      <button class="btn btn-primary dropdown-toggle col-sm-12" type="button" data-toggle="dropdown"> Select your DOTA 2 rank
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu scrollable-menu">
+        <li><span>Silver I</span></li>
+        <li><span>Silver II</span></li>
+        <li><span>Silver III</span></li>
+        <li><span>Silver IV</span></li>
+        <li><span>Silver V</span></li>
+        <li><span>Nova I</span></li>
+        <li><span>Nova II</span></li>
+        <li><span>Nova III</span></li>
+        <li><span>Nova IV</span></li>
+        <li><span>Nova Master</span></li>
+      </ul>
+    </div>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-secondary">[1]</button>
+      <button type="button" class="btn btn-secondary">[2]</button>
+      <button type="button" class="btn btn-secondary">[3]</button>
+      <button type="button" class="btn btn-secondary">[4]</button>
+      <button type="button" class="btn btn-secondary">[5]</button>
+      <button type="button" class="btn btn-secondary">[6]</button>
+      <button type="button" class="btn btn-secondary">[7]</button>
+      <button type="button" class="btn btn-secondary">[8]</button>
+      <button type="button" class="btn btn-secondary">[9]</button>
+      <button type="button" class="btn btn-secondary">[10]</button>
+    </div>
+
+    <div class="row">
+      <button class="btn btn-primary">CANCEL</button>
+      <button class="btn btn-primary">CONFIRM</button>
+    </div>
+  </div>
   <div class="row">
     <div id="sidebar-container" class="col-sm-2">
       <div class="row">
@@ -106,7 +96,7 @@
           <div class="row">
               <div id="button-container" class="col container">
                 <div>
-                <button class="col-sm-10 col-sm-offset-1 nav-button" data-ng-click="joinQueue()"> find a lobby button </button>
+                <button class="col-sm-10 col-sm-offset-1 nav-button" data-ng-click="setQueueParams()"> find a lobby button </button>
                 <button class="col-sm-10 col-sm-offset-1 nav-button" data-ng-click="leaveQueues()"> leave queues </button>
                 <div class="col-sm-10 col-sm-offset-1 nav-button"> join game button </div>
                 </div>
@@ -115,6 +105,9 @@
         </div>
       </div>
     </div>
+
+
+
     <div id="news-feed-container" class="col-sm-5">
       NEWS FEED HERE<br>
       Scrollable announcement feed.

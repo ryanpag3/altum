@@ -16,8 +16,8 @@ angular.module('angulobby').controller('loginController',
   function ($scope, $location, AuthService, socket) {
     $scope.login = function() {
       // initial values
-      $scope.error = false;
-      $scope.disabled = true;
+      $scope.error = false; // error thrown
+      $scope.disabled = true; // button disabled
 
       // call login from service
       AuthService.login($scope.loginForm.username, $scope.loginForm.password)
@@ -92,12 +92,18 @@ angular.module('angulobby').controller('homeController',
   function($scope, socket, AuthService, QueueService) {
     $scope.messages = [];
     $scope.text = null;
+    $scope.paramWindowState = false;
     socket.emit('join-room', 'home'); // join global chat
+
+    $scope.setQueueParams = function() {
+      $scope.paramWindowState = true;
+    };
 
     $scope.joinQueue = function() {
       // debug
-      var potentialQueues = ['CSGO', 'LOL', 'DOTA2']; // end debug
-      var queue = potentialQueues[Math.floor(Math.random() * potentialQueues.length)]; // end debug
+      var potentialQueues = ['CSGO', 'LOL', 'DOTA2'];
+      var queue = potentialQueues[Math.floor(Math.random() * potentialQueues.length)];
+      // end debug
       QueueService.addToQueue(AuthService.getCurrentUser(), queue)
         .then(
           // on success
@@ -127,18 +133,6 @@ angular.module('angulobby').controller('homeController',
         $scope.messages.push(message);
         $scope.$apply();
     });
-
-    $scope.joinQueueBackup = function() {
-      // debug
-      var potentialQueues = ['CSGO', 'LOL', 'DOTA2']; // end debug
-      var queue = potentialQueues[Math.floor(Math.random() * potentialQueues.length)];
-      console.log(AuthService.getCurrentUser() + ' is joining the queue: ' + queue);
-      var data = {
-        username: AuthService.getCurrentUser(),
-        queue: potentialQueues[Math.floor(Math.random() * potentialQueues.length)]
-      };
-      socket.emit('join-queue', data);
-    }
 
     // join queue
     // sending a socket command to the server

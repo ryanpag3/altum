@@ -1,0 +1,115 @@
+form {
+  background-color: darkslategray;
+
+}
+textarea {
+  resize: none;
+}
+label {
+  font-size: 16px;
+
+}
+
+.dropdown-menu {
+  margin-left: 16px;
+  margin-right: 16px;
+  width: 90%;
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 120px;
+  font-size: 24px;
+  background-color: #223f85;
+  margin-top: 5%;
+}
+
+.scrollable-menu {
+  height: auto;
+  max-height: 200px;
+  overflow-x: hidden;
+}
+
+#home-container {
+  height: 90%;
+  position: relative;
+}
+
+#select-params-container {
+  position: absolute;
+  z-index: 5;
+  height: 90%;
+  width: 50%;
+  background-color: green;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+}
+
+#select-games {
+  background-color: white;
+}
+
+#sidebar-container, #news-feed-container, #global-chat-container {
+  color: white;
+  font-size: 3vh;
+  height: 100%;
+}
+
+#sidebar-container {
+  background-color: darkgreen;
+}
+
+#news-feed-container {
+  background-color: darkblue;
+}
+
+#global-chat-container {
+  background-color: darkslategray;
+}
+
+#nav-container {
+  height: 100%;
+  background-color: darkolivegreen;
+}
+
+#profile-container {
+  background-color: darkred;
+  height: 40%;
+}
+
+#button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60%;
+  background-color: #336699;
+}
+
+#message-box {
+  height: 80%;
+  background-color: lightblue;
+  color: black;
+  font-size: 16px;
+  margin-top: 2%;
+  margin-left: 2%;
+  margin-right: 2%;
+}
+
+#chat-form {
+  color: black;
+  font-size: 16px;
+  height: 10%;
+  margin-left: 2%;
+  margin-right: 2%;
+  background-color: #223f85;
+}
+
+#send-chat-button {
+  height: 100%;
+}
