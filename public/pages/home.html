@@ -9,7 +9,7 @@
 </head>
 
 <div id="home-container" class="container-fluid" data-ng-controller="homeController">
-  <div id ="select-params-container" data-ng-show="paramWindowState">
+  <div id ="select-params-container" data-ng-show="paramWindowState" data-ng-controller="paramSelectController">
 
    <select data-ng-model="selectedGame" ng-options="x for x in games"></select>
 

@@ -89,8 +89,8 @@ angular.module('angulobby').controller('registerController',
  *
  */
 angular.module('angulobby').controller('homeController',
-  function($scope, socket, AuthService, QueueService, gameDatabase) {
-    $scope.games = gameDatabase.get();
+  ['$scope', 'socket', 'AuthService', 'QueueService',
+  function($scope, socket, AuthService) {
     $scope.messages = [];
     $scope.text = null;
     $scope.paramWindowState = false;
@@ -98,20 +98,6 @@ angular.module('angulobby').controller('homeController',
 
     $scope.setQueueParams = function() {
       $scope.paramWindowState = true;
-    };
-
-    $scope.joinQueue = function() {
-      // debug
-      var potentialQueues = ['CSGO', 'LOL', 'DOTA2'];
-      var queue = potentialQueues[Math.floor(Math.random() * potentialQueues.length)];
-      // end debug
-      QueueService.addToQueue(AuthService.getCurrentUser(), queue)
-        .then(
-          // on success
-        )
-        .catch(function(err) {
-          alert(err);
-        });
     };
 
     $scope.leaveQueues = function() {
@@ -141,4 +127,18 @@ angular.module('angulobby').controller('homeController',
     //
 
     // join lobby
-  });
+  }]);
+
+
+angular.module('angulobby').controller('paramSelectController',
+['$scope', 'ParamService', function($scope, ParamService){
+
+  ParamService.getNames()
+    .then(function(res) {
+      console.log(res);
+      $scope.games = res;
+    })
+    .catch(function(err) {
+
+    });
+}]);

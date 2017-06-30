@@ -4,7 +4,7 @@
 // service named AuthService
 // injected the dependencies that will be used
 // $q, $timeout, $http
-angular.module('angulobby').factory('AuthService',
+app.factory('AuthService',
   ['$q', '$timeout', '$http',
     function ($q, $timeout, $http) {
       var userAuthenticated = null;
@@ -18,7 +18,7 @@ angular.module('angulobby').factory('AuthService',
         register: register,
         getCurrentUser: function () {
           return currentUser;
-        }
+        },
       });
       function isLoggedIn() {
         if (userAuthenticated) {
@@ -192,23 +192,34 @@ app.factory('QueueService', [
     }
   }]);
 
-app.factory('gameDatabase',
-  ['$http', '$q', '$scope',
+app.factory('ParamService',
+  ['$http', '$q',
     function ($http, $q) {
       return ({
-        get: get
+        getNames: getNames
       });
 
+      // returns array of  {game, lobby_size}
       function get() {
+
+      }
+
+      // returns array of names
+      function getNames() {
         var deferred = $q.defer();
-        $http.get('/games/list')
+        $http.get('/games/get-names')
           .then(function (res) {
             // on success
-            deferred.resolve(res.body.docs)
+            var t = res.data.docs;
+            var games = [];
+            for (var i = 0; i < t.length; i++){
+              games.push(t[i].name); // add name strings to array to send to controller
+            }
+            deferred.resolve(games);
           })
           .catch(function (err) {
             // error thrown
-            deferred.reject(err)
+            deferred.reject(err.data.msg);
           });
         return deferred.promise;
       }
