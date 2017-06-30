@@ -89,8 +89,8 @@ angular.module('angulobby').controller('registerController',
  *
  */
 angular.module('angulobby').controller('homeController',
-  function($scope, socket, AuthService, QueueService) {
-    $scope.gameList = [];
+  function($scope, socket, AuthService, QueueService, gameDatabase) {
+    $scope.games = gameDatabase.get();
     $scope.messages = [];
     $scope.text = null;
     $scope.paramWindowState = false;

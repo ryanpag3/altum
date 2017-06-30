@@ -14,5 +14,5 @@ var User = new Schema({
 // see ref: https://github.com/saintedlama/passport-local-mongoose#api-documentation
 User.plugin(passportLocalMongoose);
 
-module.exports = mongoose.model('users', User);
+module.exports = mongoose.model('dsers', User);
 

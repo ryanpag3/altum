@@ -16,8 +16,9 @@ angular.module('angulobby').factory('AuthService',
         login: login,
         logout: logout,
         register: register,
-        getCurrentUser: function() {
-          return currentUser; }
+        getCurrentUser: function () {
+          return currentUser;
+        }
       });
       function isLoggedIn() {
         if (userAuthenticated) {
@@ -51,7 +52,7 @@ angular.module('angulobby').factory('AuthService',
         // send a POST request to the server
         $http.post('/user/login',
           {username: username, password: password})
-          // handle success
+        // handle success
           .then(function (response) {
             if (response.status === 200 && response.data.msg) {
               userAuthenticated = true;
@@ -98,7 +99,7 @@ angular.module('angulobby').factory('AuthService',
         // send POST request to the server
         $http.post('/user/register',
           {username: username, password: password})
-          // handle success case
+        // handle success case
           .then(function (response) {
             if (response.status === 200 && response.data.msg) {
               deferred.resolve();
@@ -126,7 +127,7 @@ app.factory('socket', ['$rootScope', function ($rootScope) {
     emit: function (eventName, data) {
       socket.emit(eventName, data);
     },
-    emitTo: function(room, eventName, data) {
+    emitTo: function (room, eventName, data) {
       socket.to(room).emit(eventName, data);
     }
 
@@ -135,58 +136,80 @@ app.factory('socket', ['$rootScope', function ($rootScope) {
 
 app.factory('QueueService', [
   '$http', '$q',
-    function($http, $q) {
+  function ($http, $q) {
+    return ({
+      addToQueue: addToQueue,
+      removeFromQueue: removeFromQueue,
+      removeFromAllQueues: removeFromAllQueues
+    });
+
+    function addToQueue(username, queue) {
+      var deferred = $q.defer();
+      $http.post('/queue/add', {username: username, queue: queue})
+        .then(function (res) {
+          if (res.status === 200) {
+            deferred.resolve();
+          } else {
+            deferred.reject();
+          }
+        })
+        .catch(function (res) {
+          deferred.reject();
+        });
+      return deferred.promise;
+    }
+
+    function removeFromQueue(username, queue) {
+      var deferred = $q.defer();
+      $http.post('/queue/remove', {username: username, queue: queue})
+        .then(function (res) {
+          if (res.status === 200) {
+            deferred.resolve(res.data.msg);
+          } else {
+            deferred.reject();
+          }
+        })
+        .catch(function (res) {
+          deferred.reject(res.data.msg);
+        });
+      return deferred.promise;
+    }
+
+    function removeFromAllQueues(username) {
+      var deferred = $q.defer();
+      $http.post('/queue/remove-all', {username: username})
+        .then(function (res) {
+          if (res.status === 200) {
+            deferred.resolve(res.data.msg);
+          } else {
+            deferred.reject();
+          }
+        })
+        .catch(function (res) {
+          deferred.reject(res.data.msg);
+        });
+      return deferred.promise;
+    }
+  }]);
+
+app.factory('gameDatabase',
+  ['$http', '$q', '$scope',
+    function ($http, $q) {
       return ({
-        addToQueue: addToQueue,
-        removeFromQueue: removeFromQueue,
-        removeFromAllQueues: removeFromAllQueues
+        get: get
       });
 
-      function addToQueue(username, queue) {
+      function get() {
         var deferred = $q.defer();
-        $http.post('/queue/add', {username: username, queue: queue})
-          .then(function(res) {
-            if (res.status === 200) {
-              deferred.resolve();
-            } else {
-              deferred.reject();
-            }
+        $http.get('/games/list')
+          .then(function (res) {
+            // on success
+            deferred.resolve(res.body.docs)
           })
-          .catch( function(res) {
-            deferred.reject();
+          .catch(function (err) {
+            // error thrown
+            deferred.reject(err)
           });
         return deferred.promise;
       }
-
-      function removeFromQueue(username, queue) {
-        var deferred = $q.defer();
-        $http.post('/queue/remove', {username: username, queue: queue})
-          .then(function(res) {
-            if (res.status === 200) {
-              deferred.resolve(res.data.msg);
-            } else {
-              deferred.reject();
-            }
-          })
-          .catch(function(res) {
-            deferred.reject(res.data.msg);
-          });
-        return deferred.promise;
-      }
-
-      function removeFromAllQueues(username) {
-        var deferred = $q.defer();
-        $http.post('/queue/remove-all', { username: username })
-          .then(function(res) {
-            if (res.status === 200) {
-              deferred.resolve(res.data.msg);
-            } else {
-              deferred.reject();
-            }
-          })
-          .catch(function(res) {
-            deferred.reject(res.data.msg);
-          });
-        return deferred.promise;
-      }
-  }]);
+    }]);
