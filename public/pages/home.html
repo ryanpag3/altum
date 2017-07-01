@@ -5,7 +5,7 @@
 <div id="home-container" class="container-fluid" data-ng-controller="homeController">
   <div id ="select-params-container" data-ng-show="paramWindowState">
     <div id="game-list-container" data-ng-controller="gameListController">
-      <select class="multiselect" data-placeholder="Select Game" ng-model="gameSelection" ng-options="x as x for x in names" multiple="multiple" multiselect-dropdown></select>
+      <select ng-model="gameSelection" data-ng-options="x as x for x in names"></select>
     </div>
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-secondary">[1]</button>
