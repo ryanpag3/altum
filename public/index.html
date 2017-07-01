@@ -1,13 +1,15 @@
-<html ng-app="angulobby">
+<html data-ng-app="angulobby">
 
 <head>
+  <title>AngularJS ui-select</title>
   <base href="/">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angular-ui-router/1.0.0-rc.1/angular-ui-router.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.js"></script>
 
-  <link rel="stylesheet" ng-href="../node_modules/ui-select/dist/select.min.css">
-  <script type="text/javascript" src="/node_modules/ui-select/dist/select.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.css" />
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-select/0.20.0/select.js" async></script>
+  <script src="./main.js"></script>
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -44,6 +46,7 @@
   <div id="ng-view" ng-view></div>
 </div>
 <script src="https://use.fontawesome.com/7222f42b52.js"></script>
+<script src="./socket.io/socket.io.js"></script>
 <script src="./main.js"></script>
 <script src="./services.js"></script>
 <script src="./controllers.js"></script>
