@@ -133,3 +133,59 @@ app.factory('socket', ['$rootScope', function ($rootScope) {
   };
 }]);
 
+app.factory
+(
+  'NotificationList',
+  [
+   '$http', '$q',
+    function ($http, $q)
+    {
+        return ({ get_notifications : get_notifications,
+          accept_friend : accept_friend
+        });
+
+      function get_notifications() {
+        var deferred = $q.defer();
+        $http.get('/note/list')
+          .then
+          (
+            function (res) {
+              console.log('inside factory: ' + res.data.docs.length);
+              var temp = res.data.docs, notes = [];
+              for(var i = 0; i < temp.length;++i )
+              {
+                notes.push(temp[0].notifications[0]);
+              }
+
+              deferred.resolve(notes);
+
+            }
+          )
+          .catch
+          (
+            function (err) {
+              deferred.reject(err.data.msg);
+            }
+          );
+        return deferred.promise;
+      }
+      function accept_friend()
+      {
+        var deferred = $q.defer();
+        $http.post('/note/friend')
+          .then
+          (
+            //write code here and in controller
+            //figure out how to take the info from the notification query and pass it along to the update query
+          )
+          .catch
+          (
+            function(err)
+            {
+              deferred.reject(err.data.msg);
+            }
+          )
+      }
+    }
+  ]
+);

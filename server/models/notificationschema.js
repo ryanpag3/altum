@@ -7,8 +7,7 @@ var Schema = mongoose.Schema;
 var NotificationSchema = new Schema
 ({
   to_user: String,
-  from_user: String,
-  oid: ObjectId
+  from_user: String
 });
 
-module.exports = NotificationSchema;//export as a mongoose model?
+module.exports = NotificationSchema;

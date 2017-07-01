@@ -24,6 +24,7 @@ var app = express();
 
 // require routes
 var routes = require('./routes/api.js');
+var noteRoute = require('./routes/notificationtest.js');
 
 // middleware definitions
 // middleware allows you to define a stack of actions that you should flow through
@@ -53,6 +54,7 @@ passport.deserializeUser(User.deserializeUser());
 
 // routes
 app.use('/user/', routes);
+app.use('/note/', noteRoute);
 
 // serve angular front end files from root path
 app.use('/', express.static('public', { redirect: false }));

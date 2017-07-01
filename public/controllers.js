@@ -112,3 +112,32 @@ angular.module('angulobby').controller('homeController',
 
     // join lobby
   });
+angular.module('angulobby').controller
+(
+  'notificationController',
+  [
+    '$scope', 'socket', 'NotificationList',
+    function ($scope, socket, NotificationList)
+    {
+      $scope.post_note = function ()
+      {
+        NotificationList.get_notifications()
+          .then(function(res)
+            {
+              $scope.note= res[0].from_user;
+              console.log(res);
+            }
+          )
+          .catch(function (err)
+          {
+            $scope.errorMessage = err;
+          });
+
+
+
+        console.log("pressed");
+      };
+
+    }
+  ]
+);

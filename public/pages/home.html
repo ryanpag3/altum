@@ -96,11 +96,13 @@
       <div class="row">
         <div id="nav-container" class="col-sm-12">
           <div class="row">
-            <div id="profile-container" class="col">
+            <div id="profile-container" class="col" data-ng-controller="notificationController">
               PROFILE <br>
               display username <br>
               TODO: <br>
               add levelling system functionality
+              <button data-ng-click="post_note()">post</button>
+              <textarea data-ng-model="note" style="color: black"></textarea>
             </div>
           </div>
           <div class="row">
