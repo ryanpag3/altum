@@ -1,4 +1,4 @@
-var app = angular.module('angulobby', ['ui.select','ngRoute', 'ngSanitize']);
+var app = angular.module('angulobby', ['ngRoute']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
   $routeProvider
