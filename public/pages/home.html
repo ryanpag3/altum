@@ -1,18 +1,12 @@
 <head>
-  <script
-    src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
   <link rel="stylesheet" href="../stylesheets/home.css" type="text/css">
 </head>
 
 <div id="home-container" class="container-fluid" data-ng-controller="homeController">
-  <div id ="select-params-container" data-ng-show="paramWindowState" data-ng-controller="paramSelectController">
-
-   <select data-ng-model="selectedGame" ng-options="x for x in games"></select>
-
+  <div id ="select-params-container" data-ng-show="paramWindowState">
+    <div id="game-list-container" data-ng-controller="gameListController">
+      <select class="multiselect" data-placeholder="Select Game" ng-model="gameSelection" ng-options="x as x for x in names" multiple="multiple" multiselect-dropdown></select>
+    </div>
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-secondary">[1]</button>
       <button type="button" class="btn btn-secondary">[2]</button>
@@ -79,5 +73,10 @@
       </div>
     </div>
   </div>
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.min.js"
+    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </div>
 

@@ -32,10 +32,8 @@ label {
   overflow-x: hidden;
 }
 
-.selectPicker {
-  font-size: 16px;
-  padding: 12px;
-  width:  36vh;
+#selectpicker {
+  height: 100px;
 }
 
 #home-container {

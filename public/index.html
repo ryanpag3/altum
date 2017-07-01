@@ -1,40 +1,27 @@
-<html>
+<html ng-app="angulobby">
+
 <head>
-  <style type="text/css">
-    html, body {
-      height: 100%;
-    }
-  #container {
-    height:100%;
-    display:flex;
-    flex-flow:column;
-  }
+  <base href="/">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-sanitize.min.js"></script>
 
-   #ng-view {
-     background-color: lightgreen;
-     overflow: hidden;
-   }
-
-    header {
-      height: 10%;
-    }
-  </style>
+  <link rel="stylesheet" ng-href="../node_modules/ui-select/dist/select.min.css">
+  <script type="text/javascript" src="/node_modules/ui-select/dist/select.min.js"></script>
 
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" type="css/text" href="./stylesheets/style.css">
-  <script src="https://use.fontawesome.com/7222f42b52.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script src="./main.js"></script>
-  <script src="./services.js"></script>
-  <script src="./controllers.js"></script>
-  <base href="/">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
+  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap3.css">-->
+  <link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
+  <link rel="stylesheet" type="text/css" href="./stylesheets/index.css">
+
 </head>
-<body ng-app="angulobby">
+
+<body>
 <div id="container">
-    <header>
+  <header>
     <nav class="navbar navbar-default">
       <div class="container">
         <div class="navbar-header">
@@ -52,9 +39,13 @@
 
       </div>
     </nav>
-    </header>
+  </header>
 
   <div id="ng-view" ng-view></div>
 </div>
+<script src="https://use.fontawesome.com/7222f42b52.js"></script>
+<script src="./main.js"></script>
+<script src="./services.js"></script>
+<script src="./controllers.js"></script>
 </body>
 </html>

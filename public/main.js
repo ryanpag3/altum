@@ -1,10 +1,9 @@
-var app = angular.module('angulobby', ['ngRoute']);
+var app = angular.module('angulobby', ['ngRoute', 'ngSanitize', 'ui.select']);
 
 app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'pages/home.html',
-      controller: 'IndexController',
       access: { restricted: true }
     })
     .when('/login', {
@@ -32,21 +31,6 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
   $locationProvider.html5Mode(true);
 
 }]);
-
-
-
-app.controller('IndexController', function ($scope, socket) {
-  $scope.alert = function () {
-    console.log('emitting test alert call');
-    socket.emit('test');
-  };
-
-  socket.on('test', function () {
-    console.log('test called');
-    alert('test message');
-  });
-
-});
 
 app.run(function($rootScope, $location, $route, AuthService) {
   $rootScope.$on('$routeChangeStart',

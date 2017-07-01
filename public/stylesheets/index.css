@@ -1,0 +1,16 @@
+html, body {
+  height: 100%;
+}
+#container {
+  height:100%;
+  display:flex;
+  flex-flow:column;
+}
+
+#ng-view {
+  overflow: hidden;
+}
+
+header {
+  height: 10%;
+}

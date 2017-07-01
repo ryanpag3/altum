@@ -120,25 +120,27 @@ angular.module('angulobby').controller('homeController',
         $scope.messages.push(message);
         $scope.$apply();
     });
-
-    // join queue
-    // sending a socket command to the server
-    // add their username to the queue
-    //
-
-    // join lobby
   }]);
 
 
-angular.module('angulobby').controller('paramSelectController',
-['$scope', 'ParamService', function($scope, ParamService){
+angular.module('angulobby').controller('gameListController',
+['$scope', 'GameListService', function($scope, GameListService){
+  var selectedModel = [];
+  var gameRanks = [];
 
-  ParamService.getNames()
+  GameListService.getGameNames()
     .then(function(res) {
-      console.log(res);
-      $scope.games = res;
+      $scope.names = res;
     })
     .catch(function(err) {
-
+      $scope.errorMessage = err;
     });
+
+  // GameListService.getGameRanks()
+  //   .then( function(res) {
+  //     gameRanks = res;
+  //   })
+  //   .catch(function(err) {
+  //     $scope.errorMessage = err;
+  //   });
 }]);

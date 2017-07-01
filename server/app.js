@@ -13,6 +13,7 @@ var path = require('path');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 
+
 // connect mongoose to db
 mongoose.connect('mongodb://localhost/angulobby');
 var db = mongoose.connection;
