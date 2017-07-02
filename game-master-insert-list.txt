@@ -1,13 +1,24 @@
 db.game_list.insertMany([
-{name: "Counter-Strike: Global Offensive", 
+{
+ name: "Counter-Strike: Global Offensive",
+ shortName: "csgo",
+ lobby_size : 5, 
+ ranks : ["Silver I", "Silver II", "Silver III", "Silver IV", "Silver V", "Nova I", "Nova II", "Nova III", "Nova IV", "Master Guardian I", "Master Guardian II", "Master Guardian Elite", "Distinguished Master Guardian", "Legendary Eagle", "Legendary Eagle Master", "Supreme Master First Class", "Global Elite"]},
+{
+ name: "League of Legends", 
+ shortName: "lol",
+ lobby_size : 5, 
+ ranks : ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "Master", "Challenger"]
+},
+{
+name: "DOTA 2",
+shortName: "dota2" 
 lobby_size : 5, 
-ranks : ["Silver I", "Silver II", "Silver III", "Silver IV", "Silver V", "Nova I", "Nova II", "Nova III", "Nova IV", "Master Guardian I", "Master Guardian II", "Master Guardian Elite", "Distinguished Master Guardian", "Legendary Eagle", "Legendary Eagle Master", "Supreme Master First Class", "Global Elite"]},
-{name: "League of Legends", 
-lobby_size : 5, 
-ranks : ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "Master", "Challenger"]},
-{name: "DOTA 2", 
-lobby_size : 5, 
-ranks : ["0-499", "500-999", "1000-1499", "1500-1999", "2000-2499", "2500-2999", "3000-3499", "3500-3999", "4000-4499", "4500-4999", "5000-5499", "5500-5999", "6000+"]},
-{name: "Overwatch", 
+ranks : ["0-499", "500-999", "1000-1499", "1500-1999", "2000-2499", "2500-2999", "3000-3499", "3500-3999", "4000-4499", "4500-4999", "5000-5499", "5500-5999", "6000+"
+]},
+{
+name: "Overwatch",
+shortName: "overwatch" 
 lobby_size : 6, 
-ranks : ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "Master", "Grandmaster"]}]);
+ranks : ["Bronze", "Silver", "Gold", "Platinum", "Diamond", "Master", "Grandmaster"]
+}]);

@@ -4,25 +4,30 @@
 
 <div id="home-container" class="container-fluid" data-ng-controller="homeController">
   <div id ="select-params-container" data-ng-show="paramWindowState">
-    <div id="game-list-container" data-ng-controller="gameListController">
-      <select ng-model="gameSelection" data-ng-options="x as x for x in names"></select>
-    </div>
-    <div class="btn-group" role="group">
-      <button type="button" class="btn btn-secondary">[1]</button>
-      <button type="button" class="btn btn-secondary">[2]</button>
-      <button type="button" class="btn btn-secondary">[3]</button>
-      <button type="button" class="btn btn-secondary">[4]</button>
-      <button type="button" class="btn btn-secondary">[5]</button>
-      <button type="button" class="btn btn-secondary">[6]</button>
-      <button type="button" class="btn btn-secondary">[7]</button>
-      <button type="button" class="btn btn-secondary">[8]</button>
-      <button type="button" class="btn btn-secondary">[9]</button>
-      <button type="button" class="btn btn-secondary">[10]</button>
-    </div>
+    <div id="game-list-container" data-ng-controller="paramsController">
+      <select ng-model="selectedGame" data-ng-options="game as game.name for game in games" data-ng-change="updateGame()">
+        <option  value="" disabled >Select a game</option>
+      </select>
+      <select ng-model="selectedRankIndex" data-ng-options="ranks.indexOf(rank) as rank for rank in ranks" data-ng-show="rankListShown" data-ng-change="updateRank()"></select>
 
-    <div class="row">
-      <button class="btn btn-primary">CANCEL</button>
-      <button class="btn btn-primary">CONFIRM</button>
+
+    <!--<div class="btn-group" role="group">-->
+      <!--<button type="button" class="btn btn-secondary">[1]</button>-->
+      <!--<button type="button" class="btn btn-secondary">[2]</button>-->
+      <!--<button type="button" class="btn btn-secondary">[3]</button>-->
+      <!--<button type="button" class="btn btn-secondary">[4]</button>-->
+      <!--<button type="button" class="btn btn-secondary">[5]</button>-->
+      <!--<button type="button" class="btn btn-secondary">[6]</button>-->
+      <!--<button type="button" class="btn btn-secondary">[7]</button>-->
+      <!--<button type="button" class="btn btn-secondary">[8]</button>-->
+      <!--<button type="button" class="btn btn-secondary">[9]</button>-->
+      <!--<button type="button" class="btn btn-secondary">[10]</button>-->
+    <!--</div>-->
+
+        <div class="row">
+          <button class="btn btn-primary">CANCEL</button>
+          <button class="btn btn-primary" data-ng-click="joinQueue()">CONFIRM</button>
+        </div>
     </div>
   </div>
   <div class="row">

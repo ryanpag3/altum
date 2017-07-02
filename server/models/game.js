@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Game = new Schema({
   name: String,
+  shortName: String,
   lobby_size: Number,
   ranks: [String]
 });
