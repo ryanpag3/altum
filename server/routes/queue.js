@@ -13,6 +13,12 @@ var queueService = function () {};
 
 router.post('/add', function(req, res) {
   var username = req.body.username, queue = req.body.queue;
+  if (users.map[username].existsInQueue(queue)) {
+    return res.status(500).json({
+      msg: 'user already exists in queue'
+    })
+  }
+
   if (queues[queue] === undefined) {
     queues[queue] = [username];
   } else {
@@ -83,7 +89,7 @@ var startService = queueService.prototype.startService = function() {
       var lobbyId = 1234;
       var username = queues[qName].shift(); // FIFO
       users.map[username].lobby = lobbyId;
-      users.map[username].socket.join(lobbyId);
+      users.map[username].sockets.join(lobbyId);
       console.log(username + ' has joined lobby: ' + lobbyId);
     }
   }

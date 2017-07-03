@@ -36,12 +36,15 @@ app.run(function($rootScope, $location, $route, AuthService) {
   $rootScope.$on('$routeChangeStart',
   function (event, next, current) {
     AuthService.getUserStatus()
-      .then(function(){
-        if (next.access.restricted && !AuthService.isLoggedIn()){
+      .then(function(response){
+        if (next.access.restricted && !response.isAuthenticated){
           $location.path('/login');
           $route.reload();
         }
-      });
+      })
+        .catch(function(response) {
+          console.log('error thrown');
+        });
   });
 });
 

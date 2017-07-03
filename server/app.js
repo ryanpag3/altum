@@ -12,6 +12,7 @@ var hash = require('bcrypt-nodejs');
 var path = require('path');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
+var users = require('./utils/users.js');
 
 
 // connect mongoose to db
@@ -41,17 +42,17 @@ app.use(express.static(path.join(__dirname, '../public')));
 // for example, __dirname of this file is /angulobby/server/
 
 // dev defined the output of the logger, in this case formats log for dev use
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(expressSession({
+var sessionMiddleware = expressSession({
   secret: 'TempSecretKey',
   resave: false,
   saveUninitialized: false
-}));
-// required for express
+});
+
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(sessionMiddleware);
 app.use(passport.initialize());
-// required fogit r persistant login sessions
 app.use(passport.session());
 
 // passport configuration
@@ -67,7 +68,7 @@ app.use('/games/', gamesRoutes);
 // serve angular front end files from root path
 app.use('/', express.static('public', { redirect: false }));
 
-// reswite virtual urls to angular app to enable refreshing of internal pages
+// rewrite virtual urls to angular app to enable refreshing of internal pages
 app.get('*', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });

@@ -52,6 +52,7 @@ router.post('/login', function(req, res, next) {
           msg: 'Could not log in user'
         });
       }
+      console.log(user.username + ' has connected.');
       res.status(200).json({
         msg: 'Login successful!'
       });
@@ -74,7 +75,7 @@ router.get('/status', function(req, res) {
       isAuthenticated: false
     });
   }
-  res.status(200).json({
+  return res.status(200).json({
     isAuthenticated: true,
     username: req.user.username
   });

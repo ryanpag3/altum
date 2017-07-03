@@ -29,19 +29,31 @@ app.factory('AuthService',
       }
 
       function getUserStatus() {
-        return $http.get('/user/status')
+        var deferred = $q.defer();
+        $http.get('/user/status')
           .then(function (response) {
-            // status returns true if user is authenticated
-            if (response.data.isAuthenticated) {
-              userAuthenticated = true;
-              currentUser = response.data.username;
+            if (response.status === 200 && response.data.isAuthenticated) {
+              deferred.resolve(response.data);
             } else {
-              userAuthenticated = false;
+              deferred.resolve(response.data);
             }
+            // // status returns true if user is authenticated
+            // if (response.data.isAuthenticated) {
+            //   console.log('user authenticated === true');
+            //   userAuthenticated = true;
+            //   currentUser = response.data.username;
+            // } else {
+            //   console.log('user authenticated === false');
+            //   userAuthenticated = false;
+            // }
           })
-          .catch(function (data) {
+          .catch(function (response) {
+            console.log('user authenticated === false');
             userAuthenticated = false;
+            deferred.reject(response.data);
           });
+
+        return deferred.promise;
       }
 
       function login(username, password) {
@@ -150,7 +162,7 @@ app.factory('QueueService', [
           }
         })
         .catch(function (res) {
-          deferred.reject();
+          deferred.reject(res.data.msg);
         });
       return deferred.promise;
     }

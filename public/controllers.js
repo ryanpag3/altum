@@ -11,6 +11,27 @@
  * location: current page
  * scope: current DOM scope, set by the data-ng-controller directive
  */
+angular.module('angulobby').controller('indexController',
+['$scope', '$http', 'AuthService', 'socket', function( $scope, $http, AuthService, socket) {
+  var init = function() {
+    AuthService.getUserStatus()
+      .then(function(response) {
+        if (response.isAuthenticated) {
+          // add user to user map, if user already exists, add socket
+          socket.emit('add-user', response.username);
+        } else {
+          // debug
+          console.log('this should be thrown when user is not authenticated');
+          // end debug
+        }
+      })
+      .catch(function(response) {
+        // TODO
+      });
+  };
+  init();
+}]);
+
 angular.module('angulobby').controller('loginController',
   ['$scope', '$location', 'AuthService', 'socket',
   function ($scope, $location, AuthService, socket) {
@@ -50,7 +71,6 @@ angular.module('angulobby').controller('logoutController',
       AuthService.logout()
         .then(function() {
           $location.path('/login');
-          socket.emit('delete-user', username);
         });
     };
   }]);
@@ -110,9 +130,16 @@ angular.module('angulobby').controller('homeController',
     };
 
     $scope.sendMessage = function () {
-      var data = {room: 'home', username: AuthService.getCurrentUser(), message: $scope.text };
-      socket.emit('send-message', data);
-      $scope.text = null;
+      if ($scope.text === null) {
+        console.log('empty messages are not allowed.');
+      } else {
+        AuthService.getUserStatus()
+          .then(function (response) {
+            var data = {room: 'home', username: response.username, message: $scope.text};
+            socket.emit('send-message', data);
+            $scope.text = null;
+          });
+      }
     };
 
     socket.on('update-chat', function(message) {
