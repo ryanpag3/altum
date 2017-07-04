@@ -130,7 +130,7 @@ angular.module('angulobby').controller('homeController',
     };
 
     $scope.sendMessage = function () {
-      if ($scope.text === null) {
+      if ($scope.text === null || $scope.text === "" || $scope.text === undefined) {
         console.log('empty messages are not allowed.');
       } else {
         AuthService.getUserStatus()
@@ -155,7 +155,7 @@ angular.module('angulobby').controller('paramsController',
   $scope.games = [];
   $scope.ranks = [];
   $scope.rankListShown = false;
-  var RANK_RANGE = 2; // the distance above and below the rank to queue for
+  var RANK_RANGE = 1; // the distance above and below the rank to queue for
   var game, rankRange = [];
 
   // on update, assign selected game and show rank select box

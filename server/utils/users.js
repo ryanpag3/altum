@@ -36,6 +36,7 @@ users.prototype.create = function(username, socket) {
     // add sockets to existing user object
     console.log(username + ' already exists in user map, adding socket to sockets array.');
     users.prototype.map[username].sockets.push(socket);
+    console.log(username + ' has ' + users.prototype.map[username].sockets.length);
     users.prototype.map[username].disconnected = false;
   } else {
     users.prototype.map[username] = new User(username, socket);
@@ -47,29 +48,34 @@ users.prototype.create = function(username, socket) {
   }
 };
 
-// check if user exists
-// check if multiple sockets exist
-// if
+/**
+  First, checks if user with given username exists in the user map. Second,
+  removes disconnected socket from user object. If the user sockets now
+  equal 0, we know that the user is disconnect, and can safely delete them
+  from the user map.
+ */
 users.prototype.delete = function(username, socket) {
-  var user = users.prototype.map[username];
+  //  check if user exists
   if (users.prototype.map[username] !== undefined) {
-    if (users.prototype.map[username].sockets.length > 1) {
-      console.log('background tab detected, not deleting user');
-      users.prototype.map[username].disconnected = false;
+    // check if socket exists to delete
+    if (users.prototype.map[username].sockets.includes(socket)) {
+      console.log(username + ' has disconnected a tab.');
       removeSocket(username, socket);
-    } else {
-      users.prototype.map[username].disconnected = true;
     }
 
-    setTimeout(function() {
-      // if user is still authenticated
-      if (user.disconnected === true) {
-        delete users.prototype.map[username];
-        console.log(username + ' has been removed from the usermap.');
-      }
-    }, DISCONNECT_TIMEOUT_IN_MILLIS);
-  }  else {
-    console.log('user does not exist in system.');
+    if (users.prototype.map[username].sockets.length === 0) {
+      setTimeout(function () {
+        // if user has not reconnected
+        if (users.prototype.map[username].sockets.length === 0) {
+          delete users.prototype.map[username];
+          console.log(username + ' has been removed from the user map.');
+        } else {
+          console.log(username + ' has reconnected in time.');
+        }
+      }, DISCONNECT_TIMEOUT_IN_MILLIS);
+    }
+  } else {
+    console.log(username + ' does not exist in user map. :(');
   }
 };
 
@@ -82,6 +88,15 @@ users.prototype.removeActiveQueue = function(username, queue) {
     if (users.prototype.map[username].activeQueues[i] === queue) {
       users.prototype.map[username].activeQueues.splice(i, 1);
     }
+  }
+};
+
+users.prototype.removeAllActiveQueues = function(username) {
+  for (var i = 0; i < users.prototype.map[username].activeQueues.length; i++) {
+    users.prototype.removeActiveQueue(
+      username,
+      users.prototype.map[username].activeQueues[i]
+    )
   }
 };
 

@@ -38,14 +38,6 @@ var socket = function(io) {
  * Helper Functions
  */
 
-function existsInQueue(username, queue) {
-  // returns true if user is in 'queue'
-}
-
-function existsInLobby(username) {
-  // returns true if user is in a lobby
-}
-
 function getCurrentTime() {
   var rawTime = new Date();
   return rawTime.getHours() + ':' + rawTime.getMinutes() + ':' + rawTime.getSeconds();

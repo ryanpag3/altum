@@ -6,7 +6,7 @@ var router = express.Router();
 var users = require('../utils/users');
 var queues = {};
 var SERVICE_INTERVAL_IN_MILLIS = 5000;
-var LOBBY_SIZE =  5;
+var LOBBY_SIZE =  3;
 
 // blank to add prototype functions
 var queueService = function () {};
@@ -87,13 +87,28 @@ var startService = queueService.prototype.startService = function() {
   for (var qName in queues) {
     if (queues[qName].length >= LOBBY_SIZE) {
       var lobbyId = 1234;
-      var username = queues[qName].shift(); // FIFO
-      users.map[username].lobby = lobbyId;
-      users.map[username].sockets.join(lobbyId);
-      console.log(username + ' has joined lobby: ' + lobbyId);
+      var lobbyMembers = [];
+      for (var i = 0; i < LOBBY_SIZE; i++) {
+        lobbyMembers.push(queues[qName].shift());
+      }
+      createLobby(lobbyMembers);
+  }
+};
+
+/**
+ * Helper functions
+ */
+
+function createLobby(lobbyMembers) {
+    var lobbyId = 1234;
+    for (var i = 0; i < lobbyMembers.length; i++) {
+      users.map[lobbyMembers[i]].lobby = lobbyId;
+      users.removeAllActiveQueues(lobbyMembers[i]);
+      console.log(lobbyMembers[i] + ' has been added to lobby: ' + lobbyId);
     }
   }
 };
+
 var intervalId = setInterval(startService, SERVICE_INTERVAL_IN_MILLIS);
 
 module.exports = router;

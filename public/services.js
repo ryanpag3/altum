@@ -33,6 +33,7 @@ app.factory('AuthService',
         $http.get('/user/status')
           .then(function (response) {
             if (response.status === 200 && response.data.isAuthenticated) {
+              currentUser = response.data.username;
               deferred.resolve(response.data);
             } else {
               deferred.resolve(response.data);
@@ -68,7 +69,6 @@ app.factory('AuthService',
           .then(function (response) {
             if (response.status === 200 && response.data.msg) {
               userAuthenticated = true;
-              currentUser = username;
               deferred.resolve();
             } else {
               userAuthenticated = false;
