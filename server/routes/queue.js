@@ -93,22 +93,37 @@ var startService = queueService.prototype.startService = function() {
       }
       createLobby(lobbyMembers);
   }
-};
+} setInterval(startService, SERVICE_INTERVAL_IN_MILLIS);
 
 /**
  * Helper functions
  */
 
-function createLobby(lobbyMembers) {
-    var lobbyId = 1234;
+  /**
+   * Creates a new lobby ID and assigns users to it.
+   * @param lobbyMembers: array of usernames to assign to lobby
+   */
+  function createLobby(lobbyMembers) {
+    var lobby = makeLobbyId();
     for (var i = 0; i < lobbyMembers.length; i++) {
       users.map[lobbyMembers[i]].lobby = lobbyId;
       users.removeAllActiveQueues(lobbyMembers[i]);
-      console.log(lobbyMembers[i] + ' has been added to lobby: ' + lobbyId);
+      console.log(lobbyMembers[i] + ' has been assigned to lobby: ' + lobbyId);
     }
   }
 };
 
-var intervalId = setInterval(startService, SERVICE_INTERVAL_IN_MILLIS);
+// creates a unique lobby name
+var makeLobbyId = function() {
+  var length = 16;
+  var text = "";
+  var potential = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  for (var i = 0; i < length; i++) {
+    text += potential.charAt(Math.floor(Math.random() * potential.length));
+  }
+  return text;
+};
+
+
 
 module.exports = router;

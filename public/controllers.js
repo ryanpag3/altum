@@ -108,7 +108,7 @@ angular.module('angulobby').controller('registerController',
  *
  */
 angular.module('angulobby').controller('homeController',
-  ['$scope', 'socket', 'AuthService', 'QueueService',
+  ['$scope', 'socket', 'AuthService',
   function($scope, socket, AuthService) {
     $scope.messages = [];
     $scope.text = null;
@@ -202,3 +202,9 @@ angular.module('angulobby').controller('paramsController',
       $scope.errorMessage = err;
     });
 }]);
+
+// angular.module('angulobby').controller('lobbyController', [
+//   '$scope', function($scope) {
+//
+//   }
+// ]);

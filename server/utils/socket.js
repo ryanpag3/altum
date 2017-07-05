@@ -1,7 +1,6 @@
 /**
  * Created by dev on 6/22/2017.
  */
-var queueService = require('../routes/queue');
 var users = require('./users');
 
 var socket = function(io) {
