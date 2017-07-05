@@ -54,6 +54,16 @@ label {
   margin: auto;
 }
 
+#queue-timer-container {
+  position: absolute;
+  z-index: 5;
+  height: 60%;
+  background-color: pink;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+}
+
 #select-games {
   background-color: white;
 }

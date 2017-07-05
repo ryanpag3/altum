@@ -2,8 +2,8 @@
  * Created by dev on 7/5/2017.
  */
 angular.module('angulobby').controller('paramsController',
-['$scope', 'GameListService', 'QueueService', 'AuthService',
-  function($scope, GameListService, QueueService, AuthService){
+['$scope', '$location', 'GameListService', 'QueueService', 'AuthService',
+  function($scope, $location, GameListService, QueueService, AuthService){
   $scope.games = [];
   $scope.ranks = [];
   $scope.rankListShown = false;
@@ -33,14 +33,16 @@ angular.module('angulobby').controller('paramsController',
   };
 
   $scope.joinQueue = function() {
+    // check to see if both game and rank were selected
     if (game !== undefined && rankRange !== undefined) {
       for (var i = 0; i < rankRange.length; i++) {
+        // create queue identifier based on selection
         var queue = game.shortName + '_' + rankRange[i];
-        console.log('you have been entered into: ' + queue);
         QueueService.addToQueue(AuthService.getCurrentUser(), queue);
+        console.log('you have been entered into: ' + queue);
       }
     } else {
-      // throw error
+      // TODO
     }
   };
 

@@ -3,33 +3,6 @@
 </head>
 
 <div id="home-container" class="container-fluid" data-ng-controller="homeController">
-  <div id ="select-params-container" data-ng-show="paramWindowState">
-    <div id="game-list-container" data-ng-controller="paramsController">
-      <select ng-model="selectedGame" data-ng-options="game as game.name for game in games" data-ng-change="updateGame()">
-        <option  value="" disabled >Select a game</option>
-      </select>
-      <select ng-model="selectedRankIndex" data-ng-options="ranks.indexOf(rank) as rank for rank in ranks" data-ng-show="rankListShown" data-ng-change="updateRank()"></select>
-
-
-    <!--<div class="btn-group" role="group">-->
-      <!--<button type="button" class="btn btn-secondary">[1]</button>-->
-      <!--<button type="button" class="btn btn-secondary">[2]</button>-->
-      <!--<button type="button" class="btn btn-secondary">[3]</button>-->
-      <!--<button type="button" class="btn btn-secondary">[4]</button>-->
-      <!--<button type="button" class="btn btn-secondary">[5]</button>-->
-      <!--<button type="button" class="btn btn-secondary">[6]</button>-->
-      <!--<button type="button" class="btn btn-secondary">[7]</button>-->
-      <!--<button type="button" class="btn btn-secondary">[8]</button>-->
-      <!--<button type="button" class="btn btn-secondary">[9]</button>-->
-      <!--<button type="button" class="btn btn-secondary">[10]</button>-->
-    <!--</div>-->
-
-        <div class="row">
-          <button class="btn btn-primary">CANCEL</button>
-          <button class="btn btn-primary" data-ng-click="joinQueue()">CONFIRM</button>
-        </div>
-    </div>
-  </div>
   <div class="row">
     <div id="sidebar-container" class="col-sm-2">
       <div class="row">
@@ -54,16 +27,12 @@
         </div>
       </div>
     </div>
-
-
-
     <div id="news-feed-container" class="col-sm-5">
       NEWS FEED HERE<br>
       Scrollable announcement feed.
     </div>
     <div id="global-chat-container" class="col-sm-5">
       <div id="message-box">
-        <!--see chat here <br>-->
         <!--[date] username : [message]-->
         <div data-ng-repeat="message in messages track by $index">
           <span> {{ message }} </span>
@@ -78,6 +47,24 @@
       </div>
     </div>
   </div>
+
+  <div id ="select-params-container" data-ng-show="displayParamWindow" data-ng-controller="paramsController">
+    <div id="game-list-container" >
+      <select ng-model="selectedGame" data-ng-options="game as game.name for game in games" data-ng-change="updateGame()">
+        <option  value="" disabled >Select a game</option>
+      </select>
+      <select ng-model="selectedRankIndex" data-ng-options="ranks.indexOf(rank) as rank for rank in ranks" data-ng-show="rankListShown" data-ng-change="updateRank()"></select>
+      <div class="row">
+        <button class="btn btn-primary" data-ng-click="cancelParamSelect()">CANCEL</button>
+        <button class="btn btn-primary" data-ng-click="joinQueue(); hideParamWindow(); showQueueTimer()">CONFIRM</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="queue-timer-container" data-ng-show="displayQueueTimer" class="col-sm-2">
+    <h1>QUEUE TIMER CONTAINER</h1>
+  </div>
+
   <script
     src="https://code.jquery.com/jquery-3.2.1.min.js"
     integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="

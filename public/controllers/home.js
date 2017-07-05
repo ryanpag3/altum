@@ -9,11 +9,38 @@ angular.module('angulobby').controller('homeController',
   function($scope, socket, AuthService) {
     $scope.messages = [];
     $scope.text = null;
-    $scope.paramWindowState = false;
+    $scope.displayParamWindow = false;
     socket.emit('join-room', 'home'); // join global chat
 
+    $scope.hideParamWindow = function() {
+      $scope.displayParamWindow = false;
+    };
+
+    $scope.showParamWindow = function() {
+      $scope.displayParamWindow = true;
+    };
+
+    $scope.hideQueueTimer = function() {
+      console.log('Hiding queue timer...');
+      $scope.displayQueueTimer = false;
+    };
+
+    $scope.showQueueTimer = function() {
+      console.log('show queue timer called');
+      $scope.displayQueueTimer = true;
+    };
+
+    $scope.joinQueue = function() {
+      $scope.displayParamWindow = false;
+      $scope.displayQueueTimer = true;
+    };
+
+    $scope.cancelParamSelect = function() {
+      $scope.displayParamWindow = false;
+    };
+
     $scope.setQueueParams = function() {
-      $scope.paramWindowState = true;
+      $scope.displayParamWindow = true;
     };
 
     $scope.leaveQueues = function() {
