@@ -3,6 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
+var queueManager = require('../utils/queue-manager');
 var users = require('../utils/users');
 var queues = {};
 var SERVICE_INTERVAL_IN_MILLIS = 5000;
@@ -13,67 +14,44 @@ var queueService = function () {};
 
 router.post('/add', function(req, res) {
   var username = req.body.username, queue = req.body.queue;
-  if (users.map[username].existsInQueue(queue)) {
+  // add user to queue
+  var added = queueManager.add(username, queue);
+  if (added) {
+    return res.status(200).json({
+      msg: username + ' was successfully added to ' + queue
+    })
+  } else {
     return res.status(500).json({
-      msg: 'user already exists in queue'
+      msg: 'Error! ' + username + ' was not added to ' + queue
     })
   }
-
-  if (queues[queue] === undefined) {
-    queues[queue] = [username];
-  } else {
-    queues[queue].push(username);
-  }
-  users.addActiveQueue(username, queue);
-  console.log(username + ' has been added to ' + queue);
-  return res.status(200).json({
-    msg: 'Successfully added to queue!'
-  });
 });
 
 router.post('/remove', function(req, res) {
   var username = req.body.username, queue = req.body.queue;
-  // iterate through selected queue until username is reached
-  // splice out user
-  for (var i = 0; i < queues[queue].length; i ++) {
-    if (queues[queue][i] === username) {
-      queues[queue].splice(i, 1);
-      console.log(username + ' has been removed from ' + queue);
-      users.removeActiveQueue(username, queue); // remove from user's active list
-      return res.status(200).json({
-        msg: username + ' has been removed from ' + queue
-      })
-    } else {
-      console.log(username + ' does not exists in ' + queue);
-      return res.status(500).json({
-        msg: username + ' does not exists in ' + queue
-      })
-    }
+  var removed = queueManager.remove(username, queue);
+  if (removed) {
+    return res.status(200).json({
+      msg: username + ' was successfully removed from ' + queue
+    })
+  } else {
+    return res.status(500).json({
+      msg: username + ' could not be removed from ' + queue
+    })
   }
 });
 
 router.post('/remove-all', function(req, res) {
   var username = req.body.username;
-  var queueList = users.map[username].activeQueues;
-  // iterate through queues user is currently active in
-  for (var i = 0; i < queueList.length; i++) {
-    var queue = queueList[i];
-    for (var x = 0; x < queues[queue].length; i++) {
-      if (queues[queue][x] === username) { // username found in queue
-        queues[queue].splice(x, 1); // splice out
-        console.log(username + ' removed from ' + queue);
-        users.removeActiveQueue(username, queue); // remove queue from user's active list
-      }
-    }
-  }
-
-  if (users.map[username].activeQueues.length === 0) {
+  var removed = queueManager.removeAll(username);
+  if (removed) {
     return res.status(200).json({
-      msg: 'user successfully removed from all queues'
+      msg: username + ' has been removed from all queues.'
     })
   } else {
     return res.status(500).json({
-      msg: 'error'
+      msg: username + ' has not been removed from all queues. If you see this,' +
+      ' please contact the developers.'
     })
   }
 });

@@ -48,13 +48,13 @@ app.factory('QueueService', [
       $http.post('/queue/remove-all', {username: username})
         .then(function (res) {
           if (res.status === 200) {
-            deferred.resolve(res.data.msg);
+            deferred.resolve(res);
           } else {
             deferred.reject();
           }
         })
         .catch(function (res) {
-          deferred.reject(res.data.msg);
+          deferred.reject(res);
         });
       return deferred.promise;
     }

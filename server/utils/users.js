@@ -15,16 +15,6 @@ function User(username, socket) {
                               // 2. added to new lobby
       this.disconnected = false;
       this.sockets = [socket];
-
-      this.existsInQueue = function (queue) {
-        for (var i = 0; i < this.activeQueues.length; i++) {
-          if (queue === this.activeQueues[i]) {
-            return true;
-          }
-        }
-        return false;
-      };
-
 };
 
 // holds user info by key

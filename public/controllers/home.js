@@ -12,6 +12,10 @@ angular.module('angulobby').controller('homeController',
     $scope.displayParamWindow = false;
     socket.emit('join-room', 'home'); // join global chat
 
+    socket.on('test', function() {
+      console.log('test called');
+    });
+
     $scope.hideParamWindow = function() {
       $scope.displayParamWindow = false;
     };

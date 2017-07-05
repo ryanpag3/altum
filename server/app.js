@@ -73,7 +73,7 @@ app.get('*', function(req, res, next) {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-// error handlers
+// // error handlers
 // app.use(function(req, res, next) {
 //   var err = new Error('not found');
 //   err.status = 404;
