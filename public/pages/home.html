@@ -62,7 +62,7 @@
   </div>
 
   <div id="queue-timer-container" data-ng-show="displayQueueTimer" class="col-sm-2" data-ng-controller="queueTimerController">
-    <h1>QUEUE TIMER CONTAINER</h1>
+    <h1 data-ng-model="timer">{{timer}}</h1>
     <button data-ng-click="cancel(); hideQueueTimer()">CANCEL</button>
   </div>
 
