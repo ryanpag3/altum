@@ -62,7 +62,7 @@ angular.module('angulobby').controller('homeController',
 
     socket.on('lobby-found', function(data) {
       var lobbyId = data.lobby;
-      $location.path('/lobby');
+      $location.path('/lobby/' + lobbyId);
       $scope.$apply();
     });
 

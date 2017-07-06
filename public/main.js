@@ -24,7 +24,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
       templateUrl: 'pages/contact.html',
       access: {restricted: true }
     })
-    .when('/lobby', {
+    .when('/lobby/:lobbyId', {
       templateUrl: 'pages/lobby.html',
       controller: 'lobbyController',
       access: {restricted: true}
