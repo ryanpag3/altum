@@ -3,13 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var QueueManager = require('../utils/queue-manager');
-var queueManager = new QueueManager();
-console.log('you are inside queue.js route handler');
-var users = require('../utils/users');
-var queues = {};
-var SERVICE_INTERVAL_IN_MILLIS = 5000;
-var LOBBY_SIZE =  3;
+var queueManager = require('../utils/queue-manager');
 
 router.post('/add', function(req, res) {
   var username = req.body.username, queue = req.body.queue;

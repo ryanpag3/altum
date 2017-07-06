@@ -1,5 +1,6 @@
 const express = require('express');
-const app = express();
+var app = express();
+
 
 // setup server
 var server = require('http').createServer(app);

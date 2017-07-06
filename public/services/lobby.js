@@ -3,12 +3,16 @@
  */
 var app = angular.module('angulobby');
 app.factory('lobbyService', [
-  '$http', '$q', 'socket',
-  function($http, $q, socket) {
+  '$scope', '$http', '$q', 'socket',
+  function($scope, $http, $q, socket) {
+
+
     return ({
       joinLobby: joinLobby,
       leaveLobby: leaveLobby
     });
+
+
 
     function joinLobby() {
       // TODO

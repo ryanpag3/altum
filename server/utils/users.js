@@ -8,7 +8,7 @@ var DISCONNECT_TIMEOUT_IN_MILLIS = 5000;
 // private constructor
 function User(username, socket) {
       this.username = username;
-      this.lobby = null; // lobby ID
+      this.lobby; // lobby ID
       this.activeQueues = []; // used to avoid iterating through queues to find users
                               // added on sockets call and deleted when either:
                               // 1. removed from queue/queues
@@ -22,15 +22,32 @@ users.prototype.map = {};
 
 // expose constructor
 users.prototype.create = function(username, socket) {
+
   if (users.prototype.map[username] !== undefined) {
     // add sockets to existing user object
     console.log(username + ' already exists in user map, adding socket to sockets array.');
     users.prototype.map[username].sockets.push(socket);
-    console.log(username + ' has ' + users.prototype.map[username].sockets.length);
+    // if user is already in a lobby
+    // TODO maybe check if lobbies.users contains this username?
+    if (users.prototype.map[username].lobby !== undefined) {
+      console.log('User is already in a lobby, reconnecting...');
+      console.log('lobby info: ' + users.prototype.map[username].lobby);
+      socket.emit('lobby-found');
+      for (var i = 0; i < users.prototype.map[username].sockets.length; i++) {
+        var socket = users.prototype.map[username].sockets[i];
+        socket.emit('lobby-found');
+      }
+      // if user is currently active in queue(s)
+    } else if (users.prototype.map[username].activeQueues.length !== 0) {
+      console.log(username + ' has an active queue list > 0, restarting timer');
+      socket.emit('display-queue-timer');
+      // display queue timer
+    }
+    console.log(username + ' has ' + users.prototype.map[username].sockets.length + ' sockets.');
     users.prototype.map[username].disconnected = false;
   } else {
     users.prototype.map[username] = new User(username, socket);
-    var i = Array(24).join('*');
+    var i = new Array(24).join('*');
     console.log(i);
     console.log(username + ' has been added to the user map.');
     console.log('# of users: ' + Object.keys(users.prototype.map).length);
@@ -82,12 +99,8 @@ users.prototype.removeActiveQueue = function(username, queue) {
 };
 
 users.prototype.removeAllActiveQueues = function(username) {
-  for (var i = 0; i < users.prototype.map[username].activeQueues.length; i++) {
-    users.prototype.removeActiveQueue(
-      username,
-      users.prototype.map[username].activeQueues[i]
-    )
-  }
+  users.prototype.map[username].activeQueues = [];
+  console.log(username + ' has ' + users.prototype.map[username].activeQueues.length + ' active queues.');
 };
 
 // helper functions
