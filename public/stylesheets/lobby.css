@@ -1,0 +1,77 @@
+div {
+  font-family: Helvetica, monospace;
+  text-align: center;
+  font-size: 18px;
+
+}
+
+.col-centered {
+  margin: auto;
+}
+
+.user {
+  background-color: darkred;
+  height: 100%;
+  width: 16%;
+  float: left;
+  margin-left: 5px;
+}
+
+.profile-picture {
+  background-color: lightblue;
+  height: 40%;
+  width: 95%;
+  margin: 3px;
+}
+
+.username {
+  height: 15%;
+  width: 95%;
+  background-color: yellow;
+  margin: 3px;
+}
+
+.social-links {
+  width: 95%;
+  height: 40%;
+  background-color: lightcoral;
+  margin: 3px;
+}
+
+#page-container {
+  background-color: greenyellow;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+}
+
+#lobby-container {
+  height: 100%;
+  min-height: 700px;
+  min-width: 1000px;
+  display: table;
+  margin: 0 auto;
+}
+
+#chat {
+  position: relative;
+  background-color: grey;
+  width: 1000px;
+  height: 70%;
+  overflow: auto;
+}
+
+#users {
+  position: relative;
+  background-color: darkblue;
+  height: 30%;
+  width: 1000px;
+}
+
+#users-wrapper {
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  width: 98%;
+  height: 90%;
+  margin: auto;
+}

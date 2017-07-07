@@ -1,12 +1,13 @@
 <head>
   <link rel="stylesheet" href="../stylesheets/home.css" type="text/css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 </head>
 
 <div id="home-container" class="container-fluid" data-ng-controller="homeController">
   <div class="row">
-    <div id="sidebar-container" class="col-sm-2">
+    <div id="sidebar-container" class="col-lg-2">
       <div class="row">
-        <div id="nav-container" class="col-sm-12">
+        <div id="nav-container" class="col-lg-12">
           <div class="row">
             <div id="profile-container" class="col">
               PROFILE <br>
@@ -18,20 +19,20 @@
           <div class="row">
               <div id="button-container" class="col container">
                 <div>
-                <button class="col-sm-10 col-sm-offset-1 nav-button" data-ng-click="setQueueParams()"> find a lobby button </button>
-                <button class="col-sm-10 col-sm-offset-1 nav-button" data-ng-click="leaveQueues()"> leave queues </button>
-                <div class="col-sm-10 col-sm-offset-1 nav-button"> join game button </div>
+                <button class="col-lg-10 col-lg-offset-1 nav-button" data-ng-click="setQueueParams()"> find a lobby button </button>
+                <button class="col-lg-10 col-lg-offset-1 nav-button" data-ng-click="leaveQueues()"> leave queues </button>
+                <div class="col-lg-10 col-lg-offset-1 nav-button"> join game button </div>
                 </div>
                 </div>
           </div>
         </div>
       </div>
     </div>
-    <div id="news-feed-container" class="col-sm-5">
+    <div id="news-feed-container" class="col-lg-5">
       NEWS FEED HERE<br>
       Scrollable announcement feed.
     </div>
-    <div id="global-chat-container" class="col-sm-5">
+    <div id="global-chat-container" class="col-lg-5">
       <div id="message-box">
         <!--[date] username : [message]-->
         <div data-ng-repeat="message in messages track by $index">
@@ -41,8 +42,8 @@
       <div id="chat-form">
         <!--enter chat here-->
         <form data-ng-submit="sendMessage()">
-          <textarea class="input col-sm-10" id="m" data-ng-model="text" autocomplete="off" rows="4"></textarea>
-          <button id="send-chat-button" class="btn btn-sm btn-info col-sm-2">SEND</button>
+          <textarea class="input col-lg-10" id="m" data-ng-model="text" autocomplete="off" rows="4"></textarea>
+          <button id="send-chat-button" class="btn btn-sm btn-info col-lg-2">SEND</button>
         </form>
       </div>
     </div>
@@ -61,7 +62,7 @@
     </div>
   </div>
 
-  <div id="queue-timer-container" data-ng-show="displayQueueTimer" class="col-sm-2" data-ng-controller="queueTimerController">
+  <div id="queue-timer-container" data-ng-show="displayQueueTimer" class="col-lg-2" data-ng-controller="queueTimerController">
     <h1 data-ng-model="timer">{{timer}}</h1>
     <button data-ng-click="cancel(); hideQueueTimer()">CANCEL</button>
   </div>

@@ -3,7 +3,7 @@
  */
 var users = require('./users.js');
 var lobbyManager = require('./lobby-manager.js');
-var LOBBY_SIZE = 2;
+var LOBBY_SIZE = 1;
 var QUEUE_CHECK_INTERVAL_IN_MILLIS = 50;
 var queues = {}; // holds all active queues
 var queueManager = function() {};

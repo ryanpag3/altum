@@ -1,19 +1,14 @@
 <html>
-
 <head>
-
   <base href="/">
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
-
-
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.default.css">
   <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.8.5/css/selectize.bootstrap3.css">-->
   <link rel="stylesheet" type="text/css" href="./stylesheets/style.css">
   <link rel="stylesheet" type="text/css" href="./stylesheets/index.css">
-
 </head>
 
 <body data-ng-app="angulobby" data-ng-controller="indexController">
@@ -24,7 +19,6 @@
         <div class="navbar-header">
           <a class="navbar-brand" href="/">AnguLobby Prototype</a>
         </div>
-
         <ul class="nav navbar-nav navbar-right">
           <li><a href="/"><i class="fa fa-home"></i> Home</a></li>
           <li><a href="/login"><i class="fa fa-shield"></i> Login</a></li>
@@ -33,11 +27,10 @@
             <a ng-click='logout()' class="btn btn-default">Logout</a>
           </div>
         </ul>
-
       </div>
     </nav>
   </header>
-
+  <!--injected views go here-->
   <div id="ng-view" ng-view></div>
 </div>
 <script src="https://use.fontawesome.com/7222f42b52.js"></script>
