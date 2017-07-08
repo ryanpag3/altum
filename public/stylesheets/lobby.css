@@ -5,7 +5,9 @@ div {
 
 }
 
-.col-centered {
+.centered {
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
   margin: auto;
 }
 
@@ -59,6 +61,52 @@ div {
   width: 1000px;
   height: 70%;
   overflow: auto;
+}
+
+#message-box {
+  position: relative;
+  top: 0; left: 0; right: 0;
+  margin: 5px;
+  width: 990px;
+  height: 75%;
+  background-color: lightyellow;
+}
+
+#chat-form {
+  background-color: aqua;
+  position: relative;
+  left: 0; right: 0; bottom: 0;
+  margin-left: 6px;
+  margin-right: 6px;
+  height: 20%;
+}
+
+#text-box-container {
+  height: 100%;
+  width: 700px;
+  background-color: blueviolet;
+  float: left;
+}
+
+#text-box {
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  width: 700px;
+  resize: none;
+}
+
+#send-chat-button-container {
+  height: 100%;
+  width: 270px;
+  background-color: firebrick;
+  float: left;
+}
+
+#send-chat-button {
+  height: 90%;
+  width: 90%;
+  margin: 2px;
+
 }
 
 #users {

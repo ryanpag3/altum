@@ -125,4 +125,24 @@ app.factory('AuthService',
         // return promise object
         return deferred.promise;
       }
+
+      /*
+        Attempts to query the authentication API for the
+        authenticated user object. If the API returns a
+        status code of 200, then we pass that information
+        to the client. If it returns a status code of 500,
+        we pass an error message.
+       */
+      function getUserInfo() {
+        var deferred = $q.defer();
+
+        $http.get('/info')
+          .then (function(res) {
+            deferred.resolve(res.data.user);
+          })
+          .catch(function(res) {
+            deferred.reject(res.data.msg);
+          });
+        return deferred.promise;
+      }
     }]);

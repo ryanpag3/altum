@@ -7,7 +7,8 @@ var lobbies = {}; // holds all lobby info
 
 function Lobby(lobbyId, lobbyMembers) {
   this.lobbyId = lobbyId;
-  this.users = lobbyMembers.splice(); // splice creates a copy of array
+  this.users = lobbyMembers.slice(); // slice creates a copy of array
+  console.log('lobby with id: ' + this.lobbyId + ' and users ' + users.toString() + ' created.');
 }
 
 /**
@@ -24,6 +25,7 @@ lobbyManager.prototype.createLobby = function(lobbyMembers) {
   // add queueManager per method to avoid circular dependency
   var queueManager = require('./queue-manager');
   var lobbyId = createLobbyId();
+
   // assign lobby object to map
   lobbies[lobbyId] = new Lobby(lobbyId, lobbyMembers);
   // assign lobbyId to user objects for reference to lobby map
@@ -53,6 +55,10 @@ lobbyManager.prototype.joinLobby = function(username, lobbyId) {
 
 lobbyManager.prototype.leaveLobby = function() {
   // TODO
+};
+
+lobbyManager.prototype.getUsers = function(lobbyId) {
+  return lobbies[lobbyId].users;
 };
 
 /*

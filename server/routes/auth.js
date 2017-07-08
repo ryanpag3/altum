@@ -80,6 +80,24 @@ router.get('/status', function(req, res) {
     username: req.user.username
   });
 });
+/*
+  Retrieves the currently authenticated user object.
+  If the user does not exist, then it returns a status
+  code of 500, and an error message.
+ */
+router.get('/info', function(req, res) {
+  if (req.isAuthenticated()) {
+    // TODO include social media links/profile picture link
+    var user = {name: req.user.username};
+    return res.status(200).json({
+      user: user
+    })
+  } else {
+    return res.status(500).json({
+      msg: 'could not get user info'
+    })
+  }
+});
 
 router.get('/confirm-login', function(req,res) {
   res.send(req.user)

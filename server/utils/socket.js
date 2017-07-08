@@ -2,6 +2,7 @@
  * Created by dev on 6/22/2017.
  */
 var users = require('./users');
+var lobbyManager = require('./lobby-manager');
 
 var socket = function(io) {
   var username;
@@ -30,6 +31,12 @@ var socket = function(io) {
     socket.on('disconnect', function() {
       users.delete(username, socket);
     });
+
+    socket.on('get-lobby-members', function(lobbyId) {
+      console.log('get-lobby-members socket fired');
+      var users = lobbyManager.getUsers(lobbyId);
+      io.to(lobbyId).emit('update-user-list', users);
+    })
   });
 };
 

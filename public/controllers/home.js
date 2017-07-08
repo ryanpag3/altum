@@ -51,11 +51,17 @@ angular.module('angulobby').controller('homeController',
             var data = {room: 'global', username: response.username, message: $scope.text};
             socket.emit('send-message', data);
             $scope.text = null;
+            console.log('send message fired.');
+          })
+          .catch(function(response) {
+            console.log('error thrown by getUserStatus()');
+            console.log(response);
           });
       }
     };
 
     socket.on('update-chat', function(message) {
+        console.log('update chat fired');
         $scope.messages.push(message);
         $scope.$apply();
     });
