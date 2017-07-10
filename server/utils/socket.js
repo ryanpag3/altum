@@ -29,6 +29,7 @@ var socket = function(io) {
     });
 
     socket.on('disconnect', function() {
+      console.log('socket disconnect called');
       users.delete(username, socket);
     });
 
