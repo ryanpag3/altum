@@ -24,7 +24,7 @@ function Lobby(lobbyId, lobbyMembers) {
 lobbyManager.prototype.createLobby = function(lobbyMembers) {
   // add queueManager per method to avoid circular dependency
   var queueManager = require('./queue-manager');
-  var lobbyId = createLobbyId();
+  var lobbyId = createLobbyId(16);
 
   // assign lobby object to map
   lobbies[lobbyId] = new Lobby(lobbyId, lobbyMembers);
@@ -43,21 +43,13 @@ lobbyManager.prototype.createLobby = function(lobbyMembers) {
     for (var k = 0; k < userObj.sockets.length; k++) {
       const socket = userObj.sockets[k];
       socket.emit('lobby-found', {lobby: lobbyId});
-      setTimeout(function() { socket.emit('join-lobby', {username: userObj.username, lobby: lobbyId})}, 1000);
     }
   }
 };
 
-lobbyManager.prototype.joinLobby = function(username, lobbyId) {
- // TODO
-
-};
-
-lobbyManager.prototype.leaveLobby = function() {
-  // TODO
-};
-
 lobbyManager.prototype.getUsers = function(lobbyId) {
+  // TODO
+  // use users array to query mongoDB and access social links
   return lobbies[lobbyId].users;
 };
 
@@ -65,8 +57,8 @@ lobbyManager.prototype.getUsers = function(lobbyId) {
   Helper Functions
  */
 
-function createLobbyId() {
-  var length = 16;
+function createLobbyId(len) {
+  var length = len;
   var text = "";
   var potential = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   for (var i = 0; i < length; i++) {
