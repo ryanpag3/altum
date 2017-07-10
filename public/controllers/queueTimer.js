@@ -21,6 +21,9 @@ angular.module('angulobby').controller('queueTimerController', [
     $scope.$watch('displayQueueTimer', function (newValue) {
       // if displayQueueTimer
       if (newValue) {
+        // set starting positions
+        $scope.counter = 0;
+        $scope.timer = '0:00';
         startTimer();
       } else {
         // stop timer
