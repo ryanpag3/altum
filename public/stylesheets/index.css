@@ -44,7 +44,7 @@ a:hover {
 }
 
 #header-container {
-   background-color: #464a51;
+   background-color: #bababa;
    height: 100px;
    width: 100%;
  }
@@ -73,6 +73,7 @@ a:hover {
   width: 100%;
   height: calc(100% - 100px);
   position: relative;
+  background-color: #464a51
 }
 
 #ng-view {

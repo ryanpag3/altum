@@ -19,20 +19,47 @@
           <div class="row">
               <div id="button-container" class="col container">
                 <div>
-                <button class="col-lg-10 col-lg-offset-1 nav-button" data-ng-click="setQueueParams()"> find a lobby button </button>
-                <button class="col-lg-10 col-lg-offset-1 nav-button" data-ng-click="leaveQueues()"> leave queues </button>
-                <div class="col-lg-10 col-lg-offset-1 nav-button"> join game button </div>
+                <button id="join-queue-btn" class="home-btn" data-ng-click="setQueueParams()">JOIN QUEUE </button>
+                <button id="join-lobby-btn" class="home-btn btn-disabled"> COMING SOON </button>
                 </div>
                 </div>
           </div>
         </div>
       </div>
     </div>
-    <div id="news-feed-container" class="col-lg-5">
-      NEWS FEED HERE<br>
-      Scrollable announcement feed.
+    <div id="news-feed-container" class="col-lg-4">
+      <div class="flex-center">
+        <h1 style="color: whitesmoke">ANNOUNCEMENTS</h1>
+      </div>
+      <!--COPY AND PASTE THE DIV FOR NEW ENTRY-->
+      <div class="word-wrap">
+        <h2 class="date"><strong>07/10/17</strong></h2>
+
+        <p>The Altum Matchmaking system is now live!</p>
+        <p>Click the 'JOIN QUEUE' button to find gamers of appropriate skill level in a multitude of competitive games. Select your game and appropriate skill level, and then add them on Steam, Xbox Live, Playstation Network, or the Nintendo Network!</p>
+        <p>If you have any feature recommendations, please feel free to email us at [INSERT EMAIL HERE]. Also, if you find any bugs on the website, please report them to that same email, explaining what you were doing when the bug occurred. Thank you so much and enjoy!</p>
+      <hr>
+      </div>
+      <div class="word-wrap">
+        <h2 class="date"><strong>XX/XX/XX</strong></h2>
+        <p>Lorem ipsum placerat dui bibendum quis donec ullamcorper, in feugiat aliquam nulla dapibus placerat pharetra magna, ligula aliquam nunc morbi semper torquent.</p>
+        <p>Diam fermentum lacinia euismod volutpat pulvinar lacinia, quisque vestibulum conubia ultricies potenti, conubia maecenas ornare non augue curabitur tincidunt malesuada litora tincidunt leo elementum porttitor quam pellentesque himenaeos odio venenatis fringilla.</p>
+        <p>Mi leo rhoncus semper gravida tempus purus mattis dapibus, aenean platea in scelerisque auctor etiam cubilia tempor, eget egestas aptent potenti vitae nunc suspendisse.</p>
+        <p>Lorem litora congue egestas lectus aliquam erat dictum faucibus tempus, at sagittis varius massa fermentum potenti eros suscipit ultrices primis euismod aptent purus tortor.</p>
+        <p>Mattis litora dapibus class aenean sit habitant fames, placerat est donec nam maecenas venenatis auctor, urna habitant eros urna augue et.</p>
+      <hr>
+      </div>
+      <div class="word-wrap">
+    <h2 class="date"><strong>XX/XX/XX</strong></h2>
+        <p>Lorem ipsum placerat dui bibendum quis donec ullamcorper, in feugiat aliquam nulla dapibus placerat pharetra magna, ligula aliquam nunc morbi semper torquent.</p>
+        <p>Diam fermentum lacinia euismod volutpat pulvinar lacinia, quisque vestibulum conubia ultricies potenti, conubia maecenas ornare non augue curabitur tincidunt malesuada litora tincidunt leo elementum porttitor quam pellentesque himenaeos odio venenatis fringilla.</p>
+        <p>Mi leo rhoncus semper gravida tempus purus mattis dapibus, aenean platea in scelerisque auctor etiam cubilia tempor, eget egestas aptent potenti vitae nunc suspendisse.</p>
+        <p>Lorem litora congue egestas lectus aliquam erat dictum faucibus tempus, at sagittis varius massa fermentum potenti eros suscipit ultrices primis euismod aptent purus tortor.</p>
+        <p>Mattis litora dapibus class aenean sit habitant fames, placerat est donec nam maecenas venenatis auctor, urna habitant eros urna augue et.</p>
+      <hr>
+      </div>
     </div>
-    <div id="global-chat-container" class="col-lg-5">
+    <div id="global-chat-container">
       <div id="message-box">
         <!--[date] username : [message]-->
         <div data-ng-repeat="message in messages track by $index">

@@ -2,6 +2,9 @@ form {
   background-color: darkslategray;
 
 }
+
+
+
 textarea {
   resize: none;
 }
@@ -10,26 +13,49 @@ label {
 
 }
 
+p {
+  font-size: 16px;
+}
+.word-wrap {
+  word-wrap: break-word;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-disabled {
+  opacity: 0.50;
+  cursor: not-allowed;
+}
+
 .dropdown-menu {
   margin-left: 16px;
   margin-right: 16px;
   width: 90%;
 }
 
-.nav-button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 120px;
-  font-size: 24px;
-  background-color: #223f85;
-  margin-top: 5%;
+.home-btn {
+  min-height: 200px;
+  min-width: 270px;
+  margin: 6px;
 }
 
 .scrollable-menu {
   height: auto;
   max-height: 200px;
   overflow-x: hidden;
+}
+
+.date {
+  color: #ff7070;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
 }
 
 #selectpicker {
@@ -39,6 +65,7 @@ label {
 #home-container {
   height: 100%;
   position: relative;
+  overflow: hidden;
 }
 
 #select-params-container {
@@ -75,34 +102,22 @@ label {
 }
 
 #sidebar-container {
-  background-color: darkgreen;
+  max-width: 320px;
 }
 
 #news-feed-container {
-  background-color: darkblue;
+  background-color: rgba(196, 196, 196, .2);;
+  /*color: #cecece;*/
+  margin-top: 4px;
+  margin-left: 4px;
+  margin-right: 4px;
+  overflow: auto;
 }
 
 #global-chat-container {
-  background-color: darkslategray;
-}
-
-#nav-container {
-  height: 100%;
-  background-color: darkolivegreen;
-}
-
-#profile-container {
-  background-color: darkred;
-  height: 40%;
-}
-
-#button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 60%;
-  background-color: #336699;
+  width: 50%;
+  position: absolute;
+  right: 0;
 }
 
 #message-box {
@@ -127,3 +142,35 @@ label {
 #send-chat-button {
   height: 100%;
 }
+
+#nav-container {
+  height: 100%;
+}
+
+#profile-container {
+  background-color: rgba(178, 109, 99, .5);
+  height: 40%;
+  margin: 4px;
+}
+
+#button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 60%;
+  color: white;
+  font-weight: bold
+}
+
+#join-queue-btn {
+  background: url(http://i.imgur.com/bawYP47.png)
+}
+
+#join-lobby-btn {
+  background: url(http://i.imgur.com/7CfRjKG.png)
+}
+
+
+
+
