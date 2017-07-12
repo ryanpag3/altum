@@ -71,7 +71,7 @@ a:hover {
 
 #ng-view-container {
   width: 100%;
-  height: calc(100% - 100px);
+  height: calc(100% - 110px);
   position: relative;
   background-color: #464a51
 }

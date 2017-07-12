@@ -4,13 +4,13 @@
   <link rel="stylesheet" href="/node_modules/hover.css/css/hover-min.css"/>
 </head>
 
-<div id="home-container" class="container-fluid" data-ng-controller="homeController">
-  <div class="row">
-    <div id="sidebar-container" class="col-lg-2">
-      <div class="row">
-        <div id="nav-container" class="col-lg-12">
+<div id="home-container" data-ng-controller="homeController">
+  <div class="container-fluid">
+    <div id="sidebar-container" class="col-lg-2 col-md-2">
+      <div class="">
+        <div id="nav-container" class="">
           <div class="row">
-            <div id="profile-container" class="col">
+            <div id="profile-container" class="">
               <div id="profile-pic" class="flex-center"></div>
               <h1 id="profile-username">USERNAME</h1>
               <div id="profile-level">PROFILE LEVEL</div>
@@ -33,7 +33,7 @@
         </div>
       </div>
     </div>
-    <div id="news-feed-container" class="col-lg-4">
+    <div id="news-feed-container" class="col-lg-4 col-md-4">
       <div class="flex-center">
         <h1 style="color: whitesmoke"><strong>ANNOUNCEMENTS</strong></h1>
       </div>
@@ -65,7 +65,7 @@
       <hr>
       </div>
     </div>
-    <div id="global-chat-container" class="col-lg-4">
+    <div id="global-chat-container" class="col-lg-4 col-md-4">
       <h1 style="text-align: center"><strong>Global Chat</strong></h1>
       <div id="message-box">
         <!--[date] username : [message]-->
@@ -75,11 +75,10 @@
           </div>
         </div>
       </div>
-      <div id="chat-form">
-        <!--enter chat here-->
-        <form data-ng-submit="sendMessage()">
+      <div id="chat-form-container">
+        <form id="chat-form" data-ng-submit="sendMessage()">
           <textarea rows="4" class="form-control" id="m" data-ng-model="text" autocomplete="off" placeholder="Enter message to chat!"></textarea>
-          <button id="send-chat-button" class="btn btn-sm btn-info flex-center">SEND</button>
+          <button id="send-chat-button" class="btn btn-sm btn-info">SEND</button>
         </form>
       </div>
     </div>
