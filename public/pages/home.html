@@ -14,13 +14,13 @@
               <div id="profile-pic" class="flex-center"></div>
               <div style="position: absolute; bottom: 0; left: 0; right: 0; margin-bottom: 20px">
                 <h1 id="profile-username">USERNAME</h1>
-                <div id="profile-level">PROFILE LEVEL</div>
+                <div id="profile-level">PROFILE LEVEL BAR</div>
               </div>
 
             </div>
           </div>
           <div class="row">
-              <div id="button-container" class="container">
+              <div id="button-container">
                 <div>
                 <button id="join-queue-btn" class="home-btn" data-ng-click="setQueueParams()">FIND PLAYERS</button>
                 <button id="join-lobby-btn" class="home-btn btn-disabled"> COMING SOON </button>
@@ -81,17 +81,22 @@
     </div>
   </div>
 
-  <div id ="select-params-container" data-ng-show="displayParamWindow" data-ng-controller="paramsController">
-    <div id="game-list-container" >
-      <select ng-model="selectedGame" data-ng-options="game as game.name for game in games" data-ng-change="updateGame()">
-        <option  value="" disabled >Select a game</option>
+  <div id ="select-params-container" data-ng-show="displayParamWindow" data-ng-controller="paramsController" class="flex-center">
+    <div id="game-list-container">
+      <div class="param-pic" id="game-list-pic">[game pic here]</div>
+      <select class="param-select-bar" ng-model="selectedGame" data-ng-options="game as game.name for game in games" data-ng-change="updateGame()">
+        <option  value="" disabled >Select a game!</option>
       </select>
-      <select ng-model="selectedRankIndex" data-ng-options="ranks.indexOf(rank) as rank for rank in ranks" data-ng-show="rankListShown" data-ng-change="updateRank()"></select>
-      <div class="row">
+      <div class="param-pic" id="game-rank-pic">[game rank pic here]</div>
+      <select class="param-select-bar" ng-model="selectedRankIndex" data-ng-options="ranks.indexOf(rank) as rank for rank in ranks" data-ng-show="rankListShown" data-ng-change="updateRank()">
+        <option value="" disabled>Select your rank!</option>
+      </select>
+      <div id="param-btn-container" class="rom">
         <button class="btn btn-primary" data-ng-click="cancelParamSelect()">CANCEL</button>
-        <button class="btn btn-primary" data-ng-click="joinQueue(); hideParamWindow(); showQueueTimer()">CONFIRM</button>
+        <button class="btn btn-primary" data-ng-click="joinQueue(); hideParamWindow(); showQueueTimer()">GO</button>
       </div>
     </div>
+    <div class="blur-page"></div>
   </div>
 
   <div id="queue-timer-container" data-ng-show="displayQueueTimer" class="col-lg-2" data-ng-controller="queueTimerController">

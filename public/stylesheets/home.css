@@ -70,6 +70,33 @@ p {
   word-break: break-all;
 }
 
+.blur-page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: .7;
+  z-index: -1;
+}
+
+.param-select-bar {
+  display: block;
+  width: 75%;
+  font-size: 24px;
+  margin: 0 auto;
+  background-color: #d6d4d6;
+  color: #434243;
+}
+
+.param-pic {
+  background-color: pink;
+  width: 600px;
+  height: 200px;
+  margin: 0 auto;
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
 ::-webkit-scrollbar {
   width: 0;
   background: transparent;
@@ -83,7 +110,7 @@ p {
 
 #home-container {
   min-height: 50vh;
-  height: 88vh;
+  height: 100vh;
   position: relative;
   overflow: auto;
 }
@@ -91,14 +118,21 @@ p {
 #select-params-container {
   position: absolute;
   z-index: 5;
-  height: 90%;
-  width: 50%;
-  background-color: green;
+  height: 100%;
+  width: 100%;
   left: 0;
   right: 0;
   top: 0;
   bottom: 0;
   margin: auto;
+}
+
+
+
+#game-list-container {
+  background-color: black;
+  height: 80%;
+  width: 40%;
 }
 
 #queue-timer-container {
@@ -123,18 +157,17 @@ p {
 #sidebar-container {
   min-width: 320px;
   width: 320px;
-  overflow: auto;
+  overflow: hidden;
 }
 
 #button-container {
-   display: flex;
-   justify-content: center;
    /*align-items: center;*/
-   width: 100%;
+   width: 90%;
    min-height: 500px;
    height: 50%;
    color: white;
-   font-weight: bold
+   font-weight: bold;
+  margin: 0 auto;
  }
 
 #news-feed-container {
@@ -266,16 +299,21 @@ p {
   background: url(http://i.imgur.com/7CfRjKG.png)
 }
 
+#param-btn-container {
+
+}
+
 @media screen and (max-width: 1699px) {
+
   #news-feed-container {
+    display: inline-block;
     min-width: 200px;
-    width: 62%;
-    overflow-x: scroll;
+    width: 100%;
     max-height: 800px;
   }
 
   #global-chat-container {
-    width: 87%;
+    width: 95%;
     height: 95vh;
   }
 
@@ -284,12 +322,23 @@ p {
    }
 
   #sidebar-container {
-        max-height: 800px;
+    width: 100%;
+    max-height: 550px;
+    margin: 0 auto;
   }
 
-  #news-feed-container {
-
+  #profile-container {
+    background-color: black;
+    width: 500px;
+    margin: 0 auto;
   }
+
+  #button-container {
+    background-color: yellow;
+    width: 700px;
+    margin: 0 auto;
+  }
+
 }
 
 @media screen and (max-height: 1030px) {
