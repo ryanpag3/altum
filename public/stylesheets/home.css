@@ -196,6 +196,7 @@ p {
 }
 
 #profile-container {
+  position: relative;
   border: solid black;
   background-color: rgba(160, 36, 36, .7);
   height: 40%;
@@ -207,10 +208,11 @@ p {
   border: solid;
   border-color: #464a51;
   margin: 0 auto;
-  border-radius: 200px;
-  width: 190px;
-  height: 190px;
-  background: url(http://i.imgur.com/tQ1Zifw.png)
+  border-radius: 100%;
+  width: 50%;
+  height: 50%;
+  background: url(http://i.imgur.com/tQ1Zifw.png);
+  background-size: contain;
 }
 
 #profile-username {
