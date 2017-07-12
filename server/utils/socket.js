@@ -22,10 +22,11 @@ var socket = function(io) {
       socket.join(room);
     });
 
-    socket.on('send-message', function(data) {
+    socket.on('send-message', function(message) {
+      var room = message.room;
       var currTime = getCurrentTime();
-      var msg = currTime + ' ' + data.username + ': ' + data.message;
-      io.to(data.room).emit('update-chat', msg);
+      var msg = { time: currTime, username: message.username, content: message.content };
+      io.to(room).emit('update-chat', msg);
     });
 
     socket.on('disconnect', function() {
@@ -44,10 +45,13 @@ var socket = function(io) {
 /**
  * Helper Functions
  */
-
 function getCurrentTime() {
   var rawTime = new Date();
-  return rawTime.getHours() + ':' + rawTime.getMinutes() + ':' + rawTime.getSeconds();
+  var hours = rawTime.getHours() > 9 ? rawTime.getHours() : '0' + rawTime.getHours();
+  var minutes = rawTime.getMinutes() > 9 ? rawTime.getMinutes() : '0' + rawTime.getMinutes();
+  var seconds = rawTime.getSeconds() > 9 ? rawTime.getSeconds() : '0' + rawTime.getSeconds();
+  return hours + ':' + minutes + ':' + seconds;
+
 }
 
 

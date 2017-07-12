@@ -1,6 +1,7 @@
 <head>
   <link rel="stylesheet" href="../stylesheets/home.css" type="text/css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/node_modules/hover.css/css/hover-min.css"/>
 </head>
 
 <div id="home-container" class="container-fluid" data-ng-controller="homeController">
@@ -10,16 +11,21 @@
         <div id="nav-container" class="col-lg-12">
           <div class="row">
             <div id="profile-container" class="col">
-              PROFILE <br>
-              display username <br>
-              TODO: <br>
-              add levelling system functionality
+              <div id="profile-pic" class="flex-center"></div>
+              <h1 id="profile-username">USERNAME</h1>
+              <div id="profile-level">PROFILE LEVEL</div>
+              <div id="profile-social-links">
+                  <h4>social.steam</h4>
+                  <h4>social.xbox</h4>
+                  <h4>social.playstation</h4>
+                  <h4>social.nintendo</h4>
+              </div>
             </div>
           </div>
           <div class="row">
               <div id="button-container" class="col container">
                 <div>
-                <button id="join-queue-btn" class="home-btn" data-ng-click="setQueueParams()">JOIN QUEUE </button>
+                <button id="join-queue-btn" class="home-btn" data-ng-click="setQueueParams()">FIND PLAYERS</button>
                 <button id="join-lobby-btn" class="home-btn btn-disabled"> COMING SOON </button>
                 </div>
                 </div>
@@ -29,7 +35,7 @@
     </div>
     <div id="news-feed-container" class="col-lg-4">
       <div class="flex-center">
-        <h1 style="color: whitesmoke">ANNOUNCEMENTS</h1>
+        <h1 style="color: whitesmoke"><strong>ANNOUNCEMENTS</strong></h1>
       </div>
       <!--COPY AND PASTE THE DIV FOR NEW ENTRY-->
       <div class="word-wrap">
@@ -59,18 +65,21 @@
       <hr>
       </div>
     </div>
-    <div id="global-chat-container">
+    <div id="global-chat-container" class="col-lg-4">
+      <h1 style="text-align: center"><strong>Global Chat</strong></h1>
       <div id="message-box">
         <!--[date] username : [message]-->
         <div data-ng-repeat="message in messages track by $index">
-          <span> {{ message }} </span>
+          <div data-ng-class-even="'chat-dark-bg'">
+            <span style="color: #db6064">{{message.time}}</span> | <span><strong>{{message.username}}</strong>: </span><span style="color: #666666">{{ message.content }} </span>
+          </div>
         </div>
       </div>
       <div id="chat-form">
         <!--enter chat here-->
         <form data-ng-submit="sendMessage()">
-          <textarea class="input col-lg-10" id="m" data-ng-model="text" autocomplete="off" rows="4"></textarea>
-          <button id="send-chat-button" class="btn btn-sm btn-info col-lg-2">SEND</button>
+          <textarea rows="4" class="form-control" id="m" data-ng-model="text" autocomplete="off" placeholder="Enter message to chat!"></textarea>
+          <button id="send-chat-button" class="btn btn-sm btn-info flex-center">SEND</button>
         </form>
       </div>
     </div>
@@ -93,11 +102,11 @@
     <h1 data-ng-model="timer">{{timer}}</h1>
     <button data-ng-click="cancel(); hideQueueTimer()">CANCEL</button>
   </div>
-
   <script
-    src="https://code.jquery.com/jquery-3.2.1.min.js"
-    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-    crossorigin="anonymous"></script>
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </div>
+
 

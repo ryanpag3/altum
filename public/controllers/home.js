@@ -12,7 +12,6 @@ angular.module('angulobby').controller('homeController',
     $scope.displayParamWindow = false;
     socket.emit('join-room', 'global'); // join global chat
 
-
     $scope.hideParamWindow = function() {
       $scope.displayParamWindow = false;
     };
@@ -48,7 +47,7 @@ angular.module('angulobby').controller('homeController',
       } else {
         AuthService.getUserStatus()
           .then(function (response) {
-            var data = {room: 'global', username: response.username, message: $scope.text};
+            var data = {room: 'global', username: response.username, content: $scope.text};
             socket.emit('send-message', data);
             $scope.text = null;
             console.log('send message fired.');
@@ -60,9 +59,8 @@ angular.module('angulobby').controller('homeController',
       }
     };
 
-    socket.on('update-chat', function(message) {
-        console.log('update chat fired');
-        $scope.messages.push(message);
+    socket.on('update-chat', function(data) {
+        $scope.messages.push(data);
         $scope.$apply();
     });
 
