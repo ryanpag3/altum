@@ -2,6 +2,7 @@ html, body {
     height: 100%;
     width: 100%;
   font-family: "Source Code Pro";
+  overflow: hidden;
 }
 
 header {
@@ -44,6 +45,7 @@ a:hover {
 }
 
 #header-container {
+  position: relative;
    background-color: #bababa;
    height: 100px;
    width: 100%;
@@ -71,7 +73,7 @@ a:hover {
 
 #ng-view-container {
   width: 100%;
-  height: calc(100% - 110px);
+  height: 100%;
   position: relative;
   background-color: #464a51
 }
