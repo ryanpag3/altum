@@ -47,8 +47,9 @@ p {
   border: solid;
   border-color: white;
   min-height: 210px;
-  min-width: 280px;
+  min-width: 270px;
   margin: auto;
+  margin-left: 7px;
 }
 
 .scrollable-menu {
@@ -197,6 +198,8 @@ p {
 }
 
 #send-chat-button {
+  background-color: rgb(160,36,36);
+  font-size: 1.5vh;
   height: 8%;
   width: 15%;
   position: absolute;
