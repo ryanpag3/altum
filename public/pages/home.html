@@ -5,7 +5,7 @@
 </head>
 
 <div id="home-container" data-ng-controller="homeController">
-  <div class="container-fluid">
+  <div>
     <div id="sidebar-container" class="col-lg-2 col-md-2">
       <div class="">
         <div id="nav-container" class="">
@@ -29,10 +29,29 @@
           </div>
         </div>
       </div>
+      <div id ="select-params-container" data-ng-show="displayParamWindow" data-ng-controller="paramsController">
+        <div id="game-list-container">
+          <div data-ng-model="pic" class="param-pic" id="game-list-pic" data-ng-style="{'background-image' : 'url(' + pic + ')'}"></div>
+          <select class="param-select-bar" ng-model="selectedGame" data-ng-options="game as game.name for game in games" data-ng-change="updateGame()">
+            <option value="" disabled>Select a game!</option>
+          </select>
+          <select class="param-select-bar" ng-model="selectedRankIndex" data-ng-options="ranks.indexOf(rank) as rank for rank in ranks" data-ng-show="rankListShown" data-ng-change="updateRank()">
+            <option value="" disabled>Select your rank!</option>
+          </select>
+          <div id="param-btn-container">
+            <div style="width: 90%; margin: 0 auto;">
+              <button id="param-confirm-btn" class="btn btn-success param-btn" data-ng-click="joinQueue(); hideParamWindow(); showQueueTimer()">GO</button>
+              <button id="param-cancel-btn" class="btn btn-danger param-btn" data-ng-click="cancelParamSelect()">CANCEL</button>
+            </div>
+          </div>
+          <div class="info-text" style="width: 100%"><br>If you have recommendations for game support, or notice any errors in ranks, please email the dev team at [INSERT EMAIL HERE]</div>
+        </div>
+        <!--<div class="blur-page"></div>-->
+      </div>
     </div>
     <div id="news-feed-container" class="col-lg-4 col-md-4">
       <div class="flex-center">
-        <h1 style="color: whitesmoke"><strong>ANNOUNCEMENTS</strong></h1>
+        <h1 style="color: whitesmoke"><strong>ANNOUNCEMENTS</strong></>
       </div>
       <!--COPY AND PASTE THE DIV FOR NEW ENTRY-->
       <div class="word-wrap">
@@ -81,33 +100,15 @@
     </div>
   </div>
 
-  <div id ="select-params-container" data-ng-show="displayParamWindow" data-ng-controller="paramsController" class="flex-center">
-    <div id="game-list-container">
-      <div class="param-pic" id="game-list-pic">[game pic here]</div>
-      <select class="param-select-bar" ng-model="selectedGame" data-ng-options="game as game.name for game in games" data-ng-change="updateGame()">
-        <option value="" disabled>Select a game!</option>
-      </select>
-      <div class="param-pic" id="game-rank-pic">[game rank pic here]</div>
-      <select class="param-select-bar" ng-model="selectedRankIndex" data-ng-options="ranks.indexOf(rank) as rank for rank in ranks" data-ng-show="rankListShown" data-ng-change="updateRank()">
-        <option value="" disabled>Select your rank!</option>
-      </select>
-      <div id="param-btn-container" class="rom">
-        <button class="btn btn-primary param-btn" data-ng-click="cancelParamSelect()">CANCEL</button>
-        <button class="btn btn-primary param-btn" data-ng-click="joinQueue(); hideParamWindow(); showQueueTimer()">GO</button>
-      </div>
-    </div>
-    <div class="blur-page"></div>
-  </div>
+
 
   <div id="queue-timer-container" data-ng-show="displayQueueTimer" class="col-lg-2" data-ng-controller="queueTimerController">
     <h1 data-ng-model="timer">{{timer}}</h1>
     <button data-ng-click="cancel(); hideQueueTimer()">CANCEL</button>
   </div>
-  <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+</script>
 </div>
 
 

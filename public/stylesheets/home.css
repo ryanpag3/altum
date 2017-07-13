@@ -4,6 +4,7 @@ form {
 textarea {
   resize: none;
 }
+
 label {
   font-size: 16px;
 
@@ -12,6 +13,11 @@ label {
 p {
   font-size: 16px;
 }
+
+h1 > strong {
+  font-size: 2vw;
+}
+
 .word-wrap {
   word-wrap: break-word;
 }
@@ -52,6 +58,12 @@ p {
   margin-left: 7px;
 }
 
+.info-text {
+  color: white;
+  opacity: .5;
+  text-align: center;
+}
+
 .scrollable-menu {
   height: auto;
   max-height: 200px;
@@ -81,25 +93,32 @@ p {
 
 .param-select-bar {
   display: block;
-  width: 75%;
-  font-size: 24px;
+  width: 90%;
+  font-size: 16px;
   margin: 0 auto;
+  margin-bottom: 15px;
   background-color: #d6d4d6;
   color: #434243;
+  z-index: 5;
 }
 
 .param-pic {
+  border: solid thin darkgrey;
   background-color: pink;
-  width: 600px;
-  height: 200px;
+  width: 300px;
+  height: 100px;
   margin: 0 auto;
   margin-top: 16px;
   margin-bottom: 16px;
+  background: url(http://i.imgur.com/Qu5Erdc.jpg);
+  background-size: contain;
 }
 
 .param-btn {
-  width: 200px;
-  margin: 0 auto;
+  width: 95%;
+  height: 75px;
+  margin: 8px;
+  font-size: 12px;
 }
 
 ::-webkit-scrollbar {
@@ -107,38 +126,34 @@ p {
   background: transparent;
 }
 
-
-
 #selectpicker {
   height: 100px;
 }
 
 #home-container {
-  min-height: 50vh;
+  min-height: 1000px;
   height: 100vh;
   position: relative;
   overflow: auto;
 }
 
 #select-params-container {
+  background-color: #343131;
+  border: solid #100f10;
   position: absolute;
   z-index: 5;
   height: 100%;
   width: 100%;
-  left: 0;
-  right: 0;
-  top: 0;
   bottom: 0;
-  margin: auto;
+  margin-left: -15px;
+  margin-top: 5px;
+  animation-name: slide-in-right;
+  animation-duration: .3s;
 }
 
-
-
 #game-list-container {
-  position: relative;
-  background-color: black;
-  height: 80%;
-  width: 40%;
+  height: 100%;
+  width: 100%;
 }
 
 #queue-timer-container {
@@ -157,32 +172,33 @@ p {
 
 #sidebar-container, #news-feed-container, #global-chat-container {
   color: white;
-  height: 88vh;
+  height: 100vh;
 }
 
 #sidebar-container {
   min-width: 320px;
   width: 320px;
-  overflow: hidden;
+  min-height: 1000px;
 }
 
 #button-container {
-   /*align-items: center;*/
-   width: 90%;
-   min-height: 500px;
-   height: 50%;
-   color: white;
-   font-weight: bold;
+  /*align-items: center;*/
+  width: 90%;
+  min-height: 500px;
+  height: 50%;
+  color: white;
+  font-weight: bold;
   margin: 0 auto;
- }
+}
 
 #news-feed-container {
   background-color: rgba(196, 196, 196, .2);;
   /*color: #cecece;*/
-  height: 99%;
+  height: 95%;
+  width: 25%;
   margin-top: 4px;
   margin-left: 4px;
-  margin-right: 4px;
+  margin-right: 0px;
   overflow: auto;
 }
 
@@ -190,7 +206,7 @@ p {
   /*display: inline;*/
   /*position: relative;*/
   width: 45%;
-  min-width: 35%;
+  min-width: 300px;
   min-height: 35%;
   max-height: 90vh;
 }
@@ -237,7 +253,7 @@ p {
 }
 
 #send-chat-button {
-  background-color: rgb(160,36,36);
+  background-color: rgb(160, 36, 36);
   font-size: 1.5vh;
   height: 8%;
   width: 15%;
@@ -259,7 +275,7 @@ p {
   border: solid black;
   background-color: rgba(160, 36, 36, .7);
   min-height: 320px;
-  height: 40%;
+  /*height: 40%;*/
   margin: 4px;
   overflow: hidden;
 }
@@ -295,8 +311,6 @@ p {
   text-align: center;
 }
 
-
-
 #join-queue-btn {
   background: url(http://i.imgur.com/bawYP47.png)
 }
@@ -305,22 +319,28 @@ p {
   background: url(http://i.imgur.com/7CfRjKG.png)
 }
 
-#param-btn-container {
-  background-color: blue;
-  position: absolute;
-  bottom: 0;
-  z-index: 1;
-  height: 10%;
-  width: 100%;
+@keyframes slide-in-right {
+  from {
+    transform: translate(-100%)
+  }
+  to {
+    transform: translate(0%)
+  }
 }
 
-@media screen and (max-width: 1699px) {
+@keyframes slide-out-left {
+  from {
+    transform: translate(0%)
+  }
+  to {
+    transform: translate(-100%)
+  }
+}
+
+@media screen and (max-width: 1187px) {
 
   #news-feed-container {
-    display: inline-block;
-    min-width: 200px;
-    width: 100%;
-    max-height: 800px;
+    display: none;
   }
 
   #global-chat-container {
@@ -329,8 +349,8 @@ p {
   }
 
   #send-chat-button {
-     margin: 0;
-   }
+    margin: 0;
+  }
 
   #sidebar-container {
     width: 100%;
@@ -359,14 +379,10 @@ p {
   }
 
   #index-container {
-    height: 100vh;
+    height: 100%;
     background-color: #464a51;
     overflow: auto;
   }
-
-
-
-
 
 }
 

@@ -7,7 +7,8 @@ var Game = new Schema({
   name: String,
   shortName: String,
   lobby_size: Number,
-  ranks: [String]
+  ranks: [String],
+  pic: String
 });
 
 module.exports = mongoose.model('games', Game, 'game_list');
