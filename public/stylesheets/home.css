@@ -97,6 +97,11 @@ p {
   margin-bottom: 16px;
 }
 
+.param-btn {
+  width: 200px;
+  margin: 0 auto;
+}
+
 ::-webkit-scrollbar {
   width: 0;
   background: transparent;
@@ -130,6 +135,7 @@ p {
 
 
 #game-list-container {
+  position: relative;
   background-color: black;
   height: 80%;
   width: 40%;
@@ -300,7 +306,12 @@ p {
 }
 
 #param-btn-container {
-
+  background-color: blue;
+  position: absolute;
+  bottom: 0;
+  z-index: 1;
+  height: 10%;
+  width: 100%;
 }
 
 @media screen and (max-width: 1699px) {
