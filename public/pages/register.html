@@ -21,19 +21,25 @@
     #home-container
     {
       height: 90%;
-      background-color: #336699;
+      background-color: rgba(130, 130, 130, .2);
+
+    }
+    body
+    {
+      font-family: "Source Code Pro";
+
     }
     #content-container
     {
       margin: auto;
-      background-color: magenta;
+
       height: 100%;
       width: 60%;
     }
     #title-container
     {
       font-size: 48px;
-      background-color: aqua;
+
       display: flex;
       justify-content: center;
       height: 20%;
@@ -49,14 +55,14 @@
       display: flex;
       font-size: 24px;
       margin-top: 5%;
-      background-color: blueviolet;
+
       justify-content: center;
     }
     .error-box
     {
       font-size: 18px;
       color: red;
-      background-color: antiquewhite;
+      background-color: whitesmoke;
     }
   </style>
 </head>
@@ -73,18 +79,27 @@
 
     <form class="form" data-ng-submit="register()">
 
-      <div class="col-sm-5 col-sm-offset-1 registerInput form-group" style="background-color: grey;">
+      <div class="col-sm-5 col-sm-offset-1 registerInput form-group">
         Email:<br>
         Username:<br>
         Password:<br>
         Confirm Password: <br>
+        Steam:<br>
+        PSN:<br>
+        Xbox:<br>
+        Nintendo:<br>
       </div>
 
-      <div class="col-sm-5 registerInput form-group" style="background-color: darkcyan;">
-        xxx@xxx.com<br>
+      <div class="col-sm-5 registerInput form-group">
+        <input type="email" class="form-control" name="email" data-ng-model="registerForm.email" required>
         <input type="text" class="form-control" name="username" data-ng-model="registerForm.username" required>
         <input type="password" class="form-control" name="password" data-ng-model="registerForm.password" required>
-        ***********<br>
+        <input type="password" class="form-control" name="password_confirm" data-ng-model="registerForm.password_confirm" required>
+        <input type="text" class="form-control" name="steam_id" data-ng-model="registerForm.steam_id" >
+        <input type="text" class="form-control" name="playstation_id" data-ng-model="registerForm.playstation_id" >
+        <input type="text" class="form-control" name="xbox_id" data-ng-model="registerForm.xbox_id" >
+        <input type="text" class="form-control" name="nintendo_id" data-ng-model="registerForm.nintendo_id" >
+
       </div>
 
       <div class="col-sm-2 col-sm-offset-5 submit-button form-group">
