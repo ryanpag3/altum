@@ -51,6 +51,7 @@ lobbyManager.prototype.getUsers = function(lobbyId) {
   // TODO
   // use users array to query mongoDB and access social links
   return lobbies[lobbyId].users;
+  //create a new obj array username, image, [links]
 };
 
 /*

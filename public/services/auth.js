@@ -102,14 +102,14 @@ app.factory('AuthService',
         return deferred.promise;
       }
 
-      function register(username, password, email, steam_id, playstation_id, xbox_id, nintendo_id) {
+      function register(username, password, email, steam_id, playstation_id, xbox_id, nintendo_id, blizzard_id) {
         // create new instance of deferred
         var deferred = $q.defer();
 
         // send POST request to the server
         $http.post('/user/register',
           {username: username, password: password, email: email, steam_id: steam_id, playstation_id: playstation_id,
-          xbox_id: xbox_id, nintendo_id: nintendo_id})
+          xbox_id: xbox_id, nintendo_id: nintendo_id, blizzard_id: blizzard_id})
         // handle success case
           .then(function (response) {
             if (response.status === 200 && response.data.msg) {

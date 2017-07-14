@@ -15,7 +15,7 @@ angular.module('angulobby').controller('registerController',
       // call register from service
       AuthService.register($scope.registerForm.username, $scope.registerForm.password,
         $scope.registerForm.email, $scope.registerForm.steam_id, $scope.registerForm.playstation_id,
-        $scope.registerForm.xbox_id, $scope.registerForm.nintendo_id)
+        $scope.registerForm.xbox_id, $scope.registerForm.nintendo_id, $scope.registerForm.blizzard_id)
         // handle success
         .then(function(){
           $location.path('/login');

@@ -9,7 +9,7 @@ var User = require('../models/user.js');
 router.post('/register', function(req, res) {
   User.register(new User({username: req.body.username, email: req.body.email,
       steam_id: req.body.steam_id, xbox_id: req.body.xbox_id, playstation_id: req.body.playstation_id,
-      nintendo_id: req.body.nintendo_id}),
+      nintendo_id: req.body.nintendo_id, blizzard_id: req.body.blizzard_id}),
     req.body.password, function (err, account) {
     // if any error thrown add here
     if (err) {

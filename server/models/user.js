@@ -13,7 +13,8 @@ var User = new Schema({
    steam_id: String,
    playstation_id: String,
    xbox_id: String,
-   nintendo_id: String
+   nintendo_id: String,
+   blizzard_id: String
 });
 // for more info on what this plugin does
 // see ref: https://github.com/saintedlama/passport-local-mongoose#api-documentation
