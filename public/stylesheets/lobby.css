@@ -42,15 +42,17 @@ div {
 
 #page-container {
   background-color: greenyellow;
-  height: 100%;
-  width: 100%;
+  height: 90vh;
+  width: 100vw;
   overflow: auto;
 }
 
 #lobby-container {
-  height: 100%;
-  min-height: 700px;
-  min-width: 1000px;
+  background-color: pink;
+  height: 92vh;
+  width: 60vw;
+  min-width: 800px;
+  min-height: 800px;
   display: table;
   margin: 0 auto;
 }
@@ -58,16 +60,15 @@ div {
 #chat {
   position: relative;
   background-color: grey;
-  width: 1000px;
+  width: 100%;
   height: 70%;
-  overflow: auto;
 }
 
 #message-box {
   position: relative;
   top: 0; left: 0; right: 0;
   margin: 5px;
-  width: 990px;
+  width: 100%;
   height: 75%;
   background-color: lightyellow;
 }
@@ -83,7 +84,7 @@ div {
 
 #text-box-container {
   height: 100%;
-  width: 700px;
+  width: 80%;
   background-color: blueviolet;
   float: left;
 }
@@ -91,13 +92,13 @@ div {
 #text-box {
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
-  width: 700px;
+  width: 80%;
   resize: none;
 }
 
 #send-chat-button-container {
   height: 100%;
-  width: 270px;
+  width: 20%;
   background-color: firebrick;
   float: left;
 }
@@ -112,8 +113,8 @@ div {
 #users {
   position: relative;
   background-color: darkblue;
-  height: 30%;
-  width: 1000px;
+  height: 25%;
+  width: 100%;
 }
 
 #users-wrapper {

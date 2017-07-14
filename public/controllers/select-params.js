@@ -6,7 +6,7 @@ angular.module('angulobby').controller('paramsController',
   function($scope, $location, GameListService, QueueService, AuthService){
   $scope.games = [];
   $scope.ranks = [];
-  $scope.pic = 'http://i.imgur.com/h2JGeNS.jpg';
+  $scope.pic = 'http://i.imgur.com/h2JGeNS.jpg'; // default photo
   $scope.rankListShown = false;
   var RANK_RANGE = 1; // the distance above and below the rank to queue for
   var game, rankRange = [];
