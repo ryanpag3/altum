@@ -13,13 +13,16 @@ angular.module('angulobby').controller('registerController',
       $scope.disabled = true;
 
       // call register from service
-      AuthService.register($scope.registerForm.username, $scope.registerForm.password)
+      AuthService.register($scope.registerForm.username, $scope.registerForm.password,
+        $scope.registerForm.email, $scope.registerForm.steam_id, $scope.registerForm.playstation_id,
+        $scope.registerForm.xbox_id, $scope.registerForm.nintendo_id)
         // handle success
         .then(function(){
           $location.path('/login');
           $scope.disabled = false;
           $scope.registerForm = {};
         })
+
       // handle error
         .catch(function(err){
           $scope.error = true;

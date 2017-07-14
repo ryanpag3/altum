@@ -7,9 +7,11 @@ var passport = require('passport');
 var User = require('../models/user.js');
 
 router.post('/register', function(req, res) {
-  User.register(new User({username: req.body.username}),
+  User.register(new User({username: req.body.username, email: req.body.email,
+      steam_id: req.body.steam_id, xbox_id: req.body.xbox_id, playstation_id: req.body.playstation_id,
+      nintendo_id: req.body.nintendo_id}),
     req.body.password, function (err, account) {
-    // if any error thrown
+    // if any error thrown add here
     if (err) {
       console.log(err.message);
         return res.status(500).json({
