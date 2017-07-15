@@ -1,14 +1,16 @@
 div {
   font-family: Helvetica, monospace;
   text-align: center;
-  font-size: 18px;
-
 }
 
 .centered {
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
   margin: auto;
+}
+
+.chat-dark-bg {
+  background-color: rgba(130, 130, 130, .2);
 }
 
 .user {
@@ -41,78 +43,82 @@ div {
 }
 
 #page-container {
-  background-color: greenyellow;
-  height: 90vh;
-  width: 100vw;
-  overflow: auto;
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
 
 #lobby-container {
-  background-color: pink;
-  height: 92vh;
-  width: 60vw;
-  min-width: 800px;
-  min-height: 800px;
-  display: table;
+  height: 85%;
+  width: 50%;
+  min-width: 500px;
+  /*display: table;*/
   margin: 0 auto;
 }
 
 #chat {
   position: relative;
-  background-color: grey;
   width: 100%;
-  height: 70%;
+  height: 75%;
+  margin-top: 4px;
 }
 
 #message-box {
   position: relative;
   top: 0; left: 0; right: 0;
-  margin: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   width: 100%;
   height: 75%;
-  background-color: lightyellow;
+  background-color: #d6d6d6;
+  color: black;
+  font-size: 16px;
+  word-break: break-all;
 }
 
 #chat-form {
-  background-color: aqua;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  background-color: darkgrey;
   position: relative;
-  left: 0; right: 0; bottom: 0;
-  margin-left: 6px;
-  margin-right: 6px;
   height: 20%;
+  min-height: 100px;
 }
 
 #text-box-container {
   height: 100%;
   width: 80%;
-  background-color: blueviolet;
   float: left;
 }
 
 #text-box {
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
-  width: 80%;
+  color: black;
+  border-radius: 5px;
+  /*position: absolute;*/
+  /*top: 0; left: 0; bottom: 0; right: 0;*/
+  background-color: rgba(221, 221, 221, .7);
+  width: 97%;
+  height: 88%;
+  margin: 8px;
   resize: none;
 }
 
 #send-chat-button-container {
   height: 100%;
   width: 20%;
-  background-color: firebrick;
   float: left;
 }
 
 #send-chat-button {
-  height: 90%;
+  height: 50%;
   width: 90%;
   margin: 2px;
-
+  margin-top: 10px;
 }
 
 #users {
   position: relative;
-  background-color: darkblue;
+  background-color: rgba(0, 0, 0, .2);
   height: 25%;
   width: 100%;
 }
@@ -123,4 +129,29 @@ div {
   width: 98%;
   height: 90%;
   margin: auto;
+}
+
+@media screen and (max-width: 500px) {
+  #users {
+    display: none;
+  }
+
+  #lobby-container {
+    min-width: 0;
+    height: 100%;
+    width: 98%;
+  }
+
+  #message-box {
+    /*height: 90%;*/
+  }
+}
+
+@media screen and (max-height: 800px) {
+  #users {
+    display: none;
+  }
+
+  #message-box {
+  }
 }

@@ -1,16 +1,25 @@
 html, body {
-    min-height: 1000px;
-    height: 100%;
+    height: 100vh;
     width: 100%;
+  min-width: 420px;
   font-family: "Source Code Pro";
-  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  margin-bottom: 100px;
 }
 
 header {
-  overflow: hidden;
     background-color: darkgray;
-    height: 100px;
     width: 100%;
+  height: 100px;
+}
+
+footer {
+  background-color: pink;
+  height: 75px;
+  width: 100%;
 }
 
 a:hover {
@@ -39,7 +48,7 @@ a:hover {
 /*}*/
 
 #index-container {
-    background-color: lightgray;
+  background-color: #464a51;
     height: 100%;
     width: 100%;
     color: whitesmoke;
@@ -50,12 +59,13 @@ a:hover {
    background-color: #bababa;
    height: 100px;
    width: 100%;
+  z-index: 5;
  }
 
 #logo {
   background-color: rgba(147, 147, 147, .5);
-  position: absolute;
-  left: 0;
+  position: relative;
+  float: left;
   min-width: 306px;
   min-height: 86px;
   font-size: 54px;
@@ -66,19 +76,13 @@ a:hover {
 }
 
 #nav-buttons {
-  position: absolute;
-  right: 0;
+  float: right;
   min-height:100%;
   font-size: 16px;
-}
-
-#ng-view-container {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  background-color: #464a51
+  width: 80px;
 }
 
 #ng-view {
-  overflow: hidden;
+  height: 100%;
+  width: 100%;
 }

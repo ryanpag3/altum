@@ -131,10 +131,8 @@ h1 > strong {
 }
 
 #home-container {
-  min-height: 1000px;
   height: 100vh;
-  position: relative;
-  overflow: auto;
+  width: 100%;
 }
 
 #select-params-container {
@@ -142,11 +140,9 @@ h1 > strong {
   border: solid #100f10;
   position: absolute;
   z-index: 5;
-  height: 100%;
-  width: 100%;
-  bottom: 0;
-  margin-left: -15px;
-  margin-top: 5px;
+  height: 99%;
+  width: 320px;
+  top: 0;
   animation-name: slide-in-right;
   animation-duration: .3s;
 }
@@ -170,15 +166,23 @@ h1 > strong {
   background-color: white;
 }
 
-#sidebar-container, #news-feed-container, #global-chat-container {
+#news-feed-container, #global-chat-container {
   color: white;
-  height: 100vh;
 }
 
 #sidebar-container {
+  position: absolute;
+  left: 0;
   min-width: 320px;
   width: 320px;
-  min-height: 1000px;
+  height: 100%;
+}
+
+#remainder-container {
+  position: absolute;
+  left: 320px;
+  height: 100%;
+  width: calc(100% - 320px);
 }
 
 #button-container {
@@ -192,30 +196,32 @@ h1 > strong {
 }
 
 #news-feed-container {
-  background-color: rgba(196, 196, 196, .2);;
-  /*color: #cecece;*/
+  float: left;
+  background-color: rgba(196, 196, 196, .2);
   height: 95%;
-  width: 25%;
-  margin-top: 4px;
-  margin-left: 4px;
-  margin-right: 0px;
+  width: 40%;
+  /*color: #cecece;*/
+  /*margin-top: 4px;*/
+  /*margin-left: 4px;*/
+  /*margin-right: 0px;*/
   overflow: auto;
 }
 
 #global-chat-container {
+  float: left;
   /*display: inline;*/
   /*position: relative;*/
-  width: 45%;
+  width: 50%;
+  height: 95%;
   min-width: 300px;
   min-height: 35%;
-  max-height: 90vh;
 }
 
 #message-box {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   height: 75%;
-  width: 100%;
+  width: 90%;
   background-color: #d6d6d6;
   color: black;
   font-size: 16px;
@@ -230,7 +236,7 @@ h1 > strong {
   border-bottom-right-radius: 5px;
   font-size: 16px;
   height: 10%;
-  width: 100%;
+  width: 90%;
   margin-left: 2%;
   margin-right: 2%;
   padding-top: 6px;
@@ -242,7 +248,6 @@ h1 > strong {
 }
 
 #m {
-  background-color: black;
   font-size: 16px;
   height: 100%;
   width: 83%;
@@ -255,11 +260,9 @@ h1 > strong {
 #send-chat-button {
   background-color: rgb(160, 36, 36);
   font-size: 1.5vh;
-  height: 8%;
+  height: 50%;
   width: 15%;
-  position: absolute;
-  right: 0;
-  margin-top: 5px;
+  margin-top: -100px;
   margin-right: 5px;
   /*margin-left: 15px;*/
   /*margin-bottom: 25px;*/
@@ -276,8 +279,8 @@ h1 > strong {
   background-color: rgba(160, 36, 36, .7);
   min-height: 320px;
   /*height: 40%;*/
-  margin: 4px;
-  overflow: hidden;
+  width: 320px;
+  margin-left: 4px;
 }
 
 #profile-pic {

@@ -16,7 +16,7 @@ angular.module('angulobby').controller('lobbyController',
     } else {
       AuthService.getUserStatus()
         .then(function (response) {
-          var data = {room: $scope.lobbyId, username: response.username, message: $scope.text};
+          var data = {room: $scope.lobbyId, username: response.username, content: $scope.text};
           socket.emit('send-message', data);
           $scope.text = null;
         });
