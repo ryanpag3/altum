@@ -39,7 +39,7 @@ angular.module('angulobby').controller('paramsController',
     if (game !== undefined && rankRange !== undefined) {
       for (var i = 0; i < rankRange.length; i++) {
         // create queue identifier based on selection
-        var queue = game.shortName + '_' + rankRange[i];
+        var queue = game.lobby_size + '_' + game.short_name + '_' + rankRange[i];
         QueueService.addToQueue(AuthService.getCurrentUser(), queue);
         console.log('you have been entered into: ' + queue);
       }

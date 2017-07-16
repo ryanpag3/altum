@@ -43,8 +43,18 @@
           </div>
           <div class="info-text"><br>If you have recommendations for game support, or notice any errors in ranks, please email the dev team at [INSERT EMAIL HERE]</div>
         </div>
-        <!--<div class="blur-page"></div>-->
+
       </div>
+      <div id="queue-timer-container" data-ng-show="displayQueueTimer" class="col-lg-2" data-ng-controller="queueTimerController">
+        <div style="text-align: center; font-size: 18px; opacity: .8"><br>You are successfully queued!</div>
+        <div style="display: flex; width: 100%; justify-content: center">
+          <div style="">
+            <h1 style="margin: 6px;" data-ng-model="timer">{{timer}}</h1>
+            <button class="btn btn-cancel" style="color: black; background-color: rgba(147, 147, 147, .5)" data-ng-click="cancel(); hideQueueTimer()">CANCEL</button>
+          </div>
+        </div>
+
+    </div>
     </div>
     <div id="remainder-container">
         <div id="news-feed-container">
@@ -98,10 +108,7 @@
       </div>
     </div>
 </div>
-  <div id="queue-timer-container" data-ng-show="displayQueueTimer" class="col-lg-2" data-ng-controller="queueTimerController">
-    <h1 data-ng-model="timer">{{timer}}</h1>
-    <button data-ng-click="cancel(); hideQueueTimer()">CANCEL</button>
-  </div>
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script>
 </script>

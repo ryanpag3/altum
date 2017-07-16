@@ -1,9 +1,9 @@
 /**
  * Created by dev on 7/5/2017.
  */
+var Game = require('../models/game.js');
 var users = require('./users.js');
 var lobbyManager = require('./lobby-manager.js');
-var LOBBY_SIZE = 1;
 var QUEUE_CHECK_INTERVAL_IN_MILLIS = 50;
 var queues = {}; // holds all active queues
 var queueManager = function() {};
@@ -79,8 +79,11 @@ queueManager.prototype.existsInQueue = function (username, queue) {
     return false;
   };
 
+// 'short_name': qName.substr(0, qName.indexOf('_'))
   var startService = function () {
     for (var qName in queues) {
+      // grab lobby_size from queue url, which is the first element separated by _
+      var LOBBY_SIZE = qName.substr(0, qName.indexOf('_'));
       if (queues[qName].length >= LOBBY_SIZE) {
         var lobbyMembers = [];
         for (var i = 0; i < LOBBY_SIZE; i++) {
@@ -91,6 +94,17 @@ queueManager.prototype.existsInQueue = function (username, queue) {
     }
   };
   setInterval(startService, QUEUE_CHECK_INTERVAL_IN_MILLIS);
+
+
+  var queueGarbageCollector = function() {
+    for (var qName in queues) {
+      if (queues[qName].length === 0) {
+        console.log('deleting ' + qName);
+        delete queues[qName];
+      }
+    }
+  };
+  setInterval(queueGarbageCollector, 100);
 
 module.exports = new queueManager();
 

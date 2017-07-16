@@ -156,12 +156,14 @@ h1 > strong {
 }
 
 #queue-timer-container {
+  border: solid black;
+  color: white;
   position: absolute;
   z-index: 5;
-  height: 60%;
-  background-color: pink;
-  left: 0;
-  bottom: 0;
+  height: 65%;
+  width: 309px;
+  background-color: #232523;
+  top: 320px;
   margin: auto;
 }
 
