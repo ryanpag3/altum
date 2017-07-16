@@ -7,12 +7,17 @@
   <div id="lobby-container">
     <div id="users">
       <div id="users-wrapper">
-          <div data-ng-repeat="user in activeUsers" class="user">
-            <div>
-              <div class="profile-picture">profile pic</div>
-              <div class="username">{{user.name}}</div>
-              <div class="social-links">social links</div>
+          <div id="user" data-ng-repeat="user in activeUsers" class="user">
+            <a href>
+                <div>
+                  <div class="profile-picture"></div>
+                  <div class="username-container">
+                    <div class="username">
+                      {{user.name}}
+                    </div>
+                </div>
             </div>
+            </a>
           </div>
       </div>
     </div>
@@ -23,9 +28,9 @@
     </div>
     </div>
     <!--<div id="chat-form">-->
-    <form id="chat-form"data-ng-submit="sendMessage()">
+    <form id="chat-form" data-ng-submit="sendMessage()">
     <div id="text-box-container">
-    <textarea class="input" id="text-box" data-ng-model="text" autocomplete="off" rows="4"></textarea>
+    <input type="text" id="text-box" data-ng-model="text" autocomplete="off" placeholder="Enter your text here!"> </input>
     </div>
     <div id="send-chat-button-container">
     <button id="send-chat-button" class="btn btn-info">SEND</button>
