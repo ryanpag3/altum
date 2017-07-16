@@ -359,6 +359,7 @@ h1 > strong {
     width: 620px;
     max-height: 550px;
     margin: 0 auto;
+    background-color: green;
   }
 
   #select-params-container {
@@ -380,6 +381,15 @@ h1 > strong {
     /*background-color: yellow;*/
     /*height: 50px;*/
     margin: 0 auto;
+  }
+
+  #queue-timer-container {
+    position: relative;
+    width: 500px;
+    height: 40%;
+    margin: 0 auto;
+    top: -42%;
+    z-index: 5;
   }
 
 }

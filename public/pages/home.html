@@ -18,9 +18,9 @@
             </div>
           </div>
           <div class="row">
-              <div id="button-container">
+              <div id="button-container" data-ng-show="displayBtnContainer">
                 <div>
-                <button id="join-queue-btn" class="home-btn" data-ng-click="setQueueParams()">FIND PLAYERS</button>
+                <button id="join-queue-btn" class="home-btn" data-ng-click="setQueueParams(); hideMenuBtns()">FIND PLAYERS</button>
                 <button id="join-lobby-btn" class="home-btn btn-disabled"> COMING SOON </button>
                 </div>
                 </div>
@@ -37,7 +37,7 @@
           </select>
           <div id="param-btn-container">
             <div style="width: 90%; margin: 0 auto;">
-              <button id="param-confirm-btn" class="btn btn-success param-btn" data-ng-click="joinQueue(); hideParamWindow(); showQueueTimer()">GO</button>
+              <button id="param-confirm-btn" class="btn btn-success param-btn" data-ng-click="joinQueue(); hideParamWindow(); showQueueTimer();">GO</button>
               <button id="param-cancel-btn" class="btn btn-danger param-btn" data-ng-click="cancelParamSelect()">CANCEL</button>
             </div>
           </div>
@@ -50,7 +50,7 @@
         <div style="display: flex; width: 100%; justify-content: center">
           <div style="">
             <h1 style="margin: 6px;" data-ng-model="timer">{{timer}}</h1>
-            <button class="btn btn-cancel" style="color: black; background-color: rgba(147, 147, 147, .5)" data-ng-click="cancel(); hideQueueTimer()">CANCEL</button>
+            <button class="btn btn-cancel" style="color: black; background-color: rgba(147, 147, 147, .5)" data-ng-click="cancel(); hideQueueTimer(); showMenuBtns()">CANCEL</button>
           </div>
         </div>
 
