@@ -59,9 +59,12 @@ h1 > strong {
 }
 
 .info-text {
+  width: 85%;
   color: white;
   opacity: .5;
   text-align: center;
+  margin: 0 auto;
+
 }
 
 .scrollable-menu {
@@ -221,7 +224,7 @@ h1 > strong {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   height: 75%;
-  width: 90%;
+  width: 95%;
   background-color: #d6d6d6;
   color: black;
   font-size: 16px;
@@ -232,24 +235,29 @@ h1 > strong {
 }
 
 #chat-form-container {
+
+  display: flex;
+  align-content: center;
+  justify-content: center;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   font-size: 16px;
-  height: 10%;
-  width: 90%;
+  height: 6%;
+  width: 95%;
   margin-left: 2%;
   margin-right: 2%;
-  padding-top: 6px;
   background-color: darkgrey;
 }
 
 #chat-form {
-  height: 100%;
+  width: 98%;
+  height: 50px;
+  margin-top: 10px;
 }
 
 #m {
+  color: black;
   font-size: 16px;
-  height: 100%;
   width: 83%;
   min-width: 200px;
   display: inline;
@@ -260,9 +268,9 @@ h1 > strong {
 #send-chat-button {
   background-color: rgb(160, 36, 36);
   font-size: 1.5vh;
-  height: 50%;
+  height: 40px;
   width: 15%;
-  margin-top: -100px;
+  margin-top: 0;
   margin-right: 5px;
   /*margin-left: 15px;*/
   /*margin-bottom: 25px;*/
@@ -322,6 +330,71 @@ h1 > strong {
   background: url(http://i.imgur.com/7CfRjKG.png)
 }
 
+
+
+@media screen and (max-width: 1187px) {
+
+  html, body {
+    background-color: #464a51;
+    height: 100%;
+  }
+
+  #news-feed-container {
+    display: none;
+  }
+
+  #global-chat-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  #send-chat-button {
+
+  }
+
+  #sidebar-container {
+    position: relative;
+    width: 620px;
+    max-height: 550px;
+    margin: 0 auto;
+  }
+
+  #select-params-container {
+    width: 100%;
+  }
+
+  #remainder-container {
+    position: relative;
+    left: 0;
+    width: auto;
+  }
+
+  #profile-container {
+    width: 500px;
+    margin: 0 auto;
+  }
+
+  #button-container {
+    /*background-color: yellow;*/
+    /*height: 50px;*/
+    margin: 0 auto;
+  }
+
+}
+
+/*@media screen and (max-height: 1030px) {*/
+  /*html, body {*/
+    /*margin: 0;*/
+    /*background-color: #464a51;*/
+  /*}*/
+
+  /*#index-container {*/
+    /*height: 100%;*/
+    /*background-color: #464a51;*/
+    /*overflow: auto;*/
+  /*}*/
+/*}*/
+
 @keyframes slide-in-right {
   from {
     transform: translate(-100%)
@@ -339,56 +412,6 @@ h1 > strong {
     transform: translate(-100%)
   }
 }
-
-@media screen and (max-width: 1187px) {
-
-  #news-feed-container {
-    display: none;
-  }
-
-  #global-chat-container {
-    width: 95%;
-    height: 95vh;
-  }
-
-  #send-chat-button {
-    margin: 0;
-  }
-
-  #sidebar-container {
-    width: 100%;
-    max-height: 550px;
-    margin: 0 auto;
-  }
-
-  #profile-container {
-    background-color: black;
-    width: 500px;
-    margin: 0 auto;
-  }
-
-  #button-container {
-    background-color: yellow;
-    width: 700px;
-    margin: 0 auto;
-  }
-
-}
-
-@media screen and (max-height: 1030px) {
-  html, body {
-    margin: 0;
-    background-color: #464a51;
-  }
-
-  #index-container {
-    height: 100%;
-    background-color: #464a51;
-    overflow: auto;
-  }
-
-}
-
 
 
 

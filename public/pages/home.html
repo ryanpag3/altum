@@ -41,7 +41,7 @@
               <button id="param-cancel-btn" class="btn btn-danger param-btn" data-ng-click="cancelParamSelect()">CANCEL</button>
             </div>
           </div>
-          <div class="info-text" style="width: 100%"><br>If you have recommendations for game support, or notice any errors in ranks, please email the dev team at [INSERT EMAIL HERE]</div>
+          <div class="info-text"><br>If you have recommendations for game support, or notice any errors in ranks, please email the dev team at [INSERT EMAIL HERE]</div>
         </div>
         <!--<div class="blur-page"></div>-->
       </div>
@@ -92,7 +92,7 @@
       </div>
       <div id="chat-form-container">
         <form id="chat-form" data-ng-submit="sendMessage()">
-          <textarea rows="4" class="form-control" id="m" data-ng-model="text" autocomplete="off" placeholder="Enter message to chat!"></textarea>
+          <input id="m" data-ng-model="text" autocomplete="off" placeholder="Enter message to chat!"></input>
           <button id="send-chat-button" class="btn btn-sm btn-info">SEND</button>
         </form>
       </div>

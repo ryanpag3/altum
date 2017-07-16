@@ -53,12 +53,12 @@ angular.module('angulobby').controller('lobbyController',
 
    $scope.showSocial = function(index) {
 
-     $scope.activeUsers[index].displaySocialMenu = true
+     $scope.activeUsers[index].displaySocialMenu = true;
      console.log($scope.activeUsers[index]);
    };
    $scope.hideSocial = function(index) {
+     $scope.activeUsers[index].displaySocialMenu = false;
      console.log($scope.activeUsers[index]);
-     $scope.activeUsers[index].displaySocialMenu = false
    };
 
 }]);

@@ -25,5 +25,9 @@ angular.module('angulobby').controller('loginController',
           $scope.disabled = false;
           $scope.loginForm = {};
         });
-    }
+    };
+
+    $scope.register = function() {
+      $location.path('/register');
+    };
   }]);
