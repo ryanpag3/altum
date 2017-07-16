@@ -7,6 +7,8 @@ angular.module('angulobby').controller('lobbyController',
   $scope.lobbyId = $routeParams.lobbyId;
   $scope.messages = [];
   $scope.activeUsers = [];
+  $scope.displaySocialMenu = false;
+
   socket.emit('join-room', $scope.lobbyId);
   socket.emit('get-lobby-members', $scope.lobbyId);
 
@@ -41,14 +43,22 @@ angular.module('angulobby').controller('lobbyController',
       var usernames = data;
       var temp = [];
       console.log(usernames.toString());
-      for (var name in usernames) {
-        console.log('pushing ' + usernames[name] + ' to activeUsers list.');
-        temp.push({name: usernames[name]});
+      for (var index in usernames) {
+        console.log('pushing ' + usernames[index] + ' to activeUsers list.');
+        temp.push({ name: usernames[index], showSocial: false });
       }
       $scope.activeUsers = temp;
       $scope.$apply();
     });
 
-    socket.on('get-connected-users')
+   $scope.showSocial = function(index) {
+
+     $scope.activeUsers[index].displaySocialMenu = true
+     console.log($scope.activeUsers[index]);
+   };
+   $scope.hideSocial = function(index) {
+     console.log($scope.activeUsers[index]);
+     $scope.activeUsers[index].displaySocialMenu = false
+   };
 
 }]);

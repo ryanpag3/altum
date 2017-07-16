@@ -7,17 +7,27 @@
   <div id="lobby-container">
     <div id="users">
       <div id="users-wrapper">
-          <div id="user" data-ng-repeat="user in activeUsers" class="user">
-            <a href>
-                <div>
-                  <div class="profile-picture"></div>
-                  <div class="username-container">
-                    <div class="username">
-                      {{user.name}}
-                    </div>
+          <div data-ng-repeat="user in activeUsers" class="user">
+                  <div >
+                      <div class="profile-picture"></div>
+                      <div class="username-container">
+                      <a class="username" data-ng-click="showSocial($index)">
+                        {{user.name}}
+                      </a>
+                      <div class="social-container" data-ng-show="activeUsers[$index].displaySocialMenu">
+                        <button class="btn-close" data-ng-click="hideSocial($index)">x</button>
+                        <h4>social links</h4>
+                        <div class="social-links">
+                          <p>{{user.steam}}</p>
+                          <p>{{user.xbox}}</p>
+                          <p>{{user.playstation}}</p>
+                          <p>{{user.nintendo}}</p>
+                        </div>
+                      </div>
+                  </div>
                 </div>
-            </div>
-            </a>
+
+
           </div>
       </div>
     </div>

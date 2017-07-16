@@ -3,10 +3,22 @@ div {
   text-align: center;
 }
 
+a {
+  text-decoration: none;
+}
+
 .centered {
   position: absolute;
   top: 0; left: 0; bottom: 0; right: 0;
   margin: auto;
+}
+
+.btn-close {
+  position: absolute;
+  top: 0; right: 0;
+  background: transparent;
+  border: none;
+  color: black;
 }
 
 .chat-dark-bg {
@@ -17,7 +29,6 @@ div {
   background-color: rgba(155, 155, 155, .2);
   height: 100%;
   width: 16%;
-  float: left;
   margin: 2px;
 }
 
@@ -39,15 +50,32 @@ div {
   overflow: hidden;
 }
 
-.username {
+.username, .username:hover, .username:visited, .username:active {
+  color: white;
+  text-decoration: none;
   font-size: 12px;
 }
 
+
+.social-container {
+  border: thin black solid;
+  position: absolute;
+  top: 0;
+  width: 16%;
+  height: 100%;
+  background-color: rgb(160, 36, 36);
+  z-index: 5;
+}
+
 .social-links {
-  width: 95%;
-  height: 40%;
-  background-color: lightcoral;
-  margin: 3px;
+  text-align: left;
+  position: absolute;
+  bottom: 0;
+  width: 98%;
+}
+
+h3 {
+  background-color: black;
 }
 
 #page-container {
