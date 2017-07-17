@@ -84,6 +84,7 @@ queueManager.prototype.existsInQueue = function (username, queue) {
     for (var qName in queues) {
       // grab lobby_size from queue url, which is the first element separated by _
       var LOBBY_SIZE = qName.substr(0, qName.indexOf('_'));
+      // var LOBBY_SIZE = 1; for debugging
       if (queues[qName].length >= LOBBY_SIZE) {
         var lobbyMembers = [];
         for (var i = 0; i < LOBBY_SIZE; i++) {
