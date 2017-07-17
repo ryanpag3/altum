@@ -10,9 +10,7 @@ angular.module('angulobby').controller('indexController',
           // add user to user map, if user already exists, add socket
           socket.emit('add-user', response.username);
         } else {
-          // debug
-          console.log('this should be thrown when user is not authenticated');
-          // end debug
+          // user not authenticated, do nothing
         }
       })
       .catch(function(response) {

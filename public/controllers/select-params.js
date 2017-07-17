@@ -31,7 +31,6 @@ angular.module('angulobby').controller('paramsController',
             && index < $scope.ranks.length) {
            rankRange.push($scope.ranks[index++].replace(/\s+/g, '').toLocaleLowerCase());
     }
-    console.log('rank range: ' + rankRange.join(', '));
   };
 
   $scope.joinQueue = function() {
@@ -41,7 +40,6 @@ angular.module('angulobby').controller('paramsController',
         // create queue identifier based on selection
         var queue = game.lobby_size + '_' + game.short_name + '_' + rankRange[i];
         QueueService.addToQueue(AuthService.getCurrentUser(), queue);
-        console.log('you have been entered into: ' + queue);
       }
     } else {
       // TODO
@@ -52,7 +50,6 @@ angular.module('angulobby').controller('paramsController',
   GameListService.getGames()
     .then(function(res) {
       $scope.games = res;
-      console.log(games);
     })
     .catch(function(err) {
       $scope.errorMessage = err;
