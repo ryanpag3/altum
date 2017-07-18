@@ -5,6 +5,11 @@ var lobbyManager = function() {};
 var users = require('./users');
 var lobbies = {}; // holds all lobby info
 
+//for querying db
+var http = require('http');
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost/angulobby";
+
 function Lobby(lobbyId, lobbyMembers) {
   this.lobbyId = lobbyId;
   this.users = lobbyMembers.slice(); // slice creates a copy of array
@@ -50,6 +55,21 @@ lobbyManager.prototype.createLobby = function(lobbyMembers) {
 lobbyManager.prototype.getUsers = function(lobbyId) {
   // TODO
   // use users array to query mongoDB and access social links
+  MongoClient.connect(url, function (err, db){
+    if(err) throw err;
+    for(var i = 0; i < lobbies[lobbyId].users.length; ++i) {
+      console.log("Querying database for " + lobbies[lobbyId].users[i] + "'s information");
+
+      var query = {username: lobbies[lobbyId].users[i]};
+      var filter = {_id : 0, username : 1, steam_id : 1, playstation_id: 1, xbox_id : 1, nintendo_id : 1, blizzard_id : 1}
+      db.collection("users").find(query, filter).toArray(function (err, result) {
+        if (err) throw err;
+        console.log(result);
+
+      });
+    }
+  });
+
   return lobbies[lobbyId].users;
   //create a new obj array username, image, [links]
 };
