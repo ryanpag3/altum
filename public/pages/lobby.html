@@ -8,62 +8,47 @@
     <div id="users">
       <div id="users-wrapper">
           <div data-ng-repeat="user in activeUsers" class="user">
-            <div>
-              <div class="profile-picture">profile pic</div>
-              <div class="username">{{user.name}}</div>
-              <div class="social-links">social links</div>
-            </div>
+                  <div>
+                      <div class="profile-picture"></div>
+                      <div class="username-container" data-ng-click="showSocial($index)">
+                      <a class="username">
+                        {{user.name}}
+                      </a>
+                  </div>
+                    <div class="social-container" data-ng-show="activeUsers[$index].displaySocialMenu">
+                    <button class="btn-close" data-ng-click="hideSocial($index)">x</button>
+                    <h4>PROFILE</h4>
+                    <div class="social-links">
+                      <p>{{user.steam}}</p>
+                      <p>{{user.xbox}}</p>
+                      <p>{{user.playstation}}</p>
+                      <p>{{user.nintendo}}</p>
+                    </div>
+                  </div>
+                </div>
+
+
           </div>
-          <!--<div class="user">-->
-            <!--<div class="profile-picture">profile pic</div>-->
-            <!--<div class="username">username</div>-->
-            <!--<div class="social-links">social links</div>-->
-          <!--</div>-->
-          <!--<div class="user">-->
-            <!--<div class="profile-picture">profile pic</div>-->
-            <!--<div class="username">username</div>-->
-            <!--<div class="social-links">social links</div>-->
-
-          <!--</div>-->
-          <!--<div class="user">-->
-            <!--<div class="profile-picture">profile pic</div>-->
-            <!--<div class="username">username</div>-->
-            <!--<div class="social-links">social links</div>-->
-
-          <!--</div>-->
-          <!--<div class="user">-->
-            <!--<div class="profile-picture">profile pic</div>-->
-            <!--<div class="username">username</div>-->
-            <!--<div class="social-links">social links</div>-->
-
-          <!--</div>-->
-          <!--<div class="user">-->
-            <!--<div class="profile-picture">profile pic</div>-->
-            <!--<div class="username">username</div>-->
-            <!--<div class="social-links">social links</div>-->
-          <!--</div>-->
       </div>
     </div>
   <div id="chat">
     <div id="message-box" class="centered">
-      <div data-ng-repeat="message in messages track by $index" style="text-align: left">
-        <span> {{ message }} </span>
-      </div>
+    <div data-ng-repeat="message in messages track by $index" style="text-align: left" data-ng-class-even="'chat-dark-bg'">
+      <span style="color: #db6064">{{message.time}}</span> | <span><strong>{{message.username}}</strong>: </span><span style="color: #666666">{{ message.content }} </span>
+    </div>
     </div>
     <!--<div id="chat-form">-->
-      <form id="chat-form"data-ng-submit="sendMessage()">
-        <div id="text-box-container">
-          <textarea class="input" id="text-box" data-ng-model="text" autocomplete="off" rows="4"></textarea>
-        </div>
-        <div id="send-chat-button-container">
-          <button id="send-chat-button" class="btn btn-info">SEND</button>
-        </div>
-      </form>
-    <!--</div>-->
-  </div>
-  </div>
-  <div id="game-name"></div>
-  <div id="average-rank"></div>
+    <form id="chat-form" data-ng-submit="sendMessage()">
+    <div id="text-box-container">
+    <input type="text" id="text-box" data-ng-model="text" autocomplete="off" placeholder="Enter your text here!"> </input>
+    </div>
+    <div id="send-chat-button-container">
+    <button id="send-chat-button" class="btn btn-info">SEND</button>
+    </div>
+    </form>
+    </div>
+    <!--<div id="game-name"></div>-->
+    <!--<div id="average-rank"></div>-->
 </div>
 <script
   src="https://code.jquery.com/jquery-3.2.1.min.js"

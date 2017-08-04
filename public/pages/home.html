@@ -5,34 +5,61 @@
 </head>
 
 <div id="home-container" data-ng-controller="homeController">
-  <div class="container-fluid">
-    <div id="sidebar-container" class="col-lg-2 col-md-2">
-      <div class="">
+    <div id="sidebar-container" class="">
         <div id="nav-container" class="">
           <div class="row">
             <div id="profile-container" class="">
               <div id="profile-pic" class="flex-center"></div>
               <div style="position: absolute; bottom: 0; left: 0; right: 0; margin-bottom: 20px">
                 <h1 id="profile-username">USERNAME</h1>
-                <div id="profile-level">PROFILE LEVEL</div>
+                <div id="profile-level">PROFILE LEVEL BAR</div>
               </div>
 
             </div>
           </div>
           <div class="row">
-              <div id="button-container" class="container">
+              <div id="button-container" data-ng-show="displayBtnContainer">
                 <div>
-                <button id="join-queue-btn" class="home-btn" data-ng-click="setQueueParams()">FIND PLAYERS</button>
+                <button id="join-queue-btn" class="home-btn" data-ng-click="setQueueParams(); hideMenuBtns()">FIND PLAYERS</button>
                 <button id="join-lobby-btn" class="home-btn btn-disabled"> COMING SOON </button>
                 </div>
                 </div>
           </div>
         </div>
+      <div id ="select-params-container" data-ng-show="displayParamWindow" data-ng-controller="paramsController">
+        <div id="game-list-container">
+          <div data-ng-model="pic" class="param-pic" id="game-list-pic" data-ng-style="{'background-image' : 'url(' + pic + ')'}"></div>
+          <select class="param-select-bar" ng-model="selectedGame" data-ng-options="game as game.name for game in games" data-ng-change="updateGame()">
+            <option value="" disabled>Select a game!</option>
+          </select>
+          <select class="param-select-bar" ng-model="selectedRankIndex" data-ng-options="ranks.indexOf(rank) as rank for rank in ranks" data-ng-show="rankListShown" data-ng-change="updateRank()">
+            <option value="" disabled>Select your rank!</option>
+          </select>
+          <div id="param-btn-container">
+            <div style="width: 90%; margin: 0 auto;">
+              <button id="param-confirm-btn" class="btn btn-success param-btn" data-ng-click="joinQueue(); hideParamWindow(); showQueueTimer();">GO</button>
+              <button id="param-cancel-btn" class="btn btn-danger param-btn" data-ng-click="cancelParamSelect()">CANCEL</button>
+            </div>
+          </div>
+          <div class="info-text"><br>If you have recommendations for game support, or notice any errors in ranks, please email the dev team at [INSERT EMAIL HERE]</div>
+        </div>
+
       </div>
+      <div id="queue-timer-container" data-ng-show="displayQueueTimer" class="col-lg-2" data-ng-controller="queueTimerController">
+        <div style="text-align: center; font-size: 18px; opacity: .8"><br>You are successfully queued!</div>
+        <div style="display: flex; width: 100%; justify-content: center">
+          <div style="">
+            <h1 style="margin: 6px;" data-ng-model="timer">{{timer}}</h1>
+            <button class="btn btn-cancel" style="color: black; background-color: rgba(147, 147, 147, .5)" data-ng-click="cancel(); hideQueueTimer(); showMenuBtns()">CANCEL</button>
+          </div>
+        </div>
+
     </div>
-    <div id="news-feed-container" class="col-lg-4 col-md-4">
+    </div>
+    <div id="remainder-container">
+        <div id="news-feed-container">
       <div class="flex-center">
-        <h1 style="color: whitesmoke"><strong>ANNOUNCEMENTS</strong></h1>
+        <h1 style="color: whitesmoke"><strong>ANNOUNCEMENTS</strong></>
       </div>
       <!--COPY AND PASTE THE DIV FOR NEW ENTRY-->
       <div class="word-wrap">
@@ -62,7 +89,8 @@
       <hr>
       </div>
     </div>
-    <div id="global-chat-container" class="col-lg-4 col-md-4">
+
+    <div id="global-chat-container">
       <h1 style="text-align: center"><strong>Global Chat</strong></h1>
       <div id="message-box">
         <!--[date] username : [message]-->
@@ -74,35 +102,16 @@
       </div>
       <div id="chat-form-container">
         <form id="chat-form" data-ng-submit="sendMessage()">
-          <textarea rows="4" class="form-control" id="m" data-ng-model="text" autocomplete="off" placeholder="Enter message to chat!"></textarea>
+          <input id="m" data-ng-model="text" autocomplete="off" placeholder="Enter message to chat!"></input>
           <button id="send-chat-button" class="btn btn-sm btn-info">SEND</button>
         </form>
       </div>
     </div>
-  </div>
+</div>
 
-  <div id ="select-params-container" data-ng-show="displayParamWindow" data-ng-controller="paramsController">
-    <div id="game-list-container" >
-      <select ng-model="selectedGame" data-ng-options="game as game.name for game in games" data-ng-change="updateGame()">
-        <option  value="" disabled >Select a game</option>
-      </select>
-      <select ng-model="selectedRankIndex" data-ng-options="ranks.indexOf(rank) as rank for rank in ranks" data-ng-show="rankListShown" data-ng-change="updateRank()"></select>
-      <div class="row">
-        <button class="btn btn-primary" data-ng-click="cancelParamSelect()">CANCEL</button>
-        <button class="btn btn-primary" data-ng-click="joinQueue(); hideParamWindow(); showQueueTimer()">CONFIRM</button>
-      </div>
-    </div>
-  </div>
-
-  <div id="queue-timer-container" data-ng-show="displayQueueTimer" class="col-lg-2" data-ng-controller="queueTimerController">
-    <h1 data-ng-model="timer">{{timer}}</h1>
-    <button data-ng-click="cancel(); hideQueueTimer()">CANCEL</button>
-  </div>
-  <script
-  src="https://code.jquery.com/jquery-3.2.1.min.js"
-  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
-  crossorigin="anonymous"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script>
+</script>
 </div>
 
 

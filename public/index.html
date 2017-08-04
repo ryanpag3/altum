@@ -11,28 +11,23 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/index.css">
 </head>
 
+<header>
+  <div id="logo">
+  <a href="/"><img src="src/logo.png" href="/"></a>
+  </div>
+
+  <div id="nav-buttons">
+  <a class="nav-link" href="/">HOME</a>
+  <a class="nav-link" href>ACCOUNT</a>
+  <a class="nav-link" href>ABOUT</a>
+  <a class="nav-link" data-ng-controller="logoutController" data-ng-click='logout()' href>LOGOUT</a>
+  </div>
+</header>
+
 <body data-ng-app="angulobby" data-ng-controller="indexController">
 
 <div id="index-container">
-  <div id="header-container">
-    <div id="logo">
-      <a href="/"><img src="src/logo.png" href="/"></a>
-    </div>
-
-    <div id="nav-buttons">
-      <ul class="nav navbar-nav">
-        <li><a class="nav-link" href="/">HOME</a></li>
-        <li><a class="nav-link" href>ACCOUNT</a></li>
-        <li><a class="nav-link" href>ABOUT</a></li>
-        <li><a class="nav-link" data-ng-controller="logoutController" data-ng-click='logout()' href>LOGOUT</a></li>
-      </ul>
-
-    </div>
-
-  </div>
-  <div id="ng-view-container" style="height: calc(100% - 100px)">
-    <div id="ng-view" data-ng-view></div>
-  </div>
+  <div id="ng-view" data-ng-view></div>
 </div>
 
 

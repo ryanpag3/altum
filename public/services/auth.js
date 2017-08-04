@@ -36,18 +36,8 @@ app.factory('AuthService',
             } else {
               deferred.resolve(response.data);
             }
-            // // status returns true if user is authenticated
-            // if (response.data.isAuthenticated) {
-            //   console.log('user authenticated === true');
-            //   userAuthenticated = true;
-            //   currentUser = response.data.username;
-            // } else {
-            //   console.log('user authenticated === false');
-            //   userAuthenticated = false;
-            // }
           })
           .catch(function (response) {
-            console.log('user authenticated === false');
             userAuthenticated = false;
             deferred.reject(response.data);
           });

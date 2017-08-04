@@ -48,7 +48,6 @@ app.run(function($rootScope, $location, $route, AuthService) {
         }
       })
         .catch(function(response) {
-          console.log('error thrown');
         });
   });
 });

@@ -10,7 +10,16 @@ angular.module('angulobby').controller('homeController',
     $scope.messages = [];
     $scope.text = null;
     $scope.displayParamWindow = false;
+    $scope.displayBtnContainer = true;
     socket.emit('join-room', 'global'); // join global chat
+
+    $scope.hideMenuBtns = function() {
+      $scope.displayBtnContainer = false;
+    };
+
+    $scope.showMenuBtns = function() {
+      $scope.displayBtnContainer = true;
+    };
 
     $scope.hideParamWindow = function() {
       $scope.displayParamWindow = false;
@@ -43,17 +52,16 @@ angular.module('angulobby').controller('homeController',
 
     $scope.sendMessage = function () {
       if ($scope.text === null || $scope.text === "" || $scope.text === undefined) {
-        console.log('empty messages are not allowed.');
+        alert('empty messages are not allowed.');
       } else {
         AuthService.getUserStatus()
           .then(function (response) {
             var data = {room: 'global', username: response.username, content: $scope.text};
             socket.emit('send-message', data);
             $scope.text = null;
-            console.log('send message fired.');
           })
           .catch(function(response) {
-            console.log('error thrown by getUserStatus()');
+            // catch err
             console.log(response);
           });
       }

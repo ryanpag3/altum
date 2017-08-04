@@ -6,6 +6,7 @@ angular.module('angulobby').controller('paramsController',
   function($scope, $location, GameListService, QueueService, AuthService){
   $scope.games = [];
   $scope.ranks = [];
+  $scope.pic = 'http://i.imgur.com/h2JGeNS.jpg'; // default photo
   $scope.rankListShown = false;
   var RANK_RANGE = 1; // the distance above and below the rank to queue for
   var game, rankRange = [];
@@ -14,6 +15,7 @@ angular.module('angulobby').controller('paramsController',
   $scope.updateGame = function() {
       game = $scope.selectedGame;
       $scope.ranks = game.ranks;
+      $scope.pic = game.pic;
       $scope.rankListShown = true;
   };
 
@@ -29,7 +31,6 @@ angular.module('angulobby').controller('paramsController',
             && index < $scope.ranks.length) {
            rankRange.push($scope.ranks[index++].replace(/\s+/g, '').toLocaleLowerCase());
     }
-    console.log('rank range: ' + rankRange.join(', '));
   };
 
   $scope.joinQueue = function() {
@@ -37,9 +38,8 @@ angular.module('angulobby').controller('paramsController',
     if (game !== undefined && rankRange !== undefined) {
       for (var i = 0; i < rankRange.length; i++) {
         // create queue identifier based on selection
-        var queue = game.shortName + '_' + rankRange[i];
+        var queue = game.lobby_size + '_' + game.short_name + '_' + rankRange[i];
         QueueService.addToQueue(AuthService.getCurrentUser(), queue);
-        console.log('you have been entered into: ' + queue);
       }
     } else {
       // TODO
@@ -50,7 +50,6 @@ angular.module('angulobby').controller('paramsController',
   GameListService.getGames()
     .then(function(res) {
       $scope.games = res;
-      console.log(games);
     })
     .catch(function(err) {
       $scope.errorMessage = err;

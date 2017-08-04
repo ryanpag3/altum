@@ -4,6 +4,7 @@ form {
 textarea {
   resize: none;
 }
+
 label {
   font-size: 16px;
 
@@ -12,6 +13,11 @@ label {
 p {
   font-size: 16px;
 }
+
+h1 > strong {
+  font-size: 2vw;
+}
+
 .word-wrap {
   word-wrap: break-word;
 }
@@ -52,6 +58,15 @@ p {
   margin-left: 7px;
 }
 
+.info-text {
+  width: 85%;
+  color: white;
+  opacity: .5;
+  text-align: center;
+  margin: 0 auto;
+
+}
+
 .scrollable-menu {
   height: auto;
   max-height: 200px;
@@ -70,44 +85,85 @@ p {
   word-break: break-all;
 }
 
+.blur-page {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: .7;
+  z-index: -1;
+}
+
+.param-select-bar {
+  display: block;
+  width: 90%;
+  font-size: 16px;
+  margin: 0 auto;
+  margin-bottom: 15px;
+  background-color: #d6d4d6;
+  color: #434243;
+  z-index: 5;
+}
+
+.param-pic {
+  border: solid thin darkgrey;
+  background-color: pink;
+  width: 300px;
+  height: 100px;
+  margin: 0 auto;
+  margin-top: 16px;
+  margin-bottom: 16px;
+  background: url(http://i.imgur.com/Qu5Erdc.jpg);
+  background-size: contain;
+}
+
+.param-btn {
+  width: 95%;
+  height: 75px;
+  margin: 8px;
+  font-size: 12px;
+}
+
 ::-webkit-scrollbar {
   width: 0;
   background: transparent;
 }
-
-
 
 #selectpicker {
   height: 100px;
 }
 
 #home-container {
-  min-height: 50vh;
-  height: 88vh;
-  position: relative;
-  overflow: auto;
+  height: 100vh;
+  width: 100%;
 }
 
 #select-params-container {
+  background-color: #343131;
+  border: solid #100f10;
   position: absolute;
   z-index: 5;
-  height: 90%;
-  width: 50%;
-  background-color: green;
-  left: 0;
-  right: 0;
+  height: 99%;
+  width: 320px;
   top: 0;
-  bottom: 0;
-  margin: auto;
+  animation-name: slide-in-right;
+  animation-duration: .3s;
+}
+
+#game-list-container {
+  height: 100%;
+  width: 100%;
 }
 
 #queue-timer-container {
+  border: solid black;
+  color: white;
   position: absolute;
   z-index: 5;
-  height: 60%;
-  background-color: pink;
-  left: 0;
-  bottom: 0;
+  height: 65%;
+  width: 309px;
+  background-color: #232523;
+  top: 320px;
   margin: auto;
 }
 
@@ -115,52 +171,62 @@ p {
   background-color: white;
 }
 
-#sidebar-container, #news-feed-container, #global-chat-container {
+#news-feed-container, #global-chat-container {
   color: white;
-  height: 88vh;
 }
 
 #sidebar-container {
+  position: absolute;
+  left: 0;
   min-width: 320px;
   width: 320px;
-  overflow: auto;
+  height: 100%;
+}
+
+#remainder-container {
+  position: absolute;
+  left: 320px;
+  height: 100%;
+  width: calc(100% - 320px);
 }
 
 #button-container {
-   display: flex;
-   justify-content: center;
-   /*align-items: center;*/
-   width: 100%;
-   min-height: 500px;
-   height: 50%;
-   color: white;
-   font-weight: bold
- }
+  /*align-items: center;*/
+  width: 90%;
+  min-height: 500px;
+  height: 50%;
+  color: white;
+  font-weight: bold;
+  margin: 0 auto;
+}
 
 #news-feed-container {
-  background-color: rgba(196, 196, 196, .2);;
+  float: left;
+  background-color: rgba(196, 196, 196, .2);
+  height: 95%;
+  width: 40%;
   /*color: #cecece;*/
-  height: 99%;
-  margin-top: 4px;
-  margin-left: 4px;
-  margin-right: 4px;
+  /*margin-top: 4px;*/
+  /*margin-left: 4px;*/
+  /*margin-right: 0px;*/
   overflow: auto;
 }
 
 #global-chat-container {
+  float: left;
   /*display: inline;*/
   /*position: relative;*/
-  width: 45%;
-  min-width: 35%;
+  width: 50%;
+  height: 95%;
+  min-width: 300px;
   min-height: 35%;
-  max-height: 90vh;
 }
 
 #message-box {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   height: 75%;
-  width: 100%;
+  width: 95%;
   background-color: #d6d6d6;
   color: black;
   font-size: 16px;
@@ -171,25 +237,29 @@ p {
 }
 
 #chat-form-container {
+
+  display: flex;
+  align-content: center;
+  justify-content: center;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
   font-size: 16px;
-  height: 10%;
-  width: 100%;
+  height: 6%;
+  width: 95%;
   margin-left: 2%;
   margin-right: 2%;
-  padding-top: 6px;
   background-color: darkgrey;
 }
 
 #chat-form {
-  height: 100%;
+  width: 98%;
+  height: 50px;
+  margin-top: 10px;
 }
 
 #m {
-  background-color: black;
+  color: black;
   font-size: 16px;
-  height: 100%;
   width: 83%;
   min-width: 200px;
   display: inline;
@@ -198,13 +268,11 @@ p {
 }
 
 #send-chat-button {
-  background-color: rgb(160,36,36);
+  background-color: rgb(160, 36, 36);
   font-size: 1.5vh;
-  height: 8%;
+  height: 40px;
   width: 15%;
-  position: absolute;
-  right: 0;
-  margin-top: 5px;
+  margin-top: 0;
   margin-right: 5px;
   /*margin-left: 15px;*/
   /*margin-bottom: 25px;*/
@@ -220,9 +288,9 @@ p {
   border: solid black;
   background-color: rgba(160, 36, 36, .7);
   min-height: 320px;
-  height: 40%;
-  margin: 4px;
-  overflow: hidden;
+  /*height: 40%;*/
+  width: 320px;
+  margin-left: 4px;
 }
 
 #profile-pic {
@@ -256,8 +324,6 @@ p {
   text-align: center;
 }
 
-
-
 #join-queue-btn {
   background: url(http://i.imgur.com/bawYP47.png)
 }
@@ -266,50 +332,98 @@ p {
   background: url(http://i.imgur.com/7CfRjKG.png)
 }
 
-@media screen and (max-width: 1699px) {
+
+
+@media screen and (max-width: 1187px) {
+
+  html, body {
+    background-color: #464a51;
+    height: 100%;
+  }
+
   #news-feed-container {
-    min-width: 200px;
-    width: 62%;
-    overflow-x: scroll;
-    max-height: 800px;
+    display: none;
   }
 
   #global-chat-container {
-    width: 87%;
-    height: 95vh;
+    width: 100%;
+    height: 100%;
   }
 
   #send-chat-button {
-     margin: 0;
-   }
+
+  }
 
   #sidebar-container {
-        max-height: 800px;
+    position: relative;
+    width: 620px;
+    max-height: 550px;
+    margin: 0 auto;
+    background-color: green;
   }
 
-  #news-feed-container {
+  #select-params-container {
+    width: 100%;
+  }
 
+  #remainder-container {
+    position: relative;
+    left: 0;
+    width: auto;
+  }
+
+  #profile-container {
+    width: 500px;
+    margin: 0 auto;
+  }
+
+  #button-container {
+    /*background-color: yellow;*/
+    /*height: 50px;*/
+    margin: 0 auto;
+  }
+
+  #queue-timer-container {
+    position: relative;
+    width: 500px;
+    height: 40%;
+    margin: 0 auto;
+    top: -42%;
+    z-index: 5;
+  }
+
+}
+
+/*@media screen and (max-height: 1030px) {*/
+  /*html, body {*/
+    /*margin: 0;*/
+    /*background-color: #464a51;*/
+  /*}*/
+
+  /*#index-container {*/
+    /*height: 100%;*/
+    /*background-color: #464a51;*/
+    /*overflow: auto;*/
+  /*}*/
+/*}*/
+
+@keyframes slide-in-right {
+  from {
+    transform: translate(-100%)
+  }
+  to {
+    transform: translate(0%)
   }
 }
 
-@media screen and (max-height: 1030px) {
-  html, body {
-    margin: 0;
-    background-color: #464a51;
+@keyframes slide-out-left {
+  from {
+    transform: translate(0%)
   }
-
-  #index-container {
-    height: 100vh;
-    background-color: #464a51;
-    overflow: auto;
+  to {
+    transform: translate(-100%)
   }
-
-
-
-
-
 }
-
 
 
 

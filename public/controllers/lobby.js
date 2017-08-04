@@ -7,16 +7,18 @@ angular.module('angulobby').controller('lobbyController',
   $scope.lobbyId = $routeParams.lobbyId;
   $scope.messages = [];
   $scope.activeUsers = [];
+  $scope.displaySocialMenu = false;
+
   socket.emit('join-room', $scope.lobbyId);
   socket.emit('get-lobby-members', $scope.lobbyId);
 
   $scope.sendMessage = function () {
     if ($scope.text === null || $scope.text === "" || $scope.text === undefined) {
-      console.log('empty messages are not allowed.');
+      alert('empty messages are not allowed.');
     } else {
       AuthService.getUserStatus()
         .then(function (response) {
-          var data = {room: $scope.lobbyId, username: response.username, message: $scope.text};
+          var data = {room: $scope.lobbyId, username: response.username, content: $scope.text};
           socket.emit('send-message', data);
           $scope.text = null;
         });
@@ -25,10 +27,7 @@ angular.module('angulobby').controller('lobbyController',
 
   // TODO refactor to use HTTP
   socket.on('join-lobby', function(data) {
-    console.log('lobbyController socket fired. username: ' + data.username + ' ' + data.lobby);
     $scope.obj = {username: data.username, lobbyId: data.lobby};
-    // console.log($scope.username);
-    // console.log($scope.lobbyId);
   });
 
     socket.on('update-chat', function(message) {
@@ -37,18 +36,20 @@ angular.module('angulobby').controller('lobbyController',
     });
 
     socket.on('update-user-list', function(data) {
-      console.log('update-user-list socket fired');
       var usernames = data;
       var temp = [];
-      console.log(usernames.toString());
-      for (var name in usernames) {
-        console.log('pushing ' + usernames[name] + ' to activeUsers list.');
-        temp.push({name: usernames[name]});
+      for (var index in usernames) {
+        temp.push({ name: usernames[index], showSocial: false });
       }
       $scope.activeUsers = temp;
       $scope.$apply();
     });
 
-    socket.on('get-connected-users')
+   $scope.showSocial = function(index) {
+     $scope.activeUsers[index].displaySocialMenu = true;
+   };
+   $scope.hideSocial = function(index) {
+     $scope.activeUsers[index].displaySocialMenu = false;
+   };
 
 }]);
