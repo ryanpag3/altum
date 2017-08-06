@@ -11,6 +11,12 @@ app.factory('QueueService', [
       removeFromAllQueues: removeFromAllQueues
     });
 
+    /**
+     * handles ajax call to enter a user into a queue
+     * @param username: username of user to be entered
+     * @param queue: queue url
+     * @returns {Promise} failure: error message from ajax call
+     */
     function addToQueue(username, queue) {
       var deferred = $q.defer();
       $http.post('/queue/add', {username: username, queue: queue})
@@ -27,6 +33,13 @@ app.factory('QueueService', [
       return deferred.promise;
     }
 
+    /**
+     * removes a specified user from a specified queue
+     * @param username
+     * @param queue
+     * @returns {Promise} success: success message string
+     *                    failure: failure message string
+     */
     function removeFromQueue(username, queue) {
       var deferred = $q.defer();
       $http.post('/queue/remove', {username: username, queue: queue})
@@ -43,6 +56,12 @@ app.factory('QueueService', [
       return deferred.promise;
     }
 
+    /**
+     * handles ajax call to remove specified user from all relevant queues
+     * @param username
+     * @returns {Promise} success: success message
+     *                    error: error message
+     */
     function removeFromAllQueues(username) {
       var deferred = $q.defer();
       $http.post('/queue/remove-all', {username: username})

@@ -21,37 +21,36 @@ function User(username, socket) {
 users.prototype.map = {};
 
 // expose constructor
+/**
+ * this utility method handles adding a user to the connected user map, as well as associating multiple user
+ * tabs with the same user id.
+ * @param username: unique id
+ * @param socket: websocket address
+ */
 users.prototype.create = function(username, socket) {
 
   if (users.prototype.map[username] !== undefined) {
     // add sockets to existing user object
-    console.log(username + ' already exists in user map, adding socket to sockets array.');
     users.prototype.map[username].sockets.push(socket);
     // if user is already in a lobby
-    // TODO maybe check if lobbies.users contains this username?
     if (users.prototype.map[username].lobby !== undefined) {
-      console.log('User is already in a lobby, reconnecting...');
-      console.log('lobby info: ' + users.prototype.map[username].lobby);
       socket.emit('lobby-found');
+      // associate all secondary tabs with lobby found
       for (var i = 0; i < users.prototype.map[username].sockets.length; i++) {
         var socket = users.prototype.map[username].sockets[i];
         socket.emit('lobby-found');
       }
-      // if user is currently active in queue(s)
-    } else if (users.prototype.map[username].activeQueues.length !== 0) {
+    }
+    // if user is currently active in queue(s)
+    else if (users.prototype.map[username].activeQueues.length !== 0) {
       console.log(username + ' has an active queue list > 0, restarting timer');
       socket.emit('display-queue-timer');
-      // display queue timer
     }
-    console.log(username + ' has ' + users.prototype.map[username].sockets.length + ' sockets.');
+    // define user as connected
     users.prototype.map[username].disconnected = false;
   } else {
+    // create new user object
     users.prototype.map[username] = new User(username, socket);
-    var i = new Array(24).join('*');
-    console.log(i);
-    console.log(username + ' has been added to the user map.');
-    console.log('# of users: ' + Object.keys(users.prototype.map).length);
-    console.log(i);
   }
 };
 
@@ -60,6 +59,12 @@ users.prototype.create = function(username, socket) {
   removes disconnected socket from user object. If the user sockets now
   equal 0, we know that the user is disconnect, and can safely delete them
   from the user map.
+ */
+/**
+ * checks if the user exists in the user map, removes disconnected socket from user object. If the user sockets are now
+ * 0 length, we delete them from the user map and add them to the delete buffer.
+ * @param username: unique id
+ * @param socket: websocket
  */
 users.prototype.delete = function(username, socket) {
   //  check if user exists
@@ -86,10 +91,20 @@ users.prototype.delete = function(username, socket) {
   }
 };
 
+/**
+ * associates a queue with a user
+ * @param username
+ * @param queue
+ */
 users.prototype.addActiveQueue = function(username, queue) {
   users.prototype.map[username].activeQueues.push(queue);
 };
 
+/**
+ * disassociates a queue with a user
+ * @param username
+ * @param queue
+ */
 users.prototype.removeActiveQueue = function(username, queue) {
   for (var i = 0; i < users.prototype.map[username].activeQueues.length; i++) {
     if (users.prototype.map[username].activeQueues[i] === queue) {
@@ -98,12 +113,21 @@ users.prototype.removeActiveQueue = function(username, queue) {
   }
 };
 
+/**
+ * disassociates all queues with a user
+ * @param username
+ */
 users.prototype.removeAllActiveQueues = function(username) {
   users.prototype.map[username].activeQueues = [];
   console.log(username + ' has ' + users.prototype.map[username].activeQueues.length + ' active queues.');
 };
 
-// helper functions
+/** HELPER FUNCTIONS **/
+/**
+ * removes a socket from a specified user object
+ * @param username
+ * @param socket
+ */
 function removeSocket(username, socket) {
   var sockets = users.prototype.map[username].sockets;
   for (var i = 0; i < sockets.length; i++) {

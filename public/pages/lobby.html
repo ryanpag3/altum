@@ -10,13 +10,13 @@
           <div data-ng-repeat="user in activeUsers" class="user">
                   <div>
                       <div class="profile-picture"></div>
-                      <div class="username-container" data-ng-click="showSocial($index)">
+                      <div class="username-container" data-ng-click="toggleSocial($index)">
                       <a class="username">
                         {{user.name}}
                       </a>
                   </div>
                     <div class="social-container" data-ng-show="activeUsers[$index].displaySocialMenu">
-                    <button class="btn-close" data-ng-click="hideSocial($index)">x</button>
+                    <button class="btn-close" data-ng-click="toggleSocial($index)">x</button>
                     <h4>PROFILE</h4>
                     <div class="social-links">
                       <p>{{user.steam}}</p>

@@ -5,6 +5,11 @@ var lobbyManager = function() {};
 var users = require('./users');
 var lobbies = {}; // holds all lobby info
 
+/**
+ * @param lobbyId: unique lobby identifier
+ * @param lobbyMembers: lobby member user information
+ * @constructor
+ */
 function Lobby(lobbyId, lobbyMembers) {
   this.lobbyId = lobbyId;
   this.users = lobbyMembers.slice(); // slice creates a copy of array
@@ -47,16 +52,25 @@ lobbyManager.prototype.createLobby = function(lobbyMembers) {
   }
 };
 
+/**
+ * returns user information for the specified lobby
+ * @param lobbyId: unique lobby identifier
+ * @returns {Array|Object} user information
+ */
 lobbyManager.prototype.getUsers = function(lobbyId) {
   // TODO
   // use users array to query mongoDB and access social links
   return lobbies[lobbyId].users;
 };
 
-/*
-  Helper Functions
- */
+/* HELPER FUNCTIONS */
 
+/**
+ * creates a unique lobby id
+ * todo: handle potential collisions. This is like a 1/1000000 chance or something but wouldn't be good enough for prod
+ * @param len: length of id to create
+ * @returns {string} id
+ */
 function createLobbyId(len) {
   var length = len;
   var text = "";
@@ -66,6 +80,5 @@ function createLobbyId(len) {
   }
   return text;
 }
-
 
 module.exports = new lobbyManager();

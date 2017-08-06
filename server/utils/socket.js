@@ -3,38 +3,47 @@
  */
 var users = require('./users');
 var lobbyManager = require('./lobby-manager');
-
-var socket = function(io) {
+/**
+ * This utility handles all client socket emits.
+ * @param io
+ */
+var socket = function (io) {
   var username;
-  io.on('connection', function(socket) {
-    socket.on('add-user', function(name) {
+  io.on('connection', function (socket) {
+    // on requesting to add a user to the user map
+    socket.on('add-user', function (name) {
       users.create(name, socket);
       username = name;
     });
 
-    socket.on('delete-user', function(name) {
+    // on requesting to delete a user from the user map
+    socket.on('delete-user', function (name) {
       console.log('username: ' + name);
       users.delete(name);
     });
 
-    socket.on('join-room', function(room) {
+    // on requesting to join a room
+    socket.on('join-room', function (room) {
       console.log(room + ' joined.');
       socket.join(room);
     });
 
-    socket.on('send-message', function(message) {
+    // on requesting to send a message
+    socket.on('send-message', function (message) {
       var room = message.room;
       var currTime = getCurrentTime();
-      var msg = { time: currTime, username: message.username, content: message.content };
+      var msg = {time: currTime, username: message.username, content: message.content};
       io.to(room).emit('update-chat', msg);
     });
 
-    socket.on('disconnect', function() {
+    // on disconnect
+    socket.on('disconnect', function () {
       console.log('socket disconnect called');
       users.delete(username, socket);
     });
 
-    socket.on('get-lobby-members', function(lobbyId) {
+    // on requesting lobby member info
+    socket.on('get-lobby-members', function (lobbyId) {
       console.log('get-lobby-members socket fired');
       var users = lobbyManager.getUsers(lobbyId);
       io.to(lobbyId).emit('update-user-list', users);
@@ -51,9 +60,6 @@ function getCurrentTime() {
   var minutes = rawTime.getMinutes() > 9 ? rawTime.getMinutes() : '0' + rawTime.getMinutes();
   var seconds = rawTime.getSeconds() > 9 ? rawTime.getSeconds() : '0' + rawTime.getSeconds();
   return hours + ':' + minutes + ':' + seconds;
-
 }
-
-
 
 module.exports = socket;

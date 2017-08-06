@@ -7,6 +7,10 @@
 angular.module('angulobby').controller('registerController',
 ['$scope', '$location', 'AuthService',
   function ($scope, $location, AuthService) {
+    /**
+     * register calls the authentication service to register user, displays error message if authentication fails. also handles
+     * routing based on success or failure.
+     */
     $scope.register = function () {
       // initial values
       $scope.error = false;

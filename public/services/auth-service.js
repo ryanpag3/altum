@@ -6,7 +6,7 @@ app.factory('AuthService',
   ['$q', '$timeout', '$http',
     function ($q, $timeout, $http) {
       var userAuthenticated = null;
-      // current session username
+      // current session user information
       var currentUser = null;
       return ({
         isLoggedIn: isLoggedIn,
@@ -16,35 +16,48 @@ app.factory('AuthService',
         register: register,
         getCurrentUser: function () {
           return currentUser;
-        },
-      });
-      function isLoggedIn() {
-        if (userAuthenticated) {
-          return true;
-        } else {
-          return false;
         }
+      });
+
+      /**
+       * returns the current user's authentication status in boolean format
+       * @returns {Boolean}
+       */
+      function isLoggedIn() {
+        return userAuthenticated;
       }
 
+      /**
+       * sends AJAX request and then handles success or failure
+       * @returns: username of the authenticated user
+       * @returns: error message if not authenticated
+       */
       function getUserStatus() {
         var deferred = $q.defer();
         $http.get('/user/status')
           .then(function (response) {
+            // if 200 code and authenticated
             if (response.status === 200 && response.data.isAuthenticated) {
               currentUser = response.data.username;
               deferred.resolve(response.data);
             } else {
-              deferred.resolve(response.data);
+              deferred.resolve(response.data.isAuthenticated);
             }
           })
+          // handle error thrown
           .catch(function (response) {
             userAuthenticated = false;
             deferred.reject(response.data);
           });
-
         return deferred.promise;
       }
 
+      /**
+       * handles AJAX request to server for login authentication through passport.
+       * @param username
+       * @param password
+       * @returns: {Promise} if error in authentication returns error message to client
+       */
       function login(username, password) {
         // create a new instance of deferred
         // see: https://code.angularjs.org/1.4.9/docs/api/ng/service/$q
@@ -71,6 +84,10 @@ app.factory('AuthService',
         return deferred.promise;
       }
 
+      /**
+       * handles AJAX request to server and flags the authentication status of the client to false. Also removes
+       * currentUser information.
+       */
       function logout() {
         // create new instance of deferred
         var deferred = $q.defer();
@@ -92,6 +109,12 @@ app.factory('AuthService',
         return deferred.promise;
       }
 
+      /**
+       * handles the AJAX request to the server for registration. If a status code 200 is returned with a success
+       * message, the service resolves the promise. Otherwise, it returns an error message.
+       * @param username
+       * @param password
+       */
       function register(username, password) {
         // create new instance of deferred
         var deferred = $q.defer();
@@ -101,6 +124,7 @@ app.factory('AuthService',
           {username: username, password: password})
         // handle success case
           .then(function (response) {
+            console.log(response.data.msg);
             if (response.status === 200 && response.data.msg) {
               deferred.resolve();
             } else {
@@ -113,26 +137,6 @@ app.factory('AuthService',
           });
 
         // return promise object
-        return deferred.promise;
-      }
-
-      /*
-        Attempts to query the authentication API for the
-        authenticated user object. If the API returns a
-        status code of 200, then we pass that information
-        to the client. If it returns a status code of 500,
-        we pass an error message.
-       */
-      function getUserInfo() {
-        var deferred = $q.defer();
-
-        $http.get('/info')
-          .then (function(res) {
-            deferred.resolve(res.data.user);
-          })
-          .catch(function(res) {
-            deferred.reject(res.data.msg);
-          });
         return deferred.promise;
       }
     }]);
