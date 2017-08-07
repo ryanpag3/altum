@@ -115,7 +115,6 @@ queueManager.prototype.existsInQueue = function (username, queue) {
         lobbyManager.createLobby(lobbyMembers);
 
       }
-      lobbyManager.createLobby(lobbyMembers);
     }
 
 };

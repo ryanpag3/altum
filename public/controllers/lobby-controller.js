@@ -51,7 +51,13 @@ angular.module('angulobby').controller('lobbyController',
         var users = data;
         var temp = [];
         for (var index in users) {
-          temp.push({name: users[index].username, showSocial: false});
+          temp.push({name: users[index].username,
+            steam_id: users[index].steam_id,
+            playstation_id: users[index].playstation_id,
+            nintendo_id: users[index].nintendo_id,
+            xbox_id: users[index].xbox_id,
+            blizzard_id: users[index].blizzard_id,
+            showSocial: false});
         }
         $scope.activeUsers = temp;
         $scope.$apply();
