@@ -117,7 +117,7 @@ queueManager.prototype.existsInQueue = function (username, queue) {
       }
       lobbyManager.createLobby(lobbyMembers);
     }
-  }
+
 };
 setInterval(startService, QUEUE_CHECK_INTERVAL_IN_MILLIS);
 

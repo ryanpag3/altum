@@ -48,10 +48,10 @@ angular.module('angulobby').controller('lobbyController',
        * issue a scope.apply to force an ui update.
        */
       socket.on('update-user-list', function (data) {
-        var usernames = data;
+        var users = data;
         var temp = [];
-        for (var index in usernames) {
-          temp.push({name: usernames[index], showSocial: false});
+        for (var index in users) {
+          temp.push({name: users[index].username, showSocial: false});
         }
         $scope.activeUsers = temp;
         $scope.$apply();

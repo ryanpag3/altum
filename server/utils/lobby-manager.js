@@ -75,7 +75,7 @@ lobbyManager.prototype.createLobby = function(lobbyMembers) {
  * @param lobbyId: unique lobby identifier
  * @returns {Array|Object} user information
  */
-lobbyManager.prototype.getUsers = function(lobbyId, callback) {//callback variable
+lobbyManager.prototype.getUsers = function(lobbyId) {//callback variable
       var deferred = Q.defer();
       var users = lobbies[lobbyId].users;
       User.find({'username' : users},  {_id : 0, username : 1, steam_id : 1, playstation_id: 1, xbox_id : 1, nintendo_id : 1, blizzard_id : 1}

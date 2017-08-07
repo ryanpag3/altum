@@ -45,8 +45,16 @@ var socket = function (io) {
     // on requesting lobby member info
     socket.on('get-lobby-members', function (lobbyId) {
       console.log('get-lobby-members socket fired');
-      var users = lobbyManager.getUsers(lobbyId);
-      io.to(lobbyId).emit('update-user-list', users);
+      lobbyManager.getUsers(lobbyId)
+        .then(function (results)  // user array results form lobby-manager.js
+        {
+          io.to(lobbyId).emit('update-user-list', results);
+        })
+        .catch(function (err)
+        {
+          console.log(err);
+        });
+      // io.to(lobbyId).emit('update-user-list', users);
     })
   });
 };
