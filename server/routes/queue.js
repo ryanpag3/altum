@@ -5,6 +5,11 @@ var express = require('express');
 var router = express.Router();
 var queueManager = require('../utils/queue-manager');
 
+/**
+ * handles the call to the queue manager to add the user with the specified username and queue url
+ * @returns {JSON} success: msg
+ *                 failure: msg
+ */
 router.post('/add', function(req, res) {
   var username = req.body.username, queue = req.body.queue;
   // add user to queue
@@ -20,6 +25,11 @@ router.post('/add', function(req, res) {
   }
 });
 
+/**
+ * handles the call to the queue manager to remove a user with a specified username and queue url
+ * @returns {JSON} success: msg
+ *                 failure: msg
+ */
 router.post('/remove', function(req, res) {
   var username = req.body.username, queue = req.body.queue;
   var removed = queueManager.remove(username, queue);
@@ -34,6 +44,11 @@ router.post('/remove', function(req, res) {
   }
 });
 
+/**
+ * handles the call to the queue manager to remove the specified user from all currently occupied queues
+ * @returns {JSON} success: msg
+ *                 failure: msg
+ */
 router.post('/remove-all', function(req, res) {
   var username = req.body.username;
   var removed = queueManager.removeAll(username);
@@ -48,55 +63,5 @@ router.post('/remove-all', function(req, res) {
     })
   }
 });
-//
-// /**
-//  * starts the queue service, which checks each created queue for users
-//  * @type {queueService.startService}
-//  */
-// var startService = queueService.prototype.startService = function() {
-//   // iterate through all active queues
-//   for (var qName in queues) {
-//     if (queues[qName].length >= LOBBY_SIZE) {
-//       var lobbyId = 1234;
-//       var lobbyMembers = [];
-//       for (var i = 0; i < LOBBY_SIZE; i++) {
-//         lobbyMembers.push(queues[qName].shift());
-//       }
-//       createLobby(lobbyMembers);
-//   }
-//
-// }
-
-
-/**
- * Helper functions
- */
-
-  /**
-   * Creates a new lobby ID and assigns users to it.
-   * @param lobbyMembers: array of usernames to assign to lobby
-   */
-  // function createLobby(lobbyMembers) {
-  //   var lobby = makeLobbyId();
-  //   for (var i = 0; i < lobbyMembers.length; i++) {
-  //     users.map[lobbyMembers[i]].lobby = lobbyId;
-  //     users.removeAllActiveQueues(lobbyMembers[i]);
-  //     console.log(lobbyMembers[i] + ' has been assigned to lobby: ' + lobbyId);
-  //   }
-  // };
-// setInterval(startService, SERVICE_INTERVAL_IN_MILLIS);
-
-// creates a unique lobby name
-var makeLobbyId = function() {
-  var length = 16;
-  var text = "";
-  var potential = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-  for (var i = 0; i < length; i++) {
-    text += potential.charAt(Math.floor(Math.random() * potential.length));
-  }
-  return text;
-};
-
-
 
 module.exports = router;

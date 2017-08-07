@@ -5,59 +5,71 @@
 </head>
 
 <div id="home-container" data-ng-controller="homeController">
-    <div id="sidebar-container" class="">
-        <div id="nav-container" class="">
-          <div class="row">
-            <div id="profile-container" class="">
-              <div id="profile-pic" class="flex-center"></div>
-              <div style="position: absolute; bottom: 0; left: 0; right: 0; margin-bottom: 20px">
-                <h1 id="profile-username">USERNAME</h1>
-                <div id="profile-level">PROFILE LEVEL BAR</div>
-              </div>
+  <div id="sidebar-container" class="">
+    <div id="nav-container" class="">
+      <div class="row">
+        <div id="profile-container" class="">
+          <div id="profile-pic" class="flex-center"></div>
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; margin-bottom: 20px">
+            <h1 id="profile-username">USERNAME</h1>
+            <div id="profile-level">PROFILE LEVEL BAR</div>
+          </div>
 
-            </div>
-          </div>
-          <div class="row">
-              <div id="button-container" data-ng-show="displayBtnContainer">
-                <div>
-                <button id="join-queue-btn" class="home-btn" data-ng-click="setQueueParams(); hideMenuBtns()">FIND PLAYERS</button>
-                <button id="join-lobby-btn" class="home-btn btn-disabled"> COMING SOON </button>
-                </div>
-                </div>
-          </div>
         </div>
-      <div id ="select-params-container" data-ng-show="displayParamWindow" data-ng-controller="paramsController">
-        <div id="game-list-container">
-          <div data-ng-model="pic" class="param-pic" id="game-list-pic" data-ng-style="{'background-image' : 'url(' + pic + ')'}"></div>
-          <select class="param-select-bar" ng-model="selectedGame" data-ng-options="game as game.name for game in games" data-ng-change="updateGame()">
-            <option value="" disabled>Select a game!</option>
-          </select>
-          <select class="param-select-bar" ng-model="selectedRankIndex" data-ng-options="ranks.indexOf(rank) as rank for rank in ranks" data-ng-show="rankListShown" data-ng-change="updateRank()">
-            <option value="" disabled>Select your rank!</option>
-          </select>
-          <div id="param-btn-container">
-            <div style="width: 90%; margin: 0 auto;">
-              <button id="param-confirm-btn" class="btn btn-success param-btn" data-ng-click="joinQueue(); hideParamWindow(); showQueueTimer();">GO</button>
-              <button id="param-cancel-btn" class="btn btn-danger param-btn" data-ng-click="cancelParamSelect()">CANCEL</button>
-            </div>
-          </div>
-          <div class="info-text"><br>If you have recommendations for game support, or notice any errors in ranks, please email the dev team at [INSERT EMAIL HERE]</div>
-        </div>
-
       </div>
-      <div id="queue-timer-container" data-ng-show="displayQueueTimer" class="col-lg-2" data-ng-controller="queueTimerController">
-        <div style="text-align: center; font-size: 18px; opacity: .8"><br>You are successfully queued!</div>
-        <div style="display: flex; width: 100%; justify-content: center">
-          <div style="">
-            <h1 style="margin: 6px;" data-ng-model="timer">{{timer}}</h1>
-            <button class="btn btn-cancel" style="color: black; background-color: rgba(147, 147, 147, .5)" data-ng-click="cancel(); hideQueueTimer(); showMenuBtns()">CANCEL</button>
+      <div class="row">
+        <div id="button-container" data-ng-show="displayBtnContainer">
+          <div>
+            <button id="join-queue-btn" class="home-btn" data-ng-click="toggleParamWindow()">FIND PLAYERS</button>
+            <button id="join-lobby-btn" class="home-btn btn-disabled"> COMING SOON</button>
           </div>
         </div>
+      </div>
+    </div>
+    <div id="select-params-container" data-ng-show="displayParamWindow" data-ng-controller="paramsController">
+      <div id="game-list-container">
+        <div data-ng-model="pic" class="param-pic" id="game-list-pic"
+             data-ng-style="{'background-image' : 'url(' + pic + ')'}"></div>
+        <select class="param-select-bar" ng-model="selectedGame" data-ng-options="game as game.name for game in games"
+                data-ng-change="updateGame()">
+          <option value="" disabled>Select a game!</option>
+        </select>
+        <select class="param-select-bar" ng-model="selectedRankIndex"
+                data-ng-options="ranks.indexOf(rank) as rank for rank in ranks" data-ng-show="rankListShown"
+                data-ng-change="updateRank()">
+          <option value="" disabled>Select your rank!</option>
+        </select>
+        <div id="param-btn-container">
+          <div style="width: 90%; margin: 0 auto;">
+            <button id="param-confirm-btn" class="btn btn-success param-btn"
+                    data-ng-click="joinQueue(); toggleParamWindow(); toggleTimer();">GO
+            </button>
+            <button id="param-cancel-btn" class="btn btn-danger param-btn" data-ng-click="toggleParamWindow()">CANCEL
+            </button>
+          </div>
+        </div>
+        <div class="info-text"><br>If you have recommendations for game support, or notice any errors in ranks, please
+          email the dev team at [INSERT EMAIL HERE]
+        </div>
+      </div>
 
     </div>
+    <div id="queue-timer-container" data-ng-show="displayQueueTimer" class="col-lg-2"
+         data-ng-controller="queueTimerController">
+      <div style="text-align: center; font-size: 18px; opacity: .8"><br>You are successfully queued!</div>
+      <div style="display: flex; width: 100%; justify-content: center">
+        <div style="">
+          <h1 style="margin: 6px;" data-ng-model="timer">{{timer}}</h1>
+          <button class="btn btn-cancel" style="color: black; background-color: rgba(147, 147, 147, .5)"
+                  data-ng-click="cancel(); toggleTimer()">CANCEL
+          </button>
+        </div>
+      </div>
+
     </div>
-    <div id="remainder-container">
-        <div id="news-feed-container">
+  </div>
+  <div id="remainder-container">
+    <div id="news-feed-container">
       <div class="flex-center">
         <h1 style="color: whitesmoke"><strong>ANNOUNCEMENTS</strong></>
       </div>
@@ -66,27 +78,73 @@
         <h2 class="date"><strong>07/10/17</strong></h2>
 
         <p>The Altum Matchmaking system is now live!</p>
-        <p>Click the 'JOIN QUEUE' button to find gamers of appropriate skill level in a multitude of competitive games. Select your game and appropriate skill level, and then add them on Steam, Xbox Live, Playstation Network, or the Nintendo Network!</p>
-        <p>If you have any feature recommendations, please feel free to email us at [INSERT EMAIL HERE]. Also, if you find any bugs on the website, please report them to that same email, explaining what you were doing when the bug occurred. Thank you so much and enjoy!</p>
-      <hr>
+        <p>Click the 'JOIN QUEUE' button to find gamers of appropriate skill level in a multitude of competitive games.
+          Select your game and appropriate skill level, and then add them on Steam, Xbox Live, Playstation Network, or
+          the Nintendo Network!</p>
+        <p>If you have any feature recommendations, please feel free to email us at [INSERT EMAIL HERE]. Also, if you
+          find any bugs on the website, please report them to that same email, explaining what you were doing when the
+          bug occurred. Thank you so much and enjoy!</p>
+        <hr>
       </div>
       <div class="word-wrap">
         <h2 class="date"><strong>XX/XX/XX</strong></h2>
-        <p>Lorem ipsum placerat dui bibendum quis donec ullamcorper, in feugiat aliquam nulla dapibus placerat pharetra magna, ligula aliquam nunc morbi semper torquent.</p>
-        <p>Diam fermentum lacinia euismod volutpat pulvinar lacinia, quisque vestibulum conubia ultricies potenti, conubia maecenas ornare non augue curabitur tincidunt malesuada litora tincidunt leo elementum porttitor quam pellentesque himenaeos odio venenatis fringilla.</p>
-        <p>Mi leo rhoncus semper gravida tempus purus mattis dapibus, aenean platea in scelerisque auctor etiam cubilia tempor, eget egestas aptent potenti vitae nunc suspendisse.</p>
-        <p>Lorem litora congue egestas lectus aliquam erat dictum faucibus tempus, at sagittis varius massa fermentum potenti eros suscipit ultrices primis euismod aptent purus tortor.</p>
-        <p>Mattis litora dapibus class aenean sit habitant fames, placerat est donec nam maecenas venenatis auctor, urna habitant eros urna augue et.</p>
-      <hr>
+        <p>Lorem ipsum placerat dui bibendum quis donec ullamcorper, in feugiat aliquam nulla dapibus placerat pharetra
+          magna, ligula aliquam nunc morbi semper torquent.</p>
+        <p>Diam fermentum lacinia euismod volutpat pulvinar lacinia, quisque vestibulum conubia ultricies potenti,
+          conubia maecenas ornare non augue curabitur tincidunt malesuada litora tincidunt leo elementum porttitor quam
+          pellentesque himenaeos odio venenatis fringilla.</p>
+        <p>Mi leo rhoncus semper gravida tempus purus mattis dapibus, aenean platea in scelerisque auctor etiam cubilia
+          tempor, eget egestas aptent potenti vitae nunc suspendisse.</p>
+        <p>Lorem litora congue egestas lectus aliquam erat dictum faucibus tempus, at sagittis varius massa fermentum
+          potenti eros suscipit ultrices primis euismod aptent purus tortor.</p>
+        <p>Mattis litora dapibus class aenean sit habitant fames, placerat est donec nam maecenas venenatis auctor, urna
+          habitant eros urna augue et.</p>
+        <hr>
       </div>
       <div class="word-wrap">
-    <h2 class="date"><strong>XX/XX/XX</strong></h2>
-        <p>Lorem ipsum placerat dui bibendum quis donec ullamcorper, in feugiat aliquam nulla dapibus placerat pharetra magna, ligula aliquam nunc morbi semper torquent.</p>
-        <p>Diam fermentum lacinia euismod volutpat pulvinar lacinia, quisque vestibulum conubia ultricies potenti, conubia maecenas ornare non augue curabitur tincidunt malesuada litora tincidunt leo elementum porttitor quam pellentesque himenaeos odio venenatis fringilla.</p>
-        <p>Mi leo rhoncus semper gravida tempus purus mattis dapibus, aenean platea in scelerisque auctor etiam cubilia tempor, eget egestas aptent potenti vitae nunc suspendisse.</p>
-        <p>Lorem litora congue egestas lectus aliquam erat dictum faucibus tempus, at sagittis varius massa fermentum potenti eros suscipit ultrices primis euismod aptent purus tortor.</p>
-        <p>Mattis litora dapibus class aenean sit habitant fames, placerat est donec nam maecenas venenatis auctor, urna habitant eros urna augue et.</p>
-      <hr>
+        <h2 class="date"><strong>XX/XX/XX</strong></h2>
+        <p>Lorem ipsum placerat dui bibendum quis donec ullamcorper, in feugiat aliquam nulla dapibus placerat pharetra
+          magna, ligula aliquam nunc morbi semper torquent.</p>
+        <p>Diam fermentum lacinia euismod volutpat pulvinar lacinia, quisque vestibulum conubia ultricies potenti,
+          conubia maecenas ornare non augue curabitur tincidunt malesuada litora tincidunt leo elementum porttitor quam
+          pellentesque himenaeos odio venenatis fringilla.</p>
+        <p>Mi leo rhoncus semper gravida tempus purus mattis dapibus, aenean platea in scelerisque auctor etiam cubilia
+          tempor, eget egestas aptent potenti vitae nunc suspendisse.</p>
+        <p>Lorem litora congue egestas lectus aliquam erat dictum faucibus tempus, at sagittis varius massa fermentum
+          potenti eros suscipit ultrices primis euismod aptent purus tortor.</p>
+        <p>Mattis litora dapibus class aenean sit habitant fames, placerat est donec nam maecenas venenatis auctor, urna
+          habitant eros urna augue et.</p>
+        <hr>
+      </div>
+      <div class="word-wrap">
+        <h2 class="date"><strong>XX/XX/XX</strong></h2>
+        <p>Lorem ipsum placerat dui bibendum quis donec ullamcorper, in feugiat aliquam nulla dapibus placerat pharetra
+          magna, ligula aliquam nunc morbi semper torquent.</p>
+        <p>Diam fermentum lacinia euismod volutpat pulvinar lacinia, quisque vestibulum conubia ultricies potenti,
+          conubia maecenas ornare non augue curabitur tincidunt malesuada litora tincidunt leo elementum porttitor quam
+          pellentesque himenaeos odio venenatis fringilla.</p>
+        <p>Mi leo rhoncus semper gravida tempus purus mattis dapibus, aenean platea in scelerisque auctor etiam cubilia
+          tempor, eget egestas aptent potenti vitae nunc suspendisse.</p>
+        <p>Lorem litora congue egestas lectus aliquam erat dictum faucibus tempus, at sagittis varius massa fermentum
+          potenti eros suscipit ultrices primis euismod aptent purus tortor.</p>
+        <p>Mattis litora dapibus class aenean sit habitant fames, placerat est donec nam maecenas venenatis auctor, urna
+          habitant eros urna augue et.</p>
+        <hr>
+      </div>
+      <div class="word-wrap">
+        <h2 class="date"><strong>XX/XX/XX</strong></h2>
+        <p>Lorem ipsum placerat dui bibendum quis donec ullamcorper, in feugiat aliquam nulla dapibus placerat pharetra
+          magna, ligula aliquam nunc morbi semper torquent.</p>
+        <p>Diam fermentum lacinia euismod volutpat pulvinar lacinia, quisque vestibulum conubia ultricies potenti,
+          conubia maecenas ornare non augue curabitur tincidunt malesuada litora tincidunt leo elementum porttitor quam
+          pellentesque himenaeos odio venenatis fringilla.</p>
+        <p>Mi leo rhoncus semper gravida tempus purus mattis dapibus, aenean platea in scelerisque auctor etiam cubilia
+          tempor, eget egestas aptent potenti vitae nunc suspendisse.</p>
+        <p>Lorem litora congue egestas lectus aliquam erat dictum faucibus tempus, at sagittis varius massa fermentum
+          potenti eros suscipit ultrices primis euismod aptent purus tortor.</p>
+        <p>Mattis litora dapibus class aenean sit habitant fames, placerat est donec nam maecenas venenatis auctor, urna
+          habitant eros urna augue et.</p>
+        <hr>
       </div>
     </div>
 
@@ -96,7 +154,9 @@
         <!--[date] username : [message]-->
         <div data-ng-repeat="message in messages track by $index">
           <div data-ng-class-even="'chat-dark-bg'">
-            <span style="color: #db6064">{{message.time}}</span> | <span><strong>{{message.username}}</strong>: </span><span style="color: #666666">{{ message.content }} </span>
+            <span style="color: #db6064">{{message.time}}</span> |
+            <span><strong>{{message.username}}</strong>: </span><span
+            style="color: #666666">{{ message.content }} </span>
           </div>
         </div>
       </div>
@@ -107,11 +167,13 @@
         </form>
       </div>
     </div>
-</div>
+  </div>
 
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script>
-</script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+          integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+          crossorigin="anonymous"></script>
+  <script>
+  </script>
 </div>
 
 

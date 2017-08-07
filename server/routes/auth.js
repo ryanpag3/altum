@@ -6,6 +6,11 @@ var router = express.Router();
 var passport = require('passport');
 var User = require('../models/user.js');
 
+/**
+ * when a client requests this endpoint, we call the passport authentication strategy and handle if any errors
+ * are thrown. We then authenticate the users information to serialize it into the database.
+ * @returns {JSON} error or success msg
+ */
 router.post('/register', function(req, res) {
   User.register(new User({username: req.body.username, email: req.body.email,
       steam_id: req.body.steam_id, xbox_id: req.body.xbox_id, playstation_id: req.body.playstation_id,
@@ -27,6 +32,11 @@ router.post('/register', function(req, res) {
     });
   });
 
+/**
+ * this endpoint calls our passport authentication strategy for the specified user credentials and calls the strategy
+ * function logIn to determine user authentication.
+ * @returns {JSON} success or failure message with error code
+ */
 router.post('/login', function(req, res, next) {
   // passport strategy & callback function
   // if authentication fails, user will be set to false
@@ -48,7 +58,6 @@ router.post('/login', function(req, res, next) {
     }
 
     req.logIn(user, function(err) {
-
       if (err) {
         return res.status(500).json({
           msg: 'Could not log in user'
@@ -62,6 +71,10 @@ router.post('/login', function(req, res, next) {
   })(req, res, next); // I'm not sure why these go here, but they were included in the documentation
 });
 
+/**
+ * Calls our passport strategies logout function
+ * @returns {JSON} json object with logout message
+ */
 router.get('/logout', function(req, res) {
   // method exposed by passport
   req.logout();
@@ -70,6 +83,11 @@ router.get('/logout', function(req, res) {
   });
 });
 
+/**
+ * Calls the passport strategy's authentication status method.
+ * @returns {JSON} success: authenticated boolean and authenticated username
+ *                   error: authenticated boolean
+ */
 router.get('/status', function(req, res) {
   // method exposed by passport
   if(!req.isAuthenticated()) {
@@ -82,10 +100,11 @@ router.get('/status', function(req, res) {
     username: req.user.username
   });
 });
-/*
-  Retrieves the currently authenticated user object.
-  If the user does not exist, then it returns a status
-  code of 500, and an error message.
+
+/**
+ * Retrieves the currently authenticated user object.
+ * @returns {JSON} success: user object
+ *                 failure: error message
  */
 router.get('/info', function(req, res) {
   if (req.isAuthenticated()) {
@@ -100,10 +119,5 @@ router.get('/info', function(req, res) {
     })
   }
 });
-
-router.get('/confirm-login', function(req,res) {
-  res.send(req.user)
-});
-
 
 module.exports = router;

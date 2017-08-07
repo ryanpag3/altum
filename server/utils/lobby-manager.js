@@ -23,6 +23,11 @@ var url = "mongodb://localhost/angulobby";
   this.nintendo_id = nintendo_id;
 }*/
 
+/**
+ * @param lobbyId: unique lobby identifier
+ * @param lobbyMembers: lobby member user information
+ * @constructor
+ */
 function Lobby(lobbyId, lobbyMembers) {
   this.lobbyId = lobbyId;
   this.users = lobbyMembers.slice(); // slice creates a copy of array
@@ -65,6 +70,11 @@ lobbyManager.prototype.createLobby = function(lobbyMembers) {
   }
 };
 
+/**
+ * returns user information for the specified lobby
+ * @param lobbyId: unique lobby identifier
+ * @returns {Array|Object} user information
+ */
 lobbyManager.prototype.getUsers = function(lobbyId, callback) {//callback variable
       var deferred = Q.defer();
       var users = lobbies[lobbyId].users;
@@ -89,14 +99,18 @@ lobbyManager.prototype.getUsers = function(lobbyId, callback) {//callback variab
   //     lobby_profiles_array[i].xbox_id, lobby_profiles_array[i].nintendo_id, lobby_profiles_array[i].blizzard_id);
   //
   // }
-  return lobbies[lobbyId].users;
+
   //create a new obj array username, image, [links]
 };
 
-/*
-  Helper Functions
- */
+/* HELPER FUNCTIONS */
 
+/**
+ * creates a unique lobby id
+ * todo: handle potential collisions. This is like a 1/1000000 chance or something but wouldn't be good enough for prod
+ * @param len: length of id to create
+ * @returns {string} id
+ */
 function createLobbyId(len) {
   var length = len;
   var text = "";
@@ -106,6 +120,5 @@ function createLobbyId(len) {
   }
   return text;
 }
-
 
 module.exports = new lobbyManager();

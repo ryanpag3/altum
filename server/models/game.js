@@ -3,6 +3,9 @@
  */
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+/**
+ * Schema for our master game list in mongo
+ */
 var Game = new Schema({
   name: String,
   short_name: { type: String, lowercase: true, unique: true },

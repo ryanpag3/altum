@@ -6,10 +6,12 @@
  * and sets the page to the login on success.
  */
 angular.module('angulobby').controller('logoutController',
-['$scope', '$location', 'AuthService', 'socket',
-  function ($scope, $location, AuthService, socket) {
+['$scope', '$location', 'AuthService',
+  function ($scope, $location, AuthService) {
+    /**
+     * Issues a logout command to the authentication service, and routes the user to the login page.
+     */
     $scope.logout = function() {
-      var username = AuthService.getCurrentUser();
       AuthService.logout()
         .then(function() {
           $location.path('/login');

@@ -49,7 +49,7 @@ a:hover {
 
 #index-container {
   background-color: #464a51;
-    height: 100%;
+    height: calc(100% - 100px);
     width: 100%;
     color: whitesmoke;
 }

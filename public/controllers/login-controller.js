@@ -4,6 +4,9 @@
 angular.module('angulobby').controller('loginController',
   ['$scope', '$location', 'AuthService', 'socket',
   function ($scope, $location, AuthService, socket) {
+    /**
+     * Issues a call to the login function on the authentication service, and handles routing after a success or failure.
+     */
     $scope.login = function() {
       // initial values
       $scope.error = false; // error thrown
@@ -27,6 +30,9 @@ angular.module('angulobby').controller('loginController',
         });
     };
 
+    /**
+     * routes the user to the register path
+     */
     $scope.register = function() {
       $location.path('/register');
     };
