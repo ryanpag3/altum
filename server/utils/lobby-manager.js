@@ -3,12 +3,25 @@
  */
 var lobbyManager = function() {};
 var users = require('./users');
+var User = require('../models/user');
 var lobbies = {}; // holds all lobby info
+var Q = require('q');
+
 
 //for querying db
 var http = require('http');
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost/angulobby";
+
+/*function UserProfile(username, steam_id, playstation_id, xbox_id, blizzard_id, nintendo_id) {
+  this.username = username;
+  this.profile_pic;
+  this.steam_id = steam_id;
+  this.playstation_id = playstation_id;
+  this.xbox_id = xbox_id;
+  this.blizzard_id = blizzard_id;
+  this.nintendo_id = nintendo_id;
+}*/
 
 function Lobby(lobbyId, lobbyMembers) {
   this.lobbyId = lobbyId;
@@ -52,24 +65,30 @@ lobbyManager.prototype.createLobby = function(lobbyMembers) {
   }
 };
 
-lobbyManager.prototype.getUsers = function(lobbyId) {
-  // TODO
-  // use users array to query mongoDB and access social links
-  MongoClient.connect(url, function (err, db){
-    if(err) throw err;
-    for(var i = 0; i < lobbies[lobbyId].users.length; ++i) {
-      console.log("Querying database for " + lobbies[lobbyId].users[i] + "'s information");
-
-      var query = {username: lobbies[lobbyId].users[i]};
-      var filter = {_id : 0, username : 1, steam_id : 1, playstation_id: 1, xbox_id : 1, nintendo_id : 1, blizzard_id : 1}
-      db.collection("users").find(query, filter).toArray(function (err, result) {
-        if (err) throw err;
-        console.log(result);
-
+lobbyManager.prototype.getUsers = function(lobbyId, callback) {//callback variable
+      var deferred = Q.defer();
+      var users = lobbies[lobbyId].users;
+      User.find({'username' : users},  {_id : 0, username : 1, steam_id : 1, playstation_id: 1, xbox_id : 1, nintendo_id : 1, blizzard_id : 1}
+        , function(err, results) {
+        // returns an array of user objects
+        console.log(results);
+        if(results)
+          deferred.resolve(results);
+        else
+          deferred.reject("Problem resolving query");
       });
-    }
-  });
+      return deferred.promise;
 
+
+
+
+ // });
+  // for(var i = 0; i < lobby_profiles_array.length; ++i)
+  // {
+  //   console.log(lobby_profiles_array[i].username,lobby_profiles_array[i].steam_id, lobby_profiles_array[i].playstation_id,
+  //     lobby_profiles_array[i].xbox_id, lobby_profiles_array[i].nintendo_id, lobby_profiles_array[i].blizzard_id);
+  //
+  // }
   return lobbies[lobbyId].users;
   //create a new obj array username, image, [links]
 };
