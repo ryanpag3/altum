@@ -13,7 +13,7 @@ and direct messaging. It is built with MongoDB, Angular, Express, NodeJS, and So
 
 ## Authors
 
-* **Ryan Page** - *core platform* - [pahjay] (https://github.com/pahjay)
+* **Ryan Page** - *core platform* - https://github.com/ryanpage42
 
 ## License
 
