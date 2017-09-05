@@ -18,7 +18,9 @@ var users = require('./utils/users.js');
 
 const setupApp = function(app, express, io) {
   // connect mongoose to db
-  mongoose.connect('mongodb://localhost/angulobby');
+  mongoose.connect('mongodb://localhost/angulobby', {
+    useMongoClient: true
+  });
   var db = mongoose.connection;
   db.on('error', console.error.bind(console, 'connection error: '));
   db.on('open', function() {
